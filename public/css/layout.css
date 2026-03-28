@@ -1,17 +1,14 @@
+/* Layout CSS */
 .app-header {
   position: sticky;
   top: 0;
   z-index: 1100;
   padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--header-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
-}
-
-html[data-theme="dark"] .app-header {
-  background: rgba(17, 24, 39, 0.82);
 }
 
 .topbar {
@@ -21,23 +18,43 @@ html[data-theme="dark"] .app-header {
   gap: 16px;
 }
 
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 18px;
+  padding-bottom: 24px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
 .app-shell {
   display: grid;
   grid-template-columns: 390px minmax(0, 1fr);
   gap: 20px;
   padding: 16px;
   min-height: calc(100vh - 58px - 64px);
+  align-items: stretch;
 }
 
-.sidebar {
+.sidebar,
+.map-area {
   min-height: 0;
 }
 
+.sidebar {
+  display: flex;
+}
+
 .sidebar-scroll {
-  height: 100%;
-  max-height: calc(100vh - 58px - 64px - 32px);
+  flex: 1;
+  height: calc(100vh - 58px - 64px - 32px);
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 6px;
+  padding-bottom: 88px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -52,10 +69,6 @@ html[data-theme="dark"] .app-header {
   border-radius: 999px;
 }
 
-.map-area {
-  min-height: 0;
-}
-
 .map-card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -63,6 +76,7 @@ html[data-theme="dark"] .app-header {
   box-shadow: var(--shadow);
   padding: 14px;
   height: 100%;
+  min-height: 0;
 }
 
 .map-card-head {
@@ -106,7 +120,8 @@ html[data-theme="dark"] .app-header {
 
 #map {
   width: 100%;
-  height: calc(100vh - 58px - 64px - 88px);
+  height: calc(100vh - 58px - 64px - 120px);
+  min-height: 420px;
   border-radius: 20px;
   border: 1px solid var(--border);
   overflow: hidden;
@@ -115,14 +130,10 @@ html[data-theme="dark"] .app-header {
 
 .main-footer {
   border-top: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.84);
+  background: var(--footer-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 10px 16px;
-}
-
-html[data-theme="dark"] .main-footer {
-  background: rgba(17, 24, 39, 0.84);
 }
 
 .tm-footer {
@@ -138,11 +149,20 @@ html[data-theme="dark"] .main-footer {
     min-height: auto;
   }
 
+  .sidebar {
+    display: block;
+  }
+
   .sidebar-scroll {
     height: auto;
     max-height: none;
     overflow: visible;
     padding-right: 0;
+    padding-bottom: 20px;
+  }
+
+  .map-card {
+    height: auto;
   }
 
   #map {
@@ -156,8 +176,8 @@ html[data-theme="dark"] .main-footer {
   }
 
   .topbar {
-    flex-direction: column;
-    align-items: stretch;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .app-shell {
@@ -177,5 +197,6 @@ html[data-theme="dark"] .main-footer {
 
   #map {
     height: 380px;
+    min-height: 380px;
   }
 }

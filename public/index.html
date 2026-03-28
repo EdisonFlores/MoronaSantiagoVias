@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,7 +32,6 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
-  <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 
   <link rel="stylesheet" href="/css/themes.css" />
@@ -54,7 +53,17 @@
           </div>
         </div>
 
-        <div class="header-actions" aria-label="Acciones principales">
+        <button
+          id="btnMenu"
+          class="menu-toggle d-md-none"
+          type="button"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <i class="bi bi-list"></i>
+        </button>
+
+        <div id="headerActions" class="header-actions" aria-label="Acciones principales">
           <button id="weatherBadge" class="chip" type="button" title="Clima">
             <i class="bi bi-cloud-sun-fill"></i>
             <span id="weatherText">🌤 22°C</span>
@@ -77,15 +86,15 @@
     <aside class="sidebar" aria-label="Panel lateral">
       <div class="sidebar-scroll">
         <section class="panel hero-panel">
-          <div class="hero-badge">
-            <i class="bi bi-broadcast-pin"></i>
-            Estado vial en tiempo real
-          </div>
-          <h1 class="hero-title">Consulta incidencias, rutas y condiciones de las vías</h1>
-          <p class="hero-text">
-            Explora la red vial de Morona Santiago en un mapa interactivo con información organizada y visual.
-          </p>
-        </section>
+  <div class="hero-badge">
+    <i class="bi bi-broadcast-pin"></i>
+    <span data-i18n="heroBadge">Estado vial en tiempo real</span>
+  </div>
+  <h1 class="hero-title" data-i18n="heroTitle">Consulta incidencias, rutas y condiciones de las vías</h1>
+  <p class="hero-text" data-i18n="heroText">
+    Explora la red vial de Morona Santiago en un mapa interactivo con información organizada y visual.
+  </p>
+</section>
 
         <section class="panel">
           <div class="section-title-wrap">
@@ -104,7 +113,7 @@
           </div>
         </section>
 
-        <section class="panel">
+        <section id="statsPanel" class="panel">
           <div class="section-title-wrap">
             <h2 data-i18n="statsTitle">Estadísticas</h2>
             <span class="section-pill">Resumen</span>
@@ -112,7 +121,7 @@
           <div id="statsBox" class="stats-grid"></div>
         </section>
 
-        <section class="panel panel-roads">
+        <section id="roadsPanel" class="panel panel-roads">
           <div class="panel-head">
             <div class="section-title-wrap mb-0">
               <h2 data-i18n="roadsTitle">Red vial</h2>
@@ -139,13 +148,13 @@
       <div class="map-card">
         <div class="map-card-head">
           <div>
-            <h2 class="map-title mb-1">Mapa vial interactivo</h2>
-            <p class="map-subtitle mb-0">Visualización geográfica de incidencias y tramos</p>
-          </div>
-          <div class="map-status">
-            <span class="live-dot"></span>
-            En línea
-          </div>
+  <h2 class="map-title mb-1" data-i18n="mapCardTitle">Mapa vial interactivo</h2>
+  <p class="map-subtitle mb-0" data-i18n="mapCardSubtitle">Visualización geográfica de incidencias y tramos</p>
+</div>
+<div class="map-status">
+  <span class="live-dot"></span>
+  <span data-i18n="online">En línea</span>
+</div>
         </div>
         <div id="map"></div>
       </div>
@@ -190,6 +199,16 @@
         </div>
 
         <div class="tm-footer-right" aria-label="Redes y contacto">
+          <a
+  class="social-link"
+  href="https://tourist-ms.vercel.app/"
+  target="_blank"
+  rel="noopener noreferrer"
+  title="TouristMS"
+  aria-label="TouristMS"
+>
+  <i class="bi bi-map-fill"></i>
+</a>
           <a
             class="social-link"
             href="https://www.instagram.com/3d150n_f10r35?igsh=dXhlNGdzb3AzdGpm"

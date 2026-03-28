@@ -1,3 +1,4 @@
+//ui.js
 import { translations, translateState } from "./i18n.js";
 
 function getStateClass(state = "") {

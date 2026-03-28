@@ -1,31 +1,40 @@
+/* Themes CSS */
 :root {
-  --bg: #eef4ff;
-  --panel: #ffffff;
-  --panel-2: #f8fbff;
-  --text: #172033;
-  --muted: #64748b;
-  --border: #d8e3f2;
+  --bg: #f3f7ff;
+  --panel: rgba(255, 255, 255, 0.88);
+  --panel-2: #edf4ff;
+  --text: #162033;
+  --muted: #61748d;
+  --border: #cfe0f7;
   --primary: #2563eb;
   --primary-soft: #dbeafe;
+  --primary-2: #0ea5e9;
   --danger: #dc2626;
   --warning: #d97706;
   --success: #16a34a;
-  --shadow: 0 16px 36px rgba(15, 23, 42, 0.10);
-  --shadow-soft: 0 8px 22px rgba(15, 23, 42, 0.07);
+  --shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+  --shadow-soft: 0 8px 22px rgba(15, 23, 42, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.72);
+  --footer-bg: rgba(255, 255, 255, 0.75);
+  --map-popup-bg: #ffffff;
 }
 
 html[data-theme="dark"] {
-  --bg: #0b1220;
-  --panel: #111827;
-  --panel-2: #172132;
+  --bg: #06111f;
+  --panel: rgba(11, 19, 33, 0.84);
+  --panel-2: #101c31;
   --text: #edf4ff;
   --muted: #9fb0c7;
-  --border: #2d3a4f;
-  --primary: #60a5fa;
-  --primary-soft: #1e3a8a;
+  --border: #21324b;
+  --primary: #3b82f6;
+  --primary-soft: rgba(37, 99, 235, 0.18);
+  --primary-2: #0ea5e9;
   --danger: #f87171;
   --warning: #fbbf24;
   --success: #4ade80;
-  --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.22);
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+  --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.24);
+  --header-bg: rgba(6, 17, 31, 0.82);
+  --footer-bg: rgba(8, 18, 32, 0.84);
+  --map-popup-bg: #0f172a;
 }

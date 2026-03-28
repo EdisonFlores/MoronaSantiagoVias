@@ -1,6 +1,13 @@
 // app.js
 import { fetchIncidents, fetchOsrmRoute } from "./services.js";
-import { initMap, getMapInstance, drawRouteGeometry, focusIncidentOnMap, resetMapView } from "./map.js";
+import {
+  initMap,
+  getMapInstance,
+  drawRouteGeometry,
+  focusIncidentOnMap,
+  resetMapView,
+  renderIncidentMarkers
+} from "./map.js";
 import { renderIncidents, renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
 import { initLanguage, getCurrentLanguage } from "./translate.js";
@@ -17,6 +24,75 @@ function buildStats(roads) {
   };
 }
 
+function scrollToMapOnSmallScreens() {
+  if (window.innerWidth <= 992) {
+    const mapEl = document.getElementById("map");
+    if (mapEl) {
+      mapEl.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }
+}
+
+function initMobileMenu() {
+  const btnMenu = document.getElementById("btnMenu");
+  const headerActions = document.getElementById("headerActions");
+
+  if (!btnMenu || !headerActions) return;
+
+  btnMenu.addEventListener("click", () => {
+    const isOpen = headerActions.classList.toggle("is-open");
+    btnMenu.setAttribute("aria-expanded", String(isOpen));
+  });
+}
+function showLoadingState() {
+  const lang = getCurrentLanguage();
+
+  const statsBox = document.getElementById("statsBox");
+  const incidentsList = document.getElementById("incidentsList");
+
+  if (statsBox) {
+    statsBox.innerHTML = `
+      <div class="loading-box" style="grid-column: 1 / -1;">
+        <span class="loading-spinner"></span>
+        <span>${lang === "en" ? "Loading statistics..." : "Cargando datos..."}</span>
+      </div>
+    `;
+  }
+
+  if (incidentsList) {
+    incidentsList.innerHTML = `
+      <div class="loading-box loading-roads">
+        <span class="loading-spinner"></span>
+        <span>${lang === "en" ? "Loading roads..." : "Cargando vías..."}</span>
+      </div>
+    `;
+  }
+}
+
+function showLoadError() {
+  const lang = getCurrentLanguage();
+  const incidentsList = document.getElementById("incidentsList");
+  const statsBox = document.getElementById("statsBox");
+
+  if (statsBox) {
+    statsBox.innerHTML = `
+      <div class="empty-state">
+        ${lang === "en" ? "Statistics could not be loaded." : "No se pudieron cargar los datos."}
+      </div>
+    `;
+  }
+
+  if (incidentsList) {
+    incidentsList.innerHTML = `
+      <div class="empty-state">
+        ${lang === "en" ? "Roads could not be loaded." : "No se pudieron cargar las vías."}
+      </div>
+    `;
+  }
+}
 function applyFilters() {
   const state = document.getElementById("filterState").value;
   const lang = getCurrentLanguage();
@@ -28,11 +104,13 @@ function applyFilters() {
   }
 
   renderStats(buildStats(filtered), lang);
+  renderIncidentMarkers(filtered);
 
   renderIncidents(filtered, {
     onFocus: (road) => {
       if (road.matchedRoadSegment) {
-        focusIncidentOnMap(road.matchedRoadSegment);
+        focusIncidentOnMap(road.matchedRoadSegment, road);
+        scrollToMapOnSmallScreens();
       }
     },
     onDraw: async (road) => {
@@ -47,6 +125,7 @@ function applyFilters() {
 
         const routeCoords = await fetchOsrmRoute(segment);
         drawRouteGeometry(routeCoords, road);
+        scrollToMapOnSmallScreens();
       } catch (error) {
         console.error(error);
         alert(lang === "en"
@@ -59,6 +138,7 @@ function applyFilters() {
 
 async function initApp() {
   initTheme();
+  initMobileMenu();
 
   initLanguage(() => {
     applyFilters();
@@ -75,19 +155,15 @@ async function initApp() {
   document.getElementById("filterState")?.addEventListener("change", applyFilters);
   document.getElementById("btnResetMap")?.addEventListener("click", resetMapView);
 
+  showLoadingState();
+
   try {
     const data = await fetchIncidents();
     allRoads = data.incidents || [];
     applyFilters();
   } catch (error) {
     console.error(error);
-    document.getElementById("incidentsList").innerHTML =
-      `<div class="empty-state">${
-        getCurrentLanguage() === "en"
-          ? "Roads could not be loaded."
-          : "No se pudieron cargar las vías."
-      }</div>`;
+    showLoadError();
   }
 }
-
 initApp();

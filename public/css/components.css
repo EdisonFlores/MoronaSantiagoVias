@@ -1,3 +1,4 @@
+/* Components CSS */
 .brand {
   display: flex;
   align-items: center;
@@ -12,7 +13,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary), #0ea5e9);
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
   color: #fff;
   box-shadow: 0 12px 26px rgba(29, 78, 216, 0.22);
   flex-shrink: 0;
@@ -32,6 +33,23 @@
 
 .brand-subtitle {
   display: none;
+}
+
+.menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  color: var(--text);
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.menu-toggle i {
+  font-size: 1.35rem;
 }
 
 .header-actions {
@@ -63,7 +81,7 @@
 }
 
 .panel {
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 24px;
   padding: 18px;
@@ -72,14 +90,10 @@
   -webkit-backdrop-filter: blur(10px);
 }
 
-html[data-theme="dark"] .panel {
-  background: rgba(17, 24, 39, 0.82);
-}
-
 .hero-panel {
   background:
-    radial-gradient(circle at top right, rgba(29, 78, 216, 0.16), transparent 35%),
-    radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.16), transparent 35%),
+    radial-gradient(circle at top right, rgba(37, 99, 235, 0.18), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.18), transparent 35%),
     var(--panel);
 }
 
@@ -114,12 +128,14 @@ html[data-theme="dark"] .panel {
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 14px;
+  flex-wrap: wrap;
 }
 
 .section-title-wrap h2 {
   font-size: 1rem;
   font-weight: 800;
   margin-bottom: 0;
+  word-break: break-word;
 }
 
 .section-pill {
@@ -130,18 +146,24 @@ html[data-theme="dark"] .panel {
   padding: 5px 10px;
   font-size: 0.78rem;
   font-weight: 700;
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
 }
 
 .panel-roads {
   min-height: 240px;
+  overflow: visible;
+  padding-bottom: 28px;
 }
 
 .panel-head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
+  flex-wrap: wrap;
 }
 
 .field {
@@ -201,6 +223,8 @@ html[data-theme="dark"] .panel {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  width: 100%;
+  padding-bottom: 24px;
 }
 
 .incident-card {
@@ -209,6 +233,8 @@ html[data-theme="dark"] .panel {
   border-radius: 18px;
   padding: 15px;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  width: 100%;
+  overflow: hidden;
 }
 
 .incident-card:hover {
@@ -217,18 +243,29 @@ html[data-theme="dark"] .panel {
   box-shadow: var(--shadow);
 }
 
+.incident-card p {
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+
+.incident-card p:last-of-type {
+  margin-bottom: 0;
+}
+
 .incident-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .incident-top h3 {
   font-size: 1rem;
   margin-bottom: 6px;
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 .badge-state {
@@ -238,7 +275,9 @@ html[data-theme="dark"] .panel {
   padding: 7px 11px;
   font-size: 0.82rem;
   font-weight: 800;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  max-width: 100%;
 }
 
 .badge-ok {
@@ -256,11 +295,17 @@ html[data-theme="dark"] .panel {
   color: #dc2626;
 }
 
+.badge-neutral {
+  background: rgba(148, 163, 184, 0.16);
+  color: #94a3b8;
+}
+
 .incident-actions {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-top: 12px;
+  margin-top: 14px;
+  padding-bottom: 2px;
 }
 
 .btn-primary,
@@ -278,7 +323,7 @@ html[data-theme="dark"] .panel {
 }
 
 .btn-primary {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
   color: white;
 }
 
@@ -291,6 +336,7 @@ html[data-theme="dark"] .panel {
 .small-text {
   color: var(--muted);
   font-size: 0.9rem;
+  overflow-wrap: anywhere;
 }
 
 .empty-state {
@@ -397,13 +443,60 @@ html[data-theme="dark"] .panel {
   box-shadow: var(--shadow);
 }
 
+.loading-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 110px;
+  border: 1px dashed var(--border);
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  color: var(--muted);
+  font-weight: 700;
+  text-align: center;
+  padding: 18px;
+}
+
+.loading-spinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid rgba(148, 163, 184, 0.25);
+  border-top-color: var(--primary);
+  animation: spinLoader 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+.loading-box.loading-roads {
+  min-height: 140px;
+}
+
+@keyframes spinLoader {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: inline-flex;
+  }
+
   .header-actions {
+    display: none;
     width: 100%;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-actions.is-open {
+    display: flex;
   }
 
   .chip {
-    flex: 1 1 calc(50% - 10px);
+    width: 100%;
     justify-content: center;
   }
 
@@ -430,9 +523,5 @@ html[data-theme="dark"] .panel {
 @media (max-width: 576px) {
   .stats-grid {
     grid-template-columns: 1fr;
-  }
-
-  .chip {
-    flex: 1 1 100%;
   }
 }

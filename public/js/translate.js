@@ -1,3 +1,4 @@
+//translate.js
 import { translations } from "./i18n.js";
 
 const STORAGE_KEY = "ecuavial-lang";
