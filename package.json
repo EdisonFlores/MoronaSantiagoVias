@@ -1,19 +1,14 @@
 {
   "name": "moronasantiagovias",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
+  "description": "Monitoreo vial de Morona Santiago",
+  "type": "module",
+  "scripts": {},
+  "engines": {
+    "node": "22.x"
   },
   "dependencies": {
-    "playwright": "^1.58.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+    "@sparticuz/chromium": "^138.0.2",
+    "playwright-core": "^1.58.2"
+  }
 }
