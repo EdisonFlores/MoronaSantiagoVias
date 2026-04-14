@@ -1,4 +1,3 @@
-//ui.js
 import { translations, translateState } from "./i18n.js";
 
 function getStateClass(state = "") {
@@ -62,11 +61,8 @@ export function renderIncidents(roads, handlers, lang = "es") {
           <p class="small-text"><strong>${t.source}:</strong> ${item.source}</p>
 
           <div class="incident-actions">
-            <button class="btn-secondary" data-action="focus" data-id="${item.id}">
+            <button class="btn-primary" data-action="focus" data-id="${item.id}">
               ${t.viewMap}
-            </button>
-            <button class="btn-primary" data-action="draw" data-id="${item.id}">
-              ${t.drawRoute}
             </button>
           </div>
         </article>
@@ -74,15 +70,13 @@ export function renderIncidents(roads, handlers, lang = "es") {
     })
     .join("");
 
-  container.querySelectorAll("button[data-action]").forEach((btn) => {
+  container.querySelectorAll('button[data-action="focus"]').forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
-      const action = btn.dataset.action;
       const road = roads.find((x) => x.id === id);
       if (!road) return;
 
-      if (action === "focus") handlers.onFocus(road);
-      if (action === "draw") handlers.onDraw(road);
+      handlers.onFocus?.(road);
     });
   });
 }

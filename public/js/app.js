@@ -1,4 +1,3 @@
-// app.js
 import { fetchIncidents, fetchOsrmRoute } from "./services.js";
 import {
   initMap,
@@ -24,8 +23,12 @@ function buildStats(roads) {
   };
 }
 
+function isMobileLayout() {
+  return window.innerWidth <= 992;
+}
+
 function scrollToMapOnSmallScreens() {
-  if (window.innerWidth <= 992) {
+  if (isMobileLayout()) {
     const mapEl = document.getElementById("map");
     if (mapEl) {
       mapEl.scrollIntoView({
@@ -47,6 +50,57 @@ function initMobileMenu() {
     btnMenu.setAttribute("aria-expanded", String(isOpen));
   });
 }
+
+function setMobileSidebarState(isOpen) {
+  const sidebar = document.getElementById("mobileSidebar");
+  const backdrop = document.getElementById("mobileSidebarBackdrop");
+  const openBtn = document.getElementById("btnOpenIncidents");
+
+  if (!sidebar || !backdrop || !openBtn) return;
+
+  if (!isMobileLayout()) {
+    sidebar.classList.remove("is-open");
+    backdrop.classList.remove("show");
+    document.body.classList.remove("drawer-open");
+    openBtn.setAttribute("aria-expanded", "false");
+    return;
+  }
+
+  sidebar.classList.toggle("is-open", isOpen);
+  backdrop.classList.toggle("show", isOpen);
+  document.body.classList.toggle("drawer-open", isOpen);
+  openBtn.setAttribute("aria-expanded", String(isOpen));
+}
+
+function closeMobileSidebar() {
+  setMobileSidebarState(false);
+}
+
+function initMobileSidebar() {
+  const openBtn = document.getElementById("btnOpenIncidents");
+  const backdrop = document.getElementById("mobileSidebarBackdrop");
+
+  openBtn?.addEventListener("click", () => {
+    const sidebar = document.getElementById("mobileSidebar");
+    const isOpen = sidebar?.classList.contains("is-open");
+    setMobileSidebarState(!isOpen);
+  });
+
+  backdrop?.addEventListener("click", closeMobileSidebar);
+
+  window.addEventListener("resize", () => {
+    if (!isMobileLayout()) {
+      closeMobileSidebar();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMobileSidebar();
+    }
+  });
+}
+
 function showLoadingState() {
   const lang = getCurrentLanguage();
 
@@ -93,6 +147,7 @@ function showLoadError() {
     `;
   }
 }
+
 function applyFilters() {
   const state = document.getElementById("filterState").value;
   const lang = getCurrentLanguage();
@@ -107,30 +162,37 @@ function applyFilters() {
   renderIncidentMarkers(filtered);
 
   renderIncidents(filtered, {
-    onFocus: (road) => {
-      if (road.matchedRoadSegment) {
-        focusIncidentOnMap(road.matchedRoadSegment, road);
-        scrollToMapOnSmallScreens();
-      }
-    },
-    onDraw: async (road) => {
+    onFocus: async (road) => {
       try {
         const segment = road.matchedRoadSegment;
+
+        if (!segment) return;
+
+        focusIncidentOnMap(segment, road);
+
         if (!segment?.start || !segment?.end) {
-          alert(lang === "en"
-            ? "There are no coordinates for this segment."
-            : "No hay coordenadas para este tramo.");
+          closeMobileSidebar();
+          alert(
+            lang === "en"
+              ? "There are no coordinates for this segment."
+              : "No hay coordenadas para este tramo."
+          );
+          scrollToMapOnSmallScreens();
           return;
         }
 
         const routeCoords = await fetchOsrmRoute(segment);
         drawRouteGeometry(routeCoords, road);
+        closeMobileSidebar();
         scrollToMapOnSmallScreens();
       } catch (error) {
         console.error(error);
-        alert(lang === "en"
-          ? "The route could not be drawn."
-          : "No se pudo dibujar la ruta.");
+        closeMobileSidebar();
+        alert(
+          lang === "en"
+            ? "The route could not be drawn."
+            : "No se pudo dibujar la ruta."
+        );
       }
     }
   }, lang);
@@ -139,6 +201,7 @@ function applyFilters() {
 async function initApp() {
   initTheme();
   initMobileMenu();
+  initMobileSidebar();
 
   initLanguage(() => {
     applyFilters();
@@ -166,4 +229,5 @@ async function initApp() {
     showLoadError();
   }
 }
+
 initApp();

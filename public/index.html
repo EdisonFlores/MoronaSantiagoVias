@@ -29,32 +29,32 @@
 }
 </script>
   <meta property="og:url" content="https://morona-santiago-vias-wj1s.vercel.app/" />
-<meta property="og:image" content="https://morona-santiago-vias-wj1s.vercel.app/og-image.jpg" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Morona Santiago Vial" />
-<meta
-  name="twitter:description"
-  content="Consulta el estado actual de las vías de Morona Santiago en un mapa interactivo."
-/>
-<meta name="twitter:image" content="https://morona-santiago-vias-wj1s.vercel.app/og-image.jpg" />
+  <meta property="og:image" content="https://morona-santiago-vias-wj1s.vercel.app/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Morona Santiago Vial" />
+  <meta
+    name="twitter:description"
+    content="Consulta el estado actual de las vías de Morona Santiago en un mapa interactivo."
+  />
+  <meta name="twitter:image" content="https://morona-santiago-vias-wj1s.vercel.app/og-image.jpg" />
   <link rel="canonical" href="https://morona-santiago-vias-wj1s.vercel.app/" />
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JQT8S43PH5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-JQT8S43PH5');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQT8S43PH5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JQT8S43PH5');
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Morona Santiago Vial | Estado de vías en tiempo real</title>
   <meta
-  name="description"
-  content="Consulta el estado actual de las vías de Morona Santiago, revisa incidentes reportados por ECU 911 y visualiza rutas en un mapa interactivo antes de viajar."
-/>
+    name="description"
+    content="Consulta el estado actual de las vías de Morona Santiago, revisa incidentes reportados por ECU 911 y visualiza rutas en un mapa interactivo antes de viajar."
+  />
   <meta
     name="keywords"
     content="Morona Santiago, estado vial, vías Morona Santiago, ECU 911, tránsito, carreteras, mapa vial, rutas Ecuador"
@@ -73,11 +73,9 @@
   <link rel="preconnect" href="https://unpkg.com" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://api.open-meteo.com" />
-  <link rel="preconnect" href="https://router.project-osrm.org" />
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 
   <link rel="stylesheet" href="/css/themes.css" />
@@ -129,18 +127,18 @@
   </header>
 
   <main class="app-shell container-fluid">
-    <aside class="sidebar" aria-label="Panel lateral">
+    <aside id="mobileSidebar" class="sidebar" aria-label="Panel lateral">
       <div class="sidebar-scroll">
         <section class="panel hero-panel">
-  <div class="hero-badge">
-    <i class="bi bi-broadcast-pin"></i>
-    <span data-i18n="heroBadge">Estado vial en tiempo real</span>
-  </div>
-  <h1 class="hero-title" data-i18n="heroTitle">Consulta incidencias, rutas y condiciones de las vías</h1>
-  <p class="hero-text" data-i18n="heroText">
-    Explora la red vial de Morona Santiago en un mapa interactivo con información organizada y visual.
-  </p>
-</section>
+          <div class="hero-badge">
+            <i class="bi bi-broadcast-pin"></i>
+            <span data-i18n="heroBadge">Estado vial en tiempo real</span>
+          </div>
+          <h1 class="hero-title" data-i18n="heroTitle">Consulta incidencias, rutas y condiciones de las vías</h1>
+          <p class="hero-text" data-i18n="heroText">
+            Explora la red vial de Morona Santiago en un mapa interactivo con información organizada y visual.
+          </p>
+        </section>
 
         <section class="panel">
           <div class="section-title-wrap">
@@ -190,17 +188,33 @@
       </div>
     </aside>
 
+    <div id="mobileSidebarBackdrop" class="mobile-sidebar-backdrop" aria-hidden="true"></div>
+
     <section class="map-area" aria-label="Mapa vial">
       <div class="map-card">
         <div class="map-card-head">
           <div>
-  <h2 class="map-title mb-1" data-i18n="mapCardTitle">Mapa vial interactivo</h2>
-  <p class="map-subtitle mb-0" data-i18n="mapCardSubtitle">Visualización geográfica de incidencias y tramos</p>
-</div>
-<div class="map-status">
-  <span class="live-dot"></span>
-  <span data-i18n="online">En línea</span>
-</div>
+            <h2 class="map-title mb-1" data-i18n="mapCardTitle">Mapa vial interactivo</h2>
+            <p class="map-subtitle mb-0" data-i18n="mapCardSubtitle">Visualización geográfica de incidencias y tramos</p>
+          </div>
+
+          <div class="map-card-actions">
+            <button
+              id="btnOpenIncidents"
+              class="mobile-incidents-toggle"
+              type="button"
+              aria-controls="mobileSidebar"
+              aria-expanded="false"
+            >
+              <i class="bi bi-layout-sidebar-inset"></i>
+              <span>Ver incidentes</span>
+            </button>
+
+            <div class="map-status">
+              <span class="live-dot"></span>
+              <span data-i18n="online">En línea</span>
+            </div>
+          </div>
         </div>
         <div id="map"></div>
       </div>
@@ -246,15 +260,16 @@
 
         <div class="tm-footer-right" aria-label="Redes y contacto">
           <a
-  class="social-link"
-  href="https://tourist-ms.vercel.app/"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="TouristMS"
-  aria-label="TouristMS"
->
-  <i class="bi bi-map-fill"></i>
-</a>
+            class="social-link"
+            href="https://tourist-ms.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="TouristMS"
+            aria-label="TouristMS"
+          >
+            <i class="bi bi-map-fill"></i>
+          </a>
+
           <a
             class="social-link"
             href="https://www.instagram.com/3d150n_f10r35?igsh=dXhlNGdzb3AzdGpm"

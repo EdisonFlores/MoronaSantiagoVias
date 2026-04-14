@@ -1,3 +1,4 @@
+// services.js
 export async function fetchIncidents() {
   const response = await fetch("/api/incidents");
   const data = await response.json();
@@ -14,21 +15,20 @@ export async function fetchOsrmRoute(segment) {
     throw new Error("El tramo no tiene coordenadas start/end");
   }
 
-  const coords = [
-    `${segment.start[1]},${segment.start[0]}`,
-    `${segment.end[1]},${segment.end[0]}`
-  ].join(";");
+  const start = `${segment.start[0]},${segment.start[1]}`;
+  const end = `${segment.end[0]},${segment.end[1]}`;
 
   const url =
-    `https://router.project-osrm.org/route/v1/driving/${coords}` +
-    `?overview=full&geometries=geojson&steps=false`;
+    `/api/osrm-route?start=${encodeURIComponent(start)}` +
+    `&end=${encodeURIComponent(end)}` +
+    `&profile=driving`;
 
   const response = await fetch(url);
   const data = await response.json();
 
-  if (!response.ok || data.code !== "Ok" || !data.routes?.length) {
-    throw new Error("OSRM no encontró ruta");
+  if (!response.ok || !data.ok || !data.route?.coordinates?.length) {
+    throw new Error(data.message || "No se pudo obtener la ruta desde el backend");
   }
 
-  return data.routes[0].geometry.coordinates.map(([lon, lat]) => [lat, lon]);
+  return data.route.coordinates;
 }
