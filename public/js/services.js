@@ -10,25 +10,49 @@ export async function fetchIncidents() {
   return data;
 }
 
-export async function fetchOsrmRoute(segment) {
+export async function fetchOsrmRoute(segment, options = {}) {
   if (!segment?.start || !segment?.end) {
     throw new Error("El tramo no tiene coordenadas start/end");
   }
 
-  const start = `${segment.start[0]},${segment.start[1]}`;
-  const end = `${segment.end[0]},${segment.end[1]}`;
+  const timeoutMs = options.timeoutMs || 6000;
+  const controller = new AbortController();
 
-  const url =
-    `/api/osrm-route?start=${encodeURIComponent(start)}` +
-    `&end=${encodeURIComponent(end)}` +
-    `&profile=driving`;
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+  }, timeoutMs);
 
-  const response = await fetch(url);
-  const data = await response.json();
+  try {
+    const start = `${segment.start[0]},${segment.start[1]}`;
+    const end = `${segment.end[0]},${segment.end[1]}`;
 
-  if (!response.ok || !data.ok || !data.route?.coordinates?.length) {
-    throw new Error(data.message || "No se pudo obtener la ruta desde el backend");
+    const url =
+      `/api/osrm-route?start=${encodeURIComponent(start)}` +
+      `&end=${encodeURIComponent(end)}` +
+      `&profile=driving`;
+
+    const response = await fetch(url, {
+      signal: controller.signal
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.ok || !data.route?.coordinates?.length) {
+      throw new Error(data.message || "No se pudo obtener la ruta desde el backend");
+    }
+
+    return {
+      ok: true,
+      source: "osrm",
+      coordinates: data.route.coordinates
+    };
+  } catch (error) {
+    if (error.name === "AbortError") {
+      throw new Error("OSRM demoró demasiado");
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
-
-  return data.route.coordinates;
 }

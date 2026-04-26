@@ -1,13 +1,15 @@
+//public/js/app.js
 import { fetchIncidents, fetchOsrmRoute } from "./services.js";
 import {
   initMap,
   getMapInstance,
   drawRouteGeometry,
+  drawFallbackPolyline,
   focusIncidentOnMap,
   resetMapView,
   renderIncidentMarkers
 } from "./map.js";
-import { renderIncidents, renderStats } from "./ui.js";
+import { renderIncidents,showToast,showRouteNotice , renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
 import { initLanguage, getCurrentLanguage } from "./translate.js";
 import { initWeather, bindWeatherToMap } from "./weather.js";
@@ -172,19 +174,49 @@ function applyFilters() {
 
         if (!segment?.start || !segment?.end) {
           closeMobileSidebar();
-          alert(
-            lang === "en"
-              ? "There are no coordinates for this segment."
-              : "No hay coordenadas para este tramo."
-          );
+          showToast(
+  lang === "en"
+    ? "Approximate route shown. OSRM unavailable or slow."
+    : "Ruta aproximada mostrada. OSRM no disponible o lento.",
+  "warning"
+);
+showRouteNotice(
+  lang === "en"
+    ? "OSRM did not respond or took too long. An approximate route was drawn."
+    : "OSRM no respondió o demoró demasiado. Se dibujó una ruta aproximada.",
+  "warning"
+);
           scrollToMapOnSmallScreens();
           return;
         }
 
-        const routeCoords = await fetchOsrmRoute(segment);
-        drawRouteGeometry(routeCoords, road);
-        closeMobileSidebar();
-        scrollToMapOnSmallScreens();
+       try {
+  const routeResult = await fetchOsrmRoute(segment, {
+    timeoutMs: 12000
+  });
+
+  drawRouteGeometry(routeResult.coordinates, road);
+} catch (routeError) {
+  console.warn("OSRM falló. Se usará polilínea aproximada:", routeError);
+
+  drawFallbackPolyline(segment, road);
+
+  showToast(
+  lang === "en"
+    ? "Approximate route shown. OSRM unavailable or slow."
+    : "Ruta aproximada mostrada. OSRM no disponible o lento.",
+  "warning"
+);
+showRouteNotice(
+  lang === "en"
+    ? "OSRM did not respond or took too long. An approximate route was drawn."
+    : "OSRM no respondió o demoró demasiado. Se dibujó una ruta aproximada.",
+  "warning"
+);
+}
+
+closeMobileSidebar();
+scrollToMapOnSmallScreens();
       } catch (error) {
         console.error(error);
         closeMobileSidebar();
