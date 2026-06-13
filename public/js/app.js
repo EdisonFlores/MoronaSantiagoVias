@@ -261,5 +261,15 @@ async function initApp() {
     showLoadError();
   }
 }
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
 
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then(() => console.log("Service Worker registrado"))
+      .catch(error => console.error("Error registrando Service Worker:", error));
+  });
+}
+registerServiceWorker();
 initApp();

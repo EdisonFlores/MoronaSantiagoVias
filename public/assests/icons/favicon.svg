@@ -1,3 +1,116 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-signpost-2-fill" viewBox="0 0 16 16">
-  <path d="M7.293.707A1 1 0 0 0 7 1.414V2H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h5v1H2.5a1 1 0 0 0-.8.4L.725 8.7a.5.5 0 0 0 0 .6l.975 1.3a1 1 0 0 0 .8.4H7v5h2v-5h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H9V6h4.5a1 1 0 0 0 .8-.4l.975-1.3a.5.5 0 0 0 0-.6L14.3 2.4a1 1 0 0 0-.8-.4H9v-.586A1 1 0 0 0 7.293.707"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080" role="img" aria-labelledby="title desc">
+  <title id="title">Morona Santiago Vial - Icono SVG</title>
+  <desc id="desc">Icono vectorial para plataforma vial con carretera, montañas, señal de alerta, barrera, cono y estados viales.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#dff8ff"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#43a047"/>
+      <stop offset="100%" stop-color="#0b5d2a"/>
+    </linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#102538"/>
+      <stop offset="100%" stop-color="#071521"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.28"/>
+    </filter>
+    <clipPath id="pinClip">
+      <path d="M540 42C292 42 91 237 91 478c0 285 449 560 449 560s449-275 449-560C989 237 788 42 540 42z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Shape base -->
+  <path d="M540 42C292 42 91 237 91 478c0 285 449 560 449 560s449-275 449-560C989 237 788 42 540 42z" fill="url(#dark)" filter="url(#shadow)"/>
+  <path d="M540 72C309 72 121 255 121 480c0 250 343 494 419 545 76-51 419-295 419-545C959 255 771 72 540 72z" fill="#ffffff" opacity="0.95"/>
+
+  <g clip-path="url(#pinClip)">
+    <!-- Sky -->
+    <rect x="120" y="75" width="840" height="500" fill="url(#sky)"/>
+
+    <!-- Clouds -->
+    <g fill="#fff" opacity="0.95">
+      <path d="M187 245c16-35 66-34 83-3 21-14 51 1 58 24h-177c7-17 19-21 36-21z"/>
+      <path d="M731 218c13-28 54-27 68-2 17-12 42 1 48 19H704c6-13 15-17 27-17z"/>
+    </g>
+
+    <!-- Mountains -->
+    <polygon points="105,540 300,265 462,542" fill="#0b6b35"/>
+    <polygon points="257,540 525,160 815,540" fill="#15803d"/>
+    <polygon points="460,540 725,285 1002,540" fill="#0f6b33"/>
+    <polygon points="525,160 448,270 587,270" fill="#ffffff"/>
+    <polygon points="300,265 245,340 348,340" fill="#e8f7ff"/>
+    <polygon points="725,285 666,350 778,350" fill="#e8f7ff"/>
+    <polygon points="128,542 1010,542 1010,780 128,780" fill="url(#green)"/>
+
+    <!-- Main winding road -->
+    <path d="M548 244C466 360 667 407 598 552C539 676 407 713 403 922" fill="none" stroke="#ffffff" stroke-width="126" stroke-linecap="round"/>
+    <path d="M548 244C466 360 667 407 598 552C539 676 407 713 403 922" fill="none" stroke="#1f2937" stroke-width="94" stroke-linecap="round"/>
+    <path d="M548 244C466 360 667 407 598 552C539 676 407 713 403 922" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-dasharray="48 44"/>
+
+    <!-- Bottom road curve -->
+    <path d="M465 1060C560 868 710 880 914 800" fill="none" stroke="#ffffff" stroke-width="128" stroke-linecap="round"/>
+    <path d="M465 1060C560 868 710 880 914 800" fill="none" stroke="#1f2937" stroke-width="96" stroke-linecap="round"/>
+    <path d="M465 1060C560 868 710 880 914 800" fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round" stroke-dasharray="52 42"/>
+    <path d="M720 956C772 896 850 867 960 824" fill="none" stroke="#facc15" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Dark title panel -->
+    <path d="M93 660h894v250c-94 67-311 190-447 190S187 977 93 910z" fill="#0b1724" opacity="0.94"/>
+    <path d="M93 660h894" stroke="#334155" stroke-width="8"/>
+  </g>
+
+  <!-- Outer border -->
+  <path d="M540 42C292 42 91 237 91 478c0 285 449 560 449 560s449-275 449-560C989 237 788 42 540 42z" fill="none" stroke="#0b1724" stroke-width="26"/>
+  <path d="M540 68C307 68 119 252 119 478c0 254 350 503 421 551 71-48 421-297 421-551C961 252 773 68 540 68z" fill="none" stroke="#ffffff" stroke-width="10" opacity="0.85"/>
+
+  <!-- Warning sign: landslide -->
+  <g transform="translate(112 405) rotate(-12)">
+    <rect x="74" y="175" width="22" height="118" rx="4" fill="#64748b"/>
+    <path d="M170 0l170 294H0z" fill="#facc15" stroke="#101827" stroke-width="18" stroke-linejoin="round"/>
+    <path d="M170 35l132 229H38z" fill="none" stroke="#f97316" stroke-width="8" stroke-linejoin="round" opacity="0.75"/>
+    <path d="M88 231l95-154 39 145z" fill="#0b1724"/>
+    <circle cx="232" cy="119" r="17" fill="#0b1724"/>
+    <circle cx="266" cy="157" r="14" fill="#0b1724"/>
+    <circle cx="299" cy="204" r="20" fill="#0b1724"/>
+  </g>
+
+  <!-- Location pin -->
+  <g transform="translate(760 250)">
+    <path d="M98 0C44 0 0 42 0 94c0 73 98 165 98 165s98-92 98-165C196 42 152 0 98 0z" fill="#43a047" stroke="#ffffff" stroke-width="14"/>
+    <circle cx="98" cy="91" r="42" fill="#ffffff"/>
+    <circle cx="98" cy="91" r="22" fill="#0b1724"/>
+  </g>
+
+  <!-- Road barrier and cone -->
+  <g transform="translate(760 500)">
+    <rect x="18" y="104" width="32" height="165" rx="8" fill="#263645"/>
+    <rect x="247" y="104" width="32" height="165" rx="8" fill="#263645"/>
+    <rect x="0" y="64" width="300" height="82" rx="12" fill="#f8fafc" stroke="#0b1724" stroke-width="6"/>
+    <path d="M0 64h64L0 146zM91 64h70l-63 82H28zM190 64h70l-64 82h-70zM288 64h12v82h-78z" fill="#f97316"/>
+    <g transform="translate(83 160)">
+      <path d="M78 0l50 174H28z" fill="#f97316"/>
+      <path d="M55 79h73l14 48H41z" fill="#ffffff"/>
+      <path d="M38 145h130c17 0 31 14 31 31v16H7v-16c0-17 14-31 31-31z" fill="#111827" opacity="0.88"/>
+    </g>
+  </g>
+
+  <!-- Text -->
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="start">
+    <text x="205" y="760" font-size="86" font-weight="900" fill="#ffffff" letter-spacing="2">MORONA</text>
+    <text x="205" y="850" font-size="86" font-weight="900" fill="#ffffff" letter-spacing="2">SANTIAGO</text>
+    <text x="205" y="955" font-size="112" font-weight="900" fill="#7ac943" letter-spacing="4">VIAL</text>
+  </g>
+
+  <!-- Status legend -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="800" fill="#ffffff">
+    <line x1="718" y1="723" x2="718" y2="945" stroke="#ffffff" stroke-width="4" opacity="0.75"/>
+    <circle cx="770" cy="755" r="23" fill="#22c55e" stroke="#bbf7d0" stroke-width="5"/>
+    <text x="810" y="767">HABILITADA</text>
+    <circle cx="770" cy="830" r="23" fill="#facc15" stroke="#fde68a" stroke-width="5"/>
+    <text x="810" y="842">PARCIAL</text>
+    <circle cx="770" cy="905" r="23" fill="#ef4444" stroke="#fca5a5" stroke-width="5"/>
+    <text x="810" y="917">CERRADA</text>
+  </g>
 </svg>
