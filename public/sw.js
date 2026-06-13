@@ -1,45 +1,17 @@
-const CACHE_VERSION = "morona-santiago-vial-v2";
-const APP_SHELL_CACHE = `${CACHE_VERSION}-shell`;
-const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
-
-const APP_SHELL = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/css/themes.css",
-  "/css/styles.css",
-  "/css/layout.css",
-  "/css/components.css",
-  "/js/app.js",
-  "/js/i18n.js",
-  "/js/map.js",
-  "/js/services.js",
-  "/js/theme.js",
-  "/js/translate.js",
-  "/js/ui.js",
-  "/js/weather.js",
-  "/assests/icons/favicon.svg",
-  "/assests/icons/icon-192.png",
-  "/assests/icons/icon-512.png",
-  "/og-image.jpg"
-];
+const CACHE_VERSION = "morona-santiago-vial-online-v1";
 
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(APP_SHELL_CACHE).then(cache => cache.addAll(APP_SHELL))
-  );
   self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => !key.startsWith(CACHE_VERSION))
-          .map(key => caches.delete(key))
+    caches
+      .keys()
+      .then(keys =>
+        Promise.all(keys.map(key => caches.delete(key)))
       )
-    ).then(() => self.clients.claim())
+      .then(() => self.clients.claim())
   );
 });
 
@@ -48,76 +20,74 @@ self.addEventListener("fetch", event => {
 
   if (request.method !== "GET") return;
 
-  const requestUrl = new URL(request.url);
+  event.respondWith(
+    fetch(request).catch(() => {
+      if (request.mode === "navigate") {
+        return new Response(
+          `
+          <!DOCTYPE html>
+          <html lang="es">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Sin conexión</title>
+            <style>
+              body {
+                margin: 0;
+                min-height: 100vh;
+                display: grid;
+                place-items: center;
+                font-family: Arial, sans-serif;
+                background: #06111f;
+                color: white;
+                text-align: center;
+                padding: 24px;
+              }
 
-  if (request.mode === "navigate") {
-    event.respondWith(networkFirst(request, "/index.html"));
-    return;
-  }
+              h1 {
+                font-size: 24px;
+                margin-bottom: 12px;
+              }
 
-  if (requestUrl.origin === self.location.origin && requestUrl.pathname.startsWith("/api/")) {
-    event.respondWith(networkFirst(request));
-    return;
-  }
-
-  if (requestUrl.origin === self.location.origin) {
-    event.respondWith(cacheFirst(request));
-    return;
-  }
-
-  event.respondWith(staleWhileRevalidate(request));
-});
-
-async function cacheFirst(request) {
-  const cached = await caches.match(request);
-  if (cached) return cached;
-
-  const response = await fetch(request);
-  const cache = await caches.open(RUNTIME_CACHE);
-  cache.put(request, response.clone());
-  return response;
-}
-
-async function networkFirst(request, fallbackUrl) {
-  try {
-    const response = await fetch(request);
-    const cache = await caches.open(RUNTIME_CACHE);
-    cache.put(request, response.clone());
-    return response;
-  } catch (error) {
-    const cached = await caches.match(request);
-    if (cached) return cached;
-
-    if (fallbackUrl) {
-      const fallback = await caches.match(fallbackUrl);
-      if (fallback) return fallback;
-    }
-
-    return new Response(
-      JSON.stringify({
-        ok: false,
-        message: "Sin conexion. Vuelve a intentarlo cuando tengas internet."
-      }),
-      {
-        status: 503,
-        headers: {
-          "Content-Type": "application/json"
-        }
+              p {
+                max-width: 420px;
+                line-height: 1.5;
+                color: #cbd5e1;
+              }
+            </style>
+          </head>
+          <body>
+            <main>
+              <h1>Sin conexión a internet</h1>
+              <p>
+                Morona Santiago Vial necesita internet para consultar incidentes,
+                rutas, clima y mapas actualizados.
+              </p>
+            </main>
+          </body>
+          </html>
+          `,
+          {
+            status: 503,
+            headers: {
+              "Content-Type": "text/html; charset=UTF-8"
+            }
+          }
+        );
       }
-    );
-  }
-}
 
-async function staleWhileRevalidate(request) {
-  const cache = await caches.open(RUNTIME_CACHE);
-  const cached = await cache.match(request);
-
-  const networkFetch = fetch(request)
-    .then(response => {
-      cache.put(request, response.clone());
-      return response;
+      return new Response(
+        JSON.stringify({
+          ok: false,
+          message: "Sin conexión a internet. Esta aplicación requiere conexión para funcionar."
+        }),
+        {
+          status: 503,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
     })
-    .catch(() => cached);
-
-  return cached || networkFetch;
-}
+  );
+});
