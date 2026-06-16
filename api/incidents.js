@@ -3,6 +3,26 @@ import { viasTramos } from "../lib/viasTramosData.js";
 import { matchRoadSegment } from "../lib/roadMatcher.js";
 import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 
+const CACHE_WINDOW_MS = 10 * 60 * 1000;
+
+let cachedResponse = null;
+let cachedAt = 0;
+let cachedWindowStart = 0;
+let pendingRefresh = null;
+
+function getCacheWindowStart(now = Date.now()) {
+  return Math.floor(now / CACHE_WINDOW_MS) * CACHE_WINDOW_MS;
+}
+
+function getSecondsUntilNextWindow(now = Date.now()) {
+  const nextWindowStart = getCacheWindowStart(now) + CACHE_WINDOW_MS;
+  return Math.max(1, Math.ceil((nextWindowStart - now) / 1000));
+}
+
+function isCacheFresh() {
+  return cachedResponse && cachedWindowStart === getCacheWindowStart();
+}
+
 async function buildNetworkStatus() {
   const ecu911Items = await scrapeEcu911MoronaSantiago();
   console.log("Datos ECU 911:", ecu911Items);
@@ -46,15 +66,62 @@ async function buildNetworkStatus() {
   });
 }
 
+async function getCachedNetworkStatus() {
+  const windowStart = getCacheWindowStart();
+
+  if (isCacheFresh()) {
+    return {
+      ...cachedResponse,
+      cache: {
+        status: "hit",
+        cachedAt,
+        windowStart,
+        windowMs: CACHE_WINDOW_MS
+      }
+    };
+  }
+
+  if (!pendingRefresh) {
+    pendingRefresh = buildNetworkStatus()
+      .then((roads) => {
+        cachedWindowStart = getCacheWindowStart();
+        cachedResponse = {
+          ok: true,
+          total: roads.length,
+          incidents: roads
+        };
+        cachedAt = Date.now();
+        return cachedResponse;
+      })
+      .finally(() => {
+        pendingRefresh = null;
+      });
+  }
+
+  const response = await pendingRefresh;
+
+  return {
+    ...response,
+    cache: {
+      status: "miss",
+      cachedAt,
+      windowStart: cachedWindowStart,
+      windowMs: CACHE_WINDOW_MS
+    }
+  };
+}
+
 export default async function handler(req, res) {
   try {
-    const roads = await buildNetworkStatus();
+    const data = await getCachedNetworkStatus();
+    const secondsUntilNextWindow = getSecondsUntilNextWindow();
 
-    res.status(200).json({
-      ok: true,
-      total: roads.length,
-      incidents: roads
-    });
+    res.setHeader(
+      "Cache-Control",
+      `s-maxage=${secondsUntilNextWindow}, stale-while-revalidate=60`
+    );
+
+    res.status(200).json(data);
   } catch (error) {
     console.error("Error en /api/incidents:", error);
 

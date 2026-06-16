@@ -5,6 +5,12 @@
       "memory": 1024
     }
   },
+  "crons": [
+    {
+      "path": "/api/incidents",
+      "schedule": "*/10 * * * *"
+    }
+  ],
   "routes": [
     { "handle": "filesystem" },
     { "src": "/api/(.*)", "dest": "/api/$1" },
