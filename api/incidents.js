@@ -102,6 +102,7 @@ let cachedAt = 0;
 let cachedWindowStart = 0;
 let pendingRefresh = null;
 let lastDataSource = "Sin cargar";
+let lastEcu911Error = "";
 
 function getCacheWindowStart(now = Date.now()) {
   return Math.floor(now / CACHE_WINDOW_MS) * CACHE_WINDOW_MS;
@@ -122,6 +123,7 @@ async function loadEcu911Items() {
 
     if (fastItems.length) {
       lastDataSource = "ECU 911";
+      lastEcu911Error = "";
       console.log(
         "Se obtuvo correctamente la informacion desde el ECU 911 por fetch."
       );
@@ -130,6 +132,7 @@ async function loadEcu911Items() {
 
     console.log("Fetch ECU 911 no encontro datos. Se usara Playwright.");
   } catch (error) {
+    lastEcu911Error = `Fetch ECU 911 fallo: ${error.message}`;
     console.warn("Fetch ECU 911 fallo. Se usara Playwright:", error.message);
   }
 
@@ -137,24 +140,22 @@ async function loadEcu911Items() {
     const scrapedItems = await scrapeEcu911MoronaSantiago();
     if (scrapedItems.length) {
       lastDataSource = "ECU 911";
+      lastEcu911Error = "";
       console.log(
         "Se obtuvo correctamente la informacion desde el ECU 911 por scraping."
       );
       return scrapedItems;
     }
 
-    lastDataSource = "Respaldo";
-    console.warn(
-      "No se pudo obtener info desde el ECU 911. Se usa respaldo."
-    );
-    return fallbackEcu911Items;
+    throw new Error("Playwright no encontro filas de Morona Santiago en ECU 911.");
   } catch (error) {
-    lastDataSource = "Respaldo";
+    lastDataSource = "Error ECU 911";
+    lastEcu911Error = error.message;
     console.error(
-      "No se pudo obtener info desde el ECU 911. Se usa respaldo:",
+      "No se pudo obtener info desde el ECU 911:",
       error
     );
-    return fallbackEcu911Items;
+    throw error;
   }
 }
 
@@ -224,6 +225,7 @@ async function getCachedNetworkStatus() {
           ok: true,
           total: roads.length,
           dataSource: lastDataSource,
+          ecu911Error: lastEcu911Error,
           incidents: roads
         };
         cachedAt = Date.now();
@@ -264,6 +266,8 @@ export default async function handler(req, res) {
     res.status(500).json({
       ok: false,
       message: "No se pudo construir la red vial.",
+      dataSource: lastDataSource,
+      ecu911Error: lastEcu911Error || error.message,
       error: error.message
     });
   }
