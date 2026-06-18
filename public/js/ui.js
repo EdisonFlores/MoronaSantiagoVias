@@ -1,3 +1,4 @@
+// public/js/ui.js
 import { translations, translateState } from "./i18n.js";
 
 function getStateClass(state = "") {
@@ -79,4 +80,89 @@ export function renderIncidents(roads, handlers, lang = "es") {
       handlers.onFocus?.(road);
     });
   });
+}
+export function showToast(message, type = "warning", duration = 4000) {
+  let container = document.querySelector(".toast-container");
+
+  if (!container) {
+    container = document.createElement("div");
+    container.className = "toast-container";
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+
+  const icon =
+    type === "error"
+      ? "bi-exclamation-triangle"
+      : type === "success"
+      ? "bi-check-circle"
+      : "bi-exclamation-circle";
+
+  toast.innerHTML = `
+    <i class="bi ${icon}"></i>
+    <div>${message}</div>
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(-10px)";
+    setTimeout(() => toast.remove(), 250);
+  }, duration);
+}
+export function showRouteNotice(message, type = "warning") {
+  let modal = document.getElementById("routeNoticeModal");
+
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "routeNoticeModal";
+    modal.className = "route-notice-modal";
+    modal.innerHTML = `
+      <div class="route-notice-card">
+        <button class="route-notice-close" type="button" aria-label="Cerrar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="route-notice-icon">
+          <i class="bi bi-signpost-split"></i>
+        </div>
+
+        <h3 id="routeNoticeTitle">Ruta aproximada</h3>
+        <p id="routeNoticeText"></p>
+
+        <button class="btn-primary route-notice-btn" type="button">
+          Entendido
+        </button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    modal.querySelector(".route-notice-close").addEventListener("click", () => {
+      modal.classList.remove("show");
+    });
+
+    modal.querySelector(".route-notice-btn").addEventListener("click", () => {
+      modal.classList.remove("show");
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.remove("show");
+      }
+    });
+  }
+
+  const text = modal.querySelector("#routeNoticeText");
+  const card = modal.querySelector(".route-notice-card");
+
+  text.textContent = message;
+
+  card.classList.remove("notice-warning", "notice-error", "notice-success");
+  card.classList.add(`notice-${type}`);
+
+  modal.classList.add("show");
 }

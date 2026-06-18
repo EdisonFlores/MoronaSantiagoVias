@@ -151,7 +151,45 @@ export function drawRouteGeometry(routeCoords, road) {
 
   map.fitBounds(L.latLngBounds(routeCoords), { padding: [32, 32] });
 }
+export function drawFallbackPolyline(segment, road) {
+  if (!map || !segment?.start || !segment?.end) return;
 
+  const start = getSafeCoord(segment.start);
+  const end = getSafeCoord(segment.end);
+
+  if (!start || !end) return;
+
+  clearRoadGeometry();
+
+  const color = getLineColorByState(road?.estado);
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+
+  const routeCoords = [start, end];
+
+  roadLine = L.polyline(routeCoords, {
+    weight: 5,
+    color,
+    opacity: 0.85,
+    dashArray: "10, 10"
+  }).addTo(map);
+
+  startMarker = L.marker(start)
+    .addTo(map)
+    .bindPopup(`<b>${t.mapStart}:</b> ${segment?.origen || t.mapStart}`);
+
+  endMarker = L.marker(end)
+    .addTo(map)
+    .bindPopup(`<b>${t.mapEnd}:</b> ${segment?.destino || t.mapEnd}`);
+
+  roadLine.bindPopup(
+    lang === "en"
+      ? "Approximate route. OSRM was unavailable or took too long."
+      : "Ruta aproximada. OSRM no respondió o demoró demasiado."
+  );
+
+  map.fitBounds(L.latLngBounds(routeCoords), { padding: [32, 32] });
+}
 export function addIncidentMarker(incident) {
   if (!map || !ecu911MarkersLayer) return;
 
