@@ -117,9 +117,27 @@ function isCacheFresh() {
   return cachedResponse && cachedWindowStart === getCacheWindowStart();
 }
 
+function withTimeout(promise, timeoutMs, message) {
+  let timeoutId;
+
+  const timeout = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(message));
+    }, timeoutMs);
+  });
+
+  return Promise.race([promise, timeout]).finally(() => {
+    clearTimeout(timeoutId);
+  });
+}
+
 async function loadEcu911Items() {
   try {
-    const fastItems = await fetchEcu911RoadIncidents();
+    const fastItems = await withTimeout(
+      fetchEcu911RoadIncidents(),
+      5000,
+      "Fetch ECU 911 excedio 5 segundos."
+    );
 
     if (fastItems.length) {
       lastDataSource = "ECU 911";
@@ -137,7 +155,11 @@ async function loadEcu911Items() {
   }
 
   try {
-    const scrapedItems = await scrapeEcu911MoronaSantiago();
+    const scrapedItems = await withTimeout(
+      scrapeEcu911MoronaSantiago(),
+      15000,
+      "Scraping ECU 911 excedio 15 segundos en Vercel."
+    );
     if (scrapedItems.length) {
       lastDataSource = "ECU 911";
       lastEcu911Error = "";
