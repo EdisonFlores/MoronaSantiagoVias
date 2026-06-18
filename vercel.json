@@ -2,8 +2,7 @@
   "functions": {
     "api/*.js": {
       "maxDuration": 60,
-      "memory": 1024,
-      "regions": ["gru1"]
+      "memory": 1024
     }
   },
   "routes": [

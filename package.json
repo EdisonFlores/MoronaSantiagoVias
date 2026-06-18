@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@sparticuz/chromium": "^138.0.2",
-    "cheerio": "^1.2.0",
     "playwright-core": "^1.58.2"
   }
 }
