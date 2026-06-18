@@ -1,6 +1,7 @@
 // api/incidents.js
 import { viasTramos } from "../lib/viasTramosData.js";
 import { matchRoadSegment } from "../lib/roadMatcher.js";
+import { fetchEcu911RoadIncidents } from "../lib/parseEcu911.js";
 import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 
 const CACHE_WINDOW_MS = 10 * 60 * 1000;
@@ -23,9 +24,33 @@ function isCacheFresh() {
   return cachedResponse && cachedWindowStart === getCacheWindowStart();
 }
 
+async function loadEcu911Items() {
+  try {
+    const fastItems = await fetchEcu911RoadIncidents();
+
+    if (fastItems.length) {
+      console.log("Datos ECU 911 obtenidos por fetch:", fastItems.length);
+      return fastItems;
+    }
+
+    console.log("Fetch ECU 911 no encontro datos. Se usara Playwright.");
+  } catch (error) {
+    console.warn("Fetch ECU 911 fallo. Se usara Playwright:", error.message);
+  }
+
+  try {
+    const scrapedItems = await scrapeEcu911MoronaSantiago();
+    console.log("Datos ECU 911 obtenidos por Playwright:", scrapedItems.length);
+    return scrapedItems;
+  } catch (error) {
+    console.error("No se pudo obtener ECU 911. Se usara red vial base:", error);
+    return [];
+  }
+}
+
 async function buildNetworkStatus() {
-  const ecu911Items = await scrapeEcu911MoronaSantiago();
-  console.log("Datos ECU 911:", ecu911Items);
+  const ecu911Items = await loadEcu911Items();
+  console.log("Datos ECU 911:", ecu911Items.length);
 
   const matchedItems = ecu911Items
     .map((item) => {
