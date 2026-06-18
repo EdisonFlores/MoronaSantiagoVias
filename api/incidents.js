@@ -101,6 +101,7 @@ let cachedResponse = null;
 let cachedAt = 0;
 let cachedWindowStart = 0;
 let pendingRefresh = null;
+let lastDataSource = "Sin cargar";
 
 function getCacheWindowStart(now = Date.now()) {
   return Math.floor(now / CACHE_WINDOW_MS) * CACHE_WINDOW_MS;
@@ -120,7 +121,10 @@ async function loadEcu911Items() {
     const fastItems = await fetchEcu911RoadIncidents();
 
     if (fastItems.length) {
-      console.log("Datos ECU 911 obtenidos por fetch:", fastItems.length);
+      lastDataSource = "ECU 911";
+      console.log(
+        "Se obtuvo correctamente la informacion desde el ECU 911 por fetch."
+      );
       return fastItems;
     }
 
@@ -132,14 +136,24 @@ async function loadEcu911Items() {
   try {
     const scrapedItems = await scrapeEcu911MoronaSantiago();
     if (scrapedItems.length) {
-      console.log("Datos ECU 911 obtenidos por Playwright:", scrapedItems.length);
+      lastDataSource = "ECU 911";
+      console.log(
+        "Se obtuvo correctamente la informacion desde el ECU 911 por scraping."
+      );
       return scrapedItems;
     }
 
-    console.warn("Playwright ECU 911 no encontro datos. Se usara respaldo.");
+    lastDataSource = "Respaldo";
+    console.warn(
+      "No se pudo obtener info desde el ECU 911. Se usa respaldo."
+    );
     return fallbackEcu911Items;
   } catch (error) {
-    console.error("No se pudo obtener ECU 911. Se usara respaldo:", error);
+    lastDataSource = "Respaldo";
+    console.error(
+      "No se pudo obtener info desde el ECU 911. Se usa respaldo:",
+      error
+    );
     return fallbackEcu911Items;
   }
 }
@@ -209,6 +223,7 @@ async function getCachedNetworkStatus() {
         cachedResponse = {
           ok: true,
           total: roads.length,
+          dataSource: lastDataSource,
           incidents: roads
         };
         cachedAt = Date.now();

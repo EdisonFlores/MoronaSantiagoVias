@@ -254,6 +254,11 @@ async function initApp() {
 
   try {
     const data = await fetchIncidents();
+    if (data.dataSource === "ECU 911") {
+      console.info("Se obtuvo correctamente la informacion desde el ECU 911.");
+    } else if (data.dataSource === "Respaldo") {
+      console.warn("No se pudo obtener info desde el ECU 911. Se usa respaldo.");
+    }
     allRoads = data.incidents || [];
     applyFilters();
   } catch (error) {
