@@ -4,7 +4,16 @@ import { matchRoadSegment } from "../lib/roadMatcher.js";
 import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 
 async function buildNetworkStatus() {
-  const ecu911Items = await scrapeEcu911MoronaSantiago();
+  let ecu911Items = [];
+  let sourceWarning = null;
+
+  try {
+    ecu911Items = await scrapeEcu911MoronaSantiago();
+  } catch (error) {
+    sourceWarning = `No se pudo consultar ECU 911: ${error.message}`;
+    console.error(sourceWarning, error);
+  }
+
   console.log("Datos ECU 911:", ecu911Items);
 
   const matchedItems = ecu911Items
@@ -18,7 +27,7 @@ async function buildNetworkStatus() {
     matchedItems.map((item) => [item.tramoId, item])
   );
 
-  return viasTramos.map((tramo) => {
+  const roads = viasTramos.map((tramo) => {
     const match = matchedMap.get(tramo.id);
 
     return {
@@ -44,16 +53,22 @@ async function buildNetworkStatus() {
       }
     };
   });
+
+  return {
+    roads,
+    sourceWarning
+  };
 }
 
 export default async function handler(req, res) {
   try {
-    const roads = await buildNetworkStatus();
+    const { roads, sourceWarning } = await buildNetworkStatus();
 
     res.status(200).json({
       ok: true,
       total: roads.length,
-      incidents: roads
+      incidents: roads,
+      sourceWarning
     });
   } catch (error) {
     console.error("Error en /api/incidents:", error);
