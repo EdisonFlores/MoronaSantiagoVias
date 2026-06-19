@@ -1,18 +1,48 @@
 // api/incidents.js
+import { readFile } from "node:fs/promises";
 import { viasTramos } from "../lib/viasTramosData.js";
 import { matchRoadSegment } from "../lib/roadMatcher.js";
 import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 
-async function buildNetworkStatus() {
-  let ecu911Items = [];
-  let sourceWarning = null;
+const ecu911CacheUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
+
+async function loadCachedEcu911Items() {
+  const raw = await readFile(ecu911CacheUrl, "utf8");
+  const cache = JSON.parse(raw);
+
+  return {
+    items: Array.isArray(cache.items) ? cache.items : [],
+    updatedAt: cache.updatedAt || null
+  };
+}
+
+async function getEcu911Items() {
+  if (process.env.VERCEL || process.env.VERCEL_ENV) {
+    const cache = await loadCachedEcu911Items();
+
+    return {
+      items: cache.items,
+      sourceWarning: cache.updatedAt
+        ? `Datos ECU 911 cacheados desde GitHub Actions: ${cache.updatedAt}`
+        : "Datos ECU 911 cacheados desde GitHub Actions."
+    };
+  }
 
   try {
-    ecu911Items = await scrapeEcu911MoronaSantiago();
+    const items = await scrapeEcu911MoronaSantiago();
+    return { items, sourceWarning: null };
   } catch (error) {
-    sourceWarning = `No se pudo consultar ECU 911: ${error.message}`;
-    console.error(sourceWarning, error);
+    const cache = await loadCachedEcu911Items();
+
+    return {
+      items: cache.items,
+      sourceWarning: `No se pudo consultar ECU 911 en vivo; usando cache: ${error.message}`
+    };
   }
+}
+
+async function buildNetworkStatus() {
+  const { items: ecu911Items, sourceWarning } = await getEcu911Items();
 
   console.log("Datos ECU 911:", ecu911Items);
 

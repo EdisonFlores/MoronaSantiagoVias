@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Monitoreo vial de Morona Santiago",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "update:ecu911": "node scripts/update-ecu911-cache.js"
+  },
   "engines": {
     "node": "22.x"
   },
