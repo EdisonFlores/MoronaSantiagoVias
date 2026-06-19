@@ -26,6 +26,8 @@ jobs:
 
       - name: Update ECU 911 cache
         run: npm run update:ecu911
+        env:
+          CHROME_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
 
       - name: Commit cache changes
         uses: stefanzweifel/git-auto-commit-action@v5

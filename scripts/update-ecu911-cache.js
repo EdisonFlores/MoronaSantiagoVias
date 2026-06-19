@@ -6,20 +6,49 @@ import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 const outputUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
 const outputPath = fileURLToPath(outputUrl);
 
-const items = await scrapeEcu911MoronaSantiago();
-
-if (!items.length) {
-  throw new Error("ECU 911 no devolvio reportes para Morona Santiago.");
+async function readCurrentCache() {
+  try {
+    return JSON.parse(await readFile(outputPath, "utf8"));
+  } catch {
+    return null;
+  }
 }
 
+async function scrapeWithRetries(maxAttempts = 3) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      console.log(`Intento ${attempt} de ${maxAttempts} para consultar ECU 911.`);
+      const items = await scrapeEcu911MoronaSantiago();
+      if (items.length) return items;
+      lastError = new Error("ECU 911 no devolvio reportes para Morona Santiago.");
+    } catch (error) {
+      lastError = error;
+      console.error(`Intento ${attempt} fallo: ${error.message}`);
+    }
+  }
+
+  throw lastError;
+}
+
+const currentCache = await readCurrentCache();
+let items = [];
+
 try {
-  const current = JSON.parse(await readFile(outputPath, "utf8"));
-  if (JSON.stringify(current.items) === JSON.stringify(items)) {
-    console.log("Cache ECU 911 sin cambios.");
+  items = await scrapeWithRetries();
+} catch (error) {
+  if (currentCache?.items?.length) {
+    console.error(`No se pudo actualizar ECU 911; se conserva cache previo: ${error.message}`);
     process.exit(0);
   }
-} catch {
-  // Si no existe cache previo o no se puede leer, se genera uno nuevo.
+
+  throw error;
+}
+
+if (JSON.stringify(currentCache?.items) === JSON.stringify(items)) {
+  console.log("Cache ECU 911 sin cambios.");
+  process.exit(0);
 }
 
 const payload = {
