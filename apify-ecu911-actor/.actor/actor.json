@@ -1,0 +1,13 @@
+{
+  "actorSpecification": 1,
+  "name": "ecu911-morona-santiago-cache",
+  "title": "ECU 911 Morona Santiago cache",
+  "description": "Scrapes ECU 911 road status data for Morona Santiago and stores the latest result in an Apify key-value store.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "meta": {
+    "templateId": "js-start"
+  },
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile"
+}

@@ -5,6 +5,7 @@ import { matchRoadSegment } from "../lib/roadMatcher.js";
 import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 
 const ecu911CacheUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
+const apifyRecordKey = process.env.APIFY_CACHE_KEY || "latest";
 
 async function loadCachedEcu911Items() {
   const raw = await readFile(ecu911CacheUrl, "utf8");
@@ -16,8 +17,50 @@ async function loadCachedEcu911Items() {
   };
 }
 
+async function loadApifyEcu911Items() {
+  if (!process.env.APIFY_TOKEN || !process.env.APIFY_STORE_ID) {
+    throw new Error("APIFY_TOKEN o APIFY_STORE_ID no configurado.");
+  }
+
+  const url =
+    `https://api.apify.com/v2/key-value-stores/${process.env.APIFY_STORE_ID}` +
+    `/records/${encodeURIComponent(apifyRecordKey)}`;
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${process.env.APIFY_TOKEN}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Apify respondio ${response.status}`);
+  }
+
+  const cache = await response.json();
+
+  return {
+    items: Array.isArray(cache.items) ? cache.items : [],
+    updatedAt: cache.updatedAt || null
+  };
+}
+
 async function getEcu911Items() {
   if (process.env.VERCEL || process.env.VERCEL_ENV) {
+    try {
+      const apifyCache = await loadApifyEcu911Items();
+
+      if (apifyCache.items.length) {
+        return {
+          items: apifyCache.items,
+          sourceWarning: apifyCache.updatedAt
+            ? `Datos ECU 911 cacheados desde Apify: ${apifyCache.updatedAt}`
+            : "Datos ECU 911 cacheados desde Apify."
+        };
+      }
+    } catch (error) {
+      console.error("No se pudo leer cache de Apify:", error);
+    }
+
     const cache = await loadCachedEcu911Items();
 
     return {
