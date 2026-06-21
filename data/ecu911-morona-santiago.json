@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T07:01:57.152Z",
+  "updatedAt": "2026-06-21T10:40:25.841Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -27,18 +27,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "5da9d61d-a4de-441b-bd10-ed52fbb0062d",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "LIMON INDANZA",
-      "via": "LIMON - SAN JUAN BOSCO",
-      "ref": "",
-      "estado": "Parcialmente habilitada",
-      "observaciones": "CON PRECAUCIÓN POR DESLIZAMIENTO DE TIERRA EN EL SECTOR PAXI",
-      "viaAlterna": "N/A",
-      "modified": "2026-06-05 18:39:21",
-      "source": "ECU 911"
-    },
-    {
       "id": "f04eb4a2-4457-40a3-9d2e-834a3413ebc6",
       "provincia": "MORONA SANTIAGO",
       "canton": "LOGROÑO",
@@ -48,18 +36,6 @@
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
       "modified": "2021-10-02 19:18:19",
-      "source": "ECU 911"
-    },
-    {
-      "id": "931ee900-cce6-4960-a579-9fc4473fae4d",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "GUALAQUIZA - CHUCHUMBLETZA (LIMITE PROVINCIAL ZAMORA)",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "*",
-      "viaAlterna": "N/A",
-      "modified": "2022-07-01 16:47:38",
       "source": "ECU 911"
     },
     {
@@ -75,15 +51,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
+      "id": "931ee900-cce6-4960-a579-9fc4473fae4d",
       "provincia": "MORONA SANTIAGO",
-      "canton": "TAISHA",
-      "via": "MACAS - TAISHA",
+      "canton": "GUALAQUIZA",
+      "via": "GUALAQUIZA - CHUCHUMBLETZA (LIMITE PROVINCIAL ZAMORA)",
       "ref": "",
       "estado": "Habilitada",
-      "observaciones": "HABILITADA",
+      "observaciones": "*",
       "viaAlterna": "N/A",
-      "modified": "2026-05-23 05:37:35",
+      "modified": "2022-07-01 16:47:38",
       "source": "ECU 911"
     },
     {
@@ -99,15 +75,27 @@
       "source": "ECU 911"
     },
     {
-      "id": "54c66559-eff8-47e0-b741-7faee4a244f2",
+      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
       "provincia": "MORONA SANTIAGO",
-      "canton": "TIWINTZA",
-      "via": "Y DE PATUCA - TIWINTZA",
+      "canton": "TAISHA",
+      "via": "MACAS - TAISHA",
       "ref": "",
       "estado": "Habilitada",
-      "observaciones": "PRECUCIÓN EN SECTOR PALOMINO",
+      "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
-      "modified": "2026-06-20 19:20:42",
+      "modified": "2026-05-23 05:37:35",
+      "source": "ECU 911"
+    },
+    {
+      "id": "5da9d61d-a4de-441b-bd10-ed52fbb0062d",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "LIMON INDANZA",
+      "via": "LIMON - SAN JUAN BOSCO",
+      "ref": "",
+      "estado": "Parcialmente habilitada",
+      "observaciones": "CON PRECAUCIÓN POR DESLIZAMIENTO DE TIERRA EN EL SECTOR PAXI",
+      "viaAlterna": "N/A",
+      "modified": "2026-06-05 18:39:21",
       "source": "ECU 911"
     },
     {
@@ -132,6 +120,18 @@
       "observaciones": "VIA ALTERNA AL PUYO",
       "viaAlterna": "N/A",
       "modified": "2022-05-18 04:14:12",
+      "source": "ECU 911"
+    },
+    {
+      "id": "6a4af35c-38a4-4f9b-9260-15af71fac2a0",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "MORONA",
+      "via": "MACAS - SEVILLA - SEIPA - SUCUA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "HABILITADA",
+      "viaAlterna": "N/A",
+      "modified": "2019-01-31 23:07:56",
       "source": "ECU 911"
     },
     {
@@ -219,18 +219,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "6a4af35c-38a4-4f9b-9260-15af71fac2a0",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "MORONA",
-      "via": "MACAS - SEVILLA - SEIPA - SUCUA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2019-01-31 23:07:56",
-      "source": "ECU 911"
-    },
-    {
       "id": "2f548f2a-6d38-491c-81f7-2a699e70a2b9",
       "provincia": "MORONA SANTIAGO",
       "canton": "SUCUA",
@@ -240,6 +228,18 @@
       "observaciones": "*",
       "viaAlterna": "N/A",
       "modified": "2022-07-01 16:46:33",
+      "source": "ECU 911"
+    },
+    {
+      "id": "54c66559-eff8-47e0-b741-7faee4a244f2",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "TIWINTZA",
+      "via": "Y DE PATUCA - TIWINTZA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "PRECUCIÓN EN SECTOR PALOMINO",
+      "viaAlterna": "N/A",
+      "modified": "2026-06-20 19:20:42",
       "source": "ECU 911"
     },
     {
