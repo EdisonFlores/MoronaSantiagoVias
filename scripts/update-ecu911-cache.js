@@ -5,7 +5,12 @@ import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 
 const outputUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
 const outputPath = fileURLToPath(outputUrl);
-const sourceUrl = "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A";
+const sourceUrl =
+  "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A" +
+  "&and:<>:EstadoActual-id=593" +
+  "&order=Provincia-descripcion" +
+  "&limit=200" +
+  "&start=0";
 
 async function readCurrentCache() {
   try {
