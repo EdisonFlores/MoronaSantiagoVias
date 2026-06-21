@@ -78,6 +78,72 @@ function closeMobileSidebar() {
   setMobileSidebarState(false);
 }
 
+async function focusRoadOnMap(road) {
+  const lang = getCurrentLanguage();
+
+  try {
+    const segment = road.matchedRoadSegment;
+
+    if (!segment) return;
+
+    focusIncidentOnMap(segment, road);
+
+    if (!segment?.start || !segment?.end) {
+      closeMobileSidebar();
+      showToast(
+        lang === "en"
+          ? "Approximate route shown. OSRM unavailable or slow."
+          : "Ruta aproximada mostrada. OSRM no disponible o lento.",
+        "warning"
+      );
+      showRouteNotice(
+        lang === "en"
+          ? "OSRM did not respond or took too long. An approximate route was drawn."
+          : "OSRM no respondió o demoró demasiado. Se dibujó una ruta aproximada.",
+        "warning"
+      );
+      scrollToMapOnSmallScreens();
+      return;
+    }
+
+    try {
+      const routeResult = await fetchOsrmRoute(segment, {
+        timeoutMs: 12000
+      });
+
+      drawRouteGeometry(routeResult.coordinates, road);
+    } catch (routeError) {
+      console.warn("OSRM falló. Se usará polilínea aproximada:", routeError);
+
+      drawFallbackPolyline(segment, road);
+
+      showToast(
+        lang === "en"
+          ? "Approximate route shown. OSRM unavailable or slow."
+          : "Ruta aproximada mostrada. OSRM no disponible o lento.",
+        "warning"
+      );
+      showRouteNotice(
+        lang === "en"
+          ? "OSRM did not respond or took too long. An approximate route was drawn."
+          : "OSRM no respondió o demoró demasiado. Se dibujó una ruta aproximada.",
+        "warning"
+      );
+    }
+
+    closeMobileSidebar();
+    scrollToMapOnSmallScreens();
+  } catch (error) {
+    console.error(error);
+    closeMobileSidebar();
+    alert(
+      lang === "en"
+        ? "The route could not be drawn."
+        : "No se pudo dibujar la ruta."
+    );
+  }
+}
+
 function initMobileSidebar() {
   const openBtn = document.getElementById("btnOpenIncidents");
   const backdrop = document.getElementById("mobileSidebarBackdrop");
@@ -161,7 +227,9 @@ function applyFilters() {
   }
 
   renderStats(buildStats(filtered), lang);
-  renderIncidentMarkers(filtered);
+  renderIncidentMarkers(filtered, {
+    onSelect: focusRoadOnMap
+  });
 
   renderIncidents(filtered, {
     onFocus: async (road) => {

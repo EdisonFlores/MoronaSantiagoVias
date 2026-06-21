@@ -209,25 +209,32 @@ export function drawFallbackPolyline(segment, road) {
 
   map.fitBounds(L.latLngBounds(routeCoords), { padding: [32, 32] });
 }
-export function addIncidentMarker(incident) {
+export function addIncidentMarker(incident, handlers = {}) {
   if (!map || !ecu911MarkersLayer) return;
 
   const start = getSafeCoord(incident?.matchedRoadSegment?.start);
   if (!start) return;
 
-  const marker = L.marker(start).bindPopup(buildIncidentPopup(incident));
+  const marker = L.marker(start);
+
+  if (handlers.onSelect) {
+    marker.on("click", () => handlers.onSelect(incident));
+  } else {
+    marker.bindPopup(buildIncidentPopup(incident));
+  }
+
   ecu911MarkersLayer.addLayer(marker);
 
   return marker;
 }
 
-export function renderIncidentMarkers(incidents = []) {
+export function renderIncidentMarkers(incidents = [], handlers = {}) {
   if (!map || !ecu911MarkersLayer) return;
 
   clearEcu911Markers();
 
   incidents.forEach((incident) => {
-    addIncidentMarker(incident);
+    addIncidentMarker(incident, handlers);
   });
 }
 
