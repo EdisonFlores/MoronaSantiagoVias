@@ -6,18 +6,21 @@
     "storeName": {
       "title": "Key-value store name",
       "type": "string",
+      "editor": "textfield",
       "description": "Named Apify key-value store where the latest cache will be saved.",
       "default": "ecu911-morona-santiago-cache"
     },
     "recordKey": {
       "title": "Record key",
       "type": "string",
+      "editor": "textfield",
       "description": "Record key used by the Vercel API to read the latest cache.",
       "default": "latest"
     },
     "useApifyProxy": {
       "title": "Use Apify Proxy",
       "type": "boolean",
+      "editor": "checkbox",
       "description": "Enable if ECU 911 blocks Apify datacenter requests.",
       "default": false
     },
@@ -26,6 +29,9 @@
       "type": "array",
       "description": "Optional Apify Proxy groups, for example RESIDENTIAL if available in your plan.",
       "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
       "default": []
     }
   }
