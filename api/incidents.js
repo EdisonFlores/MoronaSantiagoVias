@@ -45,6 +45,16 @@ async function loadApifyEcu911Items() {
 }
 
 async function getEcu911Items() {
+  try {
+    const items = await scrapeEcu911MoronaSantiago();
+
+    if (items.length) {
+      return { items, sourceWarning: null };
+    }
+  } catch (error) {
+    console.error("No se pudo consultar ECU 911 en vivo:", error);
+  }
+
   if (process.env.VERCEL || process.env.VERCEL_ENV) {
     try {
       const apifyCache = await loadApifyEcu911Items();
@@ -66,22 +76,19 @@ async function getEcu911Items() {
     return {
       items: cache.items,
       sourceWarning: cache.updatedAt
-        ? `Datos ECU 911 cacheados desde GitHub Actions: ${cache.updatedAt}`
-        : "Datos ECU 911 cacheados desde GitHub Actions."
+        ? `No se pudo consultar ECU 911 en vivo; usando cache de GitHub Actions: ${cache.updatedAt}`
+        : "No se pudo consultar ECU 911 en vivo; usando cache de GitHub Actions."
     };
   }
 
-  try {
-    const items = await scrapeEcu911MoronaSantiago();
-    return { items, sourceWarning: null };
-  } catch (error) {
-    const cache = await loadCachedEcu911Items();
+  const cache = await loadCachedEcu911Items();
 
-    return {
-      items: cache.items,
-      sourceWarning: `No se pudo consultar ECU 911 en vivo; usando cache: ${error.message}`
-    };
-  }
+  return {
+    items: cache.items,
+    sourceWarning: cache.updatedAt
+      ? `No se pudo consultar ECU 911 en vivo; usando cache local: ${cache.updatedAt}`
+      : "No se pudo consultar ECU 911 en vivo; usando cache local."
+  };
 }
 
 async function buildNetworkStatus() {

@@ -5,6 +5,7 @@ import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 
 const outputUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
 const outputPath = fileURLToPath(outputUrl);
+const sourceUrl = "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A";
 
 async function readCurrentCache() {
   try {
@@ -46,14 +47,17 @@ try {
   throw error;
 }
 
-if (JSON.stringify(currentCache?.items) === JSON.stringify(items)) {
+if (
+  currentCache?.sourceUrl === sourceUrl &&
+  JSON.stringify(currentCache?.items) === JSON.stringify(items)
+) {
   console.log("Cache ECU 911 sin cambios.");
   process.exit(0);
 }
 
 const payload = {
   updatedAt: new Date().toISOString(),
-  sourceUrl: "https://www.ecu911.gob.ec/consulta-de-vias/",
+  sourceUrl,
   items
 };
 
