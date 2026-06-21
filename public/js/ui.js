@@ -9,6 +9,20 @@ function getStateClass(state = "") {
   return "badge-ok";
 }
 
+function formatIncidentDate(value, lang = "es") {
+  if (!value) return "";
+
+  const date = new Date(String(value).replace(" ", "T"));
+  if (Number.isNaN(date.getTime())) return "";
+
+  return new Intl.DateTimeFormat(lang === "en" ? "en-US" : "es-EC", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(date);
+}
+
 export function renderStats(stats, lang = "es") {
   const t = translations[lang] || translations.es;
   const box = document.getElementById("statsBox");
@@ -46,6 +60,10 @@ export function renderIncidents(roads, handlers, lang = "es") {
     .map((item) => {
       const observation = item.observaciones || t.noNews;
       const stateText = translateState(item.estado, lang);
+      const updatedAt = formatIncidentDate(item.updatedAt, lang);
+      const updatedLine = updatedAt
+        ? `<p class="small-text"><strong>${t.lastUpdated}:</strong> ${updatedAt}</p>`
+        : "";
 
       return `
         <article class="incident-card">
@@ -60,6 +78,7 @@ export function renderIncidents(roads, handlers, lang = "es") {
           <p><strong>${t.observation}:</strong> ${observation}</p>
           <p><strong>${t.alternateRoute}:</strong> ${item.viaAlterna}</p>
           <p class="small-text"><strong>${t.source}:</strong> ${item.source}</p>
+          ${updatedLine}
 
           <div class="incident-actions">
             <button class="btn-primary" data-action="focus" data-id="${item.id}">

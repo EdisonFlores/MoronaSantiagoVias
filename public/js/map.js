@@ -27,6 +27,20 @@ function getIncidentBadgeClass(state = "") {
   return "color:#16a34a;font-weight:700;";
 }
 
+function formatIncidentDate(value, lang = "es") {
+  if (!value) return "";
+
+  const date = new Date(String(value).replace(" ", "T"));
+  if (Number.isNaN(date.getTime())) return "";
+
+  return new Intl.DateTimeFormat(lang === "en" ? "en-US" : "es-EC", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(date);
+}
+
 function getSafeCoord(point) {
   if (!point) return null;
 
@@ -56,6 +70,10 @@ function buildIncidentPopup(incident) {
   const viaAlterna = incident?.viaAlterna || "N/A";
   const source = incident?.source || "ECU 911";
   const ref = incident?.ref ? ` (${incident.ref})` : "";
+  const updatedAt = formatIncidentDate(incident?.updatedAt, lang);
+  const updatedLine = updatedAt
+    ? `<div style="margin-top:4px;"><b>${t.lastUpdated || "Actualizado por ECU 911"}:</b> ${updatedAt}</div>`
+    : "";
 
   return `
     <div style="min-width:220px; max-width:280px; line-height:1.45;">
@@ -64,6 +82,7 @@ function buildIncidentPopup(incident) {
       <div style="margin-bottom:4px;"><b>Observación:</b> ${observaciones}</div>
       <div style="margin-bottom:4px;"><b>Vía alterna:</b> ${viaAlterna}</div>
       <div><b>Fuente:</b> ${source}</div>
+      ${updatedLine}
     </div>
   `;
 }

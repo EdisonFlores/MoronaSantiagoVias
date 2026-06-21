@@ -120,6 +120,7 @@ async function buildNetworkStatus() {
         ? match.observaciones
         : "Sin novedades reportadas.",
       viaAlterna: match?.viaAlterna || "N/A",
+      updatedAt: match?.modified || null,
       source: match ? "ECU 911" : "Red vial base",
       hasRoadMatch: true,
       matchedRoadSegment: {
