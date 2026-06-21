@@ -52,7 +52,7 @@ async function getProxyLaunchOptions(input) {
 
 async function scrapeEcu911MoronaSantiago(input) {
   const proxyOptions = await getProxyLaunchOptions(input);
-  Actor.log.info(`Abriendo ECU 911${input.useApifyProxy ? " con Apify Proxy" : " sin proxy"}...`);
+  console.log(`Abriendo ECU 911${input.useApifyProxy ? " con Apify Proxy" : " sin proxy"}...`);
   const browser = await chromium.launch({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -71,7 +71,7 @@ async function scrapeEcu911MoronaSantiago(input) {
 
     const tables = page.locator("table");
     const tableCount = await tables.count();
-    Actor.log.info(`Tablas encontradas: ${tableCount}`);
+    console.log(`Tablas encontradas: ${tableCount}`);
 
     let targetTable = null;
 
@@ -92,7 +92,7 @@ async function scrapeEcu911MoronaSantiago(input) {
     }
 
     if (!targetTable) {
-      Actor.log.warning("No se encontro la tabla objetivo.");
+      console.warn("No se encontro la tabla objetivo.");
       return [];
     }
 
@@ -141,7 +141,7 @@ await Actor.main(async () => {
   const input = (await Actor.getInput()) || {};
   const storeName = input.storeName || "ecu911-morona-santiago-cache";
   const recordKey = input.recordKey || "latest";
-  Actor.log.info(`Usando store "${storeName}" y record "${recordKey}".`);
+  console.log(`Usando store "${storeName}" y record "${recordKey}".`);
 
   const items = await scrapeEcu911MoronaSantiago(input);
 
@@ -160,5 +160,5 @@ await Actor.main(async () => {
   await Actor.setValue("OUTPUT", payload);
   await Actor.pushData(items);
 
-  Actor.log.info(`Cache actualizado en store "${storeName}", record "${recordKey}" con ${items.length} reportes.`);
+  console.log(`Cache actualizado en store "${storeName}", record "${recordKey}" con ${items.length} reportes.`);
 });
