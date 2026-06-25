@@ -83,7 +83,7 @@ export const translations = {
     footerDescription: "Plataforma de monitoreo vial de Morona Santiago",
     officialSource: "Fuente oficial:",
     footerLinksLabel: "Redes y contacto",
-    touristms: "TouristMS",
+    touristms: "MoronaBus",
     instagram: "Instagram",
     linkedin: "LinkedIn",
     whatsapp: "WhatsApp"
@@ -172,7 +172,7 @@ export const translations = {
     footerDescription: "Road monitoring platform for Morona Santiago",
     officialSource: "Official source:",
     footerLinksLabel: "Social links and contact",
-    touristms: "TouristMS",
+    touristms: "MoronaBus",
     instagram: "Instagram",
     linkedin: "LinkedIn",
     whatsapp: "WhatsApp"
