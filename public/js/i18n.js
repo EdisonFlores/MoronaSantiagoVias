@@ -8,6 +8,7 @@ export const translations = {
     climate: "Clima",
     languageToggle: "Idioma / Language",
     theme: "Tema",
+    tutorialButton: "Tutorial",
 
     // HERO
     heroBadge: "Estado vial en tiempo real",
@@ -60,6 +61,14 @@ export const translations = {
     mapCardTitle: "Mapa vial interactivo",
     mapCardSubtitle: "Visualización geográfica de incidencias y tramos",
     online: "En línea",
+    startTrip: "Iniciar recorrido",
+    stopTrip: "Detener recorrido",
+    yourLocation: "Tu ubicación",
+    nearestRoad: "Tramo cercano",
+    distanceToRoad: "Distancia al tramo",
+    locationAccuracy: "Precisión GPS",
+    noRoadNearby: "Sin tramo cercano",
+    noRoadState: "Fuera de tramo reportado",
 
     // LOADING
     loadingStats: "Cargando datos...",
@@ -78,6 +87,28 @@ export const translations = {
 
     // MODAL / GENERIC
     close: "Cerrar",
+    tutorialStep: "Paso",
+    tutorialPrev: "Atrás",
+    tutorialNext: "Siguiente",
+    tutorialFinish: "Finalizar",
+    tutorialIntroTitle: "Explora el sistema",
+    tutorialIntroText: "Este panel resume el monitoreo vial y te da acceso rápido a filtros, estadísticas e incidentes.",
+    tutorialFilterTitle: "Filtra por estado",
+    tutorialFilterText: "Usa este selector para ver todas las vías, solo las habilitadas, parciales o cerradas.",
+    tutorialStatsTitle: "Revisa el resumen",
+    tutorialStatsText: "Aquí puedes ver cuántos reportes hay por estado según la información cargada.",
+    tutorialRoadsTitle: "Consulta incidentes",
+    tutorialRoadsText: "Cada card muestra la vía, provincia, estado, observación, fuente y hora de actualización.",
+    tutorialMapButtonTitle: "Ubica una vía",
+    tutorialMapButtonText: "Pulsa Ver en mapa para centrar el tramo, abrir el marcador y dibujar la ruta aproximada.",
+    tutorialMapTitle: "Navega el mapa",
+    tutorialMapText: "En el mapa puedes acercarte, alejarte y revisar visualmente los tramos o marcadores reportados.",
+    tutorialTripTitle: "Inicia un recorrido",
+    tutorialTripText: "Este botón activa el GPS del dispositivo, muestra tu avance con un marcador de auto y te ayuda a identificar el tramo cercano y su estado.",
+    tutorialResetTitle: "Limpia la vista",
+    tutorialResetText: "Este botón vuelve el mapa a la vista inicial y elimina rutas o marcadores enfocados.",
+    tutorialToolsTitle: "Herramientas rápidas",
+    tutorialToolsText: "Desde la barra superior puedes consultar el clima, cambiar idioma, alternar el tema y volver a abrir este tutorial.",
 
     // FOOTER
     footerDescription: "Plataforma de monitoreo vial de Morona Santiago",
@@ -97,6 +128,7 @@ export const translations = {
     climate: "Weather",
     languageToggle: "Language / Idioma",
     theme: "Theme",
+    tutorialButton: "Tutorial",
 
     // HERO
     heroBadge: "Real-time road status",
@@ -149,6 +181,14 @@ export const translations = {
     mapCardTitle: "Interactive road map",
     mapCardSubtitle: "Geographic visualization of incidents and road segments",
     online: "Online",
+    startTrip: "Start trip",
+    stopTrip: "Stop trip",
+    yourLocation: "Your location",
+    nearestRoad: "Nearby segment",
+    distanceToRoad: "Distance to segment",
+    locationAccuracy: "GPS accuracy",
+    noRoadNearby: "No nearby segment",
+    noRoadState: "Outside reported segment",
 
     // LOADING
     loadingStats: "Loading statistics...",
@@ -167,6 +207,28 @@ export const translations = {
 
     // MODAL / GENERIC
     close: "Close",
+    tutorialStep: "Step",
+    tutorialPrev: "Back",
+    tutorialNext: "Next",
+    tutorialFinish: "Finish",
+    tutorialIntroTitle: "Explore the system",
+    tutorialIntroText: "This panel summarizes road monitoring and gives you quick access to filters, statistics, and incidents.",
+    tutorialFilterTitle: "Filter by status",
+    tutorialFilterText: "Use this selector to view all roads, only open roads, partial roads, or closed roads.",
+    tutorialStatsTitle: "Check the summary",
+    tutorialStatsText: "Here you can see how many reports exist by status according to the loaded information.",
+    tutorialRoadsTitle: "Review incidents",
+    tutorialRoadsText: "Each card shows the road, province, status, observation, source, and update time.",
+    tutorialMapButtonTitle: "Locate a road",
+    tutorialMapButtonText: "Press View on map to center the segment, open the marker, and draw the approximate route.",
+    tutorialMapTitle: "Navigate the map",
+    tutorialMapText: "On the map you can zoom in, zoom out, and visually inspect reported segments or markers.",
+    tutorialTripTitle: "Start a trip",
+    tutorialTripText: "This button enables device GPS, shows your progress with a car marker, and helps identify the nearby segment and its status.",
+    tutorialResetTitle: "Clear the view",
+    tutorialResetText: "This button returns the map to the initial view and removes focused routes or markers.",
+    tutorialToolsTitle: "Quick tools",
+    tutorialToolsText: "From the top bar you can check weather, switch language, toggle theme, and reopen this tutorial.",
 
     // FOOTER
     footerDescription: "Road monitoring platform for Morona Santiago",

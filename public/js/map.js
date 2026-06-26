@@ -8,6 +8,10 @@ let startMarker = null;
 let endMarker = null;
 let focusMarker = null;
 let ecu911MarkersLayer = null;
+let userLocationMarker = null;
+let userAccuracyCircle = null;
+let userPathLine = null;
+let userPathCoords = [];
 
 function getLineColorByState(state = "") {
   const value = String(state).toLowerCase();
@@ -25,6 +29,27 @@ function getIncidentBadgeClass(state = "") {
   if (value.includes("parcial")) return "color:#ca8a04;font-weight:700;";
   if (value.includes("sin reporte")) return "color:#94a3b8;font-weight:700;";
   return "color:#16a34a;font-weight:700;";
+}
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function buildUserLocationIcon(heading = null) {
+  const rotation = Number.isFinite(heading) ? heading : 0;
+
+  return L.divIcon({
+    className: "leaflet-user-car-marker",
+    html: `<div class="user-car-icon" style="transform: rotate(${rotation}deg);"><i class="bi bi-car-front-fill"></i></div>`,
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -18]
+  });
 }
 
 function formatIncidentDate(value, lang = "es") {
@@ -140,6 +165,110 @@ export function clearAllMapElements() {
   clearRoadGeometry();
   clearIncidentFocus();
   clearEcu911Markers();
+}
+
+export function clearTravelTracking() {
+  if (!map) return;
+
+  if (userLocationMarker) {
+    map.removeLayer(userLocationMarker);
+    userLocationMarker = null;
+  }
+
+  if (userAccuracyCircle) {
+    map.removeLayer(userAccuracyCircle);
+    userAccuracyCircle = null;
+  }
+
+  if (userPathLine) {
+    map.removeLayer(userPathLine);
+    userPathLine = null;
+  }
+
+  userPathCoords = [];
+}
+
+export function updateTravelPosition(location, nearestRoad = null, options = {}) {
+  if (!map || !location) return;
+
+  const lat = Number(location.lat);
+  const lng = Number(location.lng);
+
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+  const latLng = [lat, lng];
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+  const accuracy = Number(location.accuracy);
+  const heading = Number(location.heading);
+  const hasAccuracy = Number.isFinite(accuracy);
+  const distance = Number(nearestRoad?.distanceMeters);
+  const distanceLabel = Number.isFinite(distance)
+    ? distance < 1000
+      ? `${Math.round(distance)} m`
+      : `${(distance / 1000).toFixed(1)} km`
+    : "";
+  const roadName = nearestRoad?.road?.via || t.noRoadNearby;
+  const roadState = nearestRoad?.road?.estado || t.noRoadState;
+  const popup = `
+    <div class="user-location-popup">
+      <strong>${escapeHtml(t.yourLocation)}</strong>
+      <span>${escapeHtml(t.nearestRoad)}: ${escapeHtml(roadName)}</span>
+      <span>${escapeHtml(t.stateLabel)}: ${escapeHtml(roadState)}</span>
+      ${distanceLabel ? `<span>${escapeHtml(t.distanceToRoad)}: ${distanceLabel}</span>` : ""}
+      ${hasAccuracy ? `<span>${escapeHtml(t.locationAccuracy)}: ${Math.round(accuracy)} m</span>` : ""}
+    </div>
+  `;
+
+  if (!userLocationMarker) {
+    userLocationMarker = L.marker(latLng, {
+      icon: buildUserLocationIcon(heading)
+    }).addTo(map);
+  } else {
+    userLocationMarker.setLatLng(latLng);
+    userLocationMarker.setIcon(buildUserLocationIcon(heading));
+  }
+
+  userLocationMarker.bindPopup(popup);
+
+  if (hasAccuracy) {
+    if (!userAccuracyCircle) {
+      userAccuracyCircle = L.circle(latLng, {
+        radius: accuracy,
+        color: "#0ea5e9",
+        fillColor: "#0ea5e9",
+        fillOpacity: 0.12,
+        weight: 1.5
+      }).addTo(map);
+    } else {
+      userAccuracyCircle.setLatLng(latLng);
+      userAccuracyCircle.setRadius(accuracy);
+    }
+  }
+
+  const lastCoord = userPathCoords[userPathCoords.length - 1];
+  const changedEnough = !lastCoord || Math.abs(lastCoord[0] - lat) > 0.00001 || Math.abs(lastCoord[1] - lng) > 0.00001;
+
+  if (changedEnough) {
+    userPathCoords.push(latLng);
+  }
+
+  if (userPathCoords.length >= 2) {
+    if (!userPathLine) {
+      userPathLine = L.polyline(userPathCoords, {
+        color: "#0ea5e9",
+        weight: 4,
+        opacity: 0.9,
+        dashArray: "8, 10"
+      }).addTo(map);
+    } else {
+      userPathLine.setLatLngs(userPathCoords);
+    }
+  }
+
+  if (options.follow) {
+    map.setView(latLng, Math.max(map.getZoom(), 15), { animate: true });
+  }
 }
 
 export function drawRouteGeometry(routeCoords, road) {
@@ -265,5 +394,6 @@ export function focusIncidentOnMap(segment, incident = null) {
 
 export function resetMapView() {
   clearAllMapElements();
+  clearTravelTracking();
   map.setView([-2.30814, -78.11135], 8);
 }
