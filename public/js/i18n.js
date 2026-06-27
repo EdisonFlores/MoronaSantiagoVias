@@ -11,6 +11,9 @@ export const translations = {
     tutorialButton: "Tutorial",
     downloadApk: "Descargar APK",
     downloadAndroid: "Descargar para Android",
+    voiceAssistant: "Asistente de Voz",
+    voicePause: "Pausar voz",
+    voiceResume: "Continuar voz",
 
     // HERO
     heroBadge: "Estado vial en tiempo real",
@@ -113,6 +116,15 @@ export const translations = {
     tutorialToolsText: "Desde la barra superior puedes consultar el clima, cambiar idioma y alternar el tema.",
     tutorialDownloadTitle: "Descarga la app",
     tutorialDownloadText: "En el footer puedes descargar la APK para instalar la versión Android de Ecuavial.",
+    tutorialVoiceTitle: "Activa el asistente de voz",
+    tutorialVoiceText: "Este botón lee en voz alta un resumen y luego permite escuchar elementos al pasar el cursor o enfocar controles.",
+    voiceUnsupported: "Tu navegador no soporta lectura por voz.",
+    voiceIntro: "Bienvenido a Ecuavial. Este es un resumen accesible del estado vial de Morona Santiago.",
+    voiceStats: "Resumen de reportes",
+    voiceNoRoads: "No hay incidentes para leer con el filtro actual.",
+    shuarWarningTitle: "Traducción Shuar en revisión",
+    shuarWarningText: "La traducción Shuar no es cien por ciento fiable y puede contener errores. Se recomienda validarla con hablantes o traductores de la comunidad.",
+    shuarWarningAccept: "Entendido",
 
     // FOOTER
     footerDescription: "Plataforma de monitoreo vial de Morona Santiago",
@@ -135,6 +147,9 @@ export const translations = {
     tutorialButton: "Tutorial",
     downloadApk: "Download APK",
     downloadAndroid: "Download for Android",
+    voiceAssistant: "Voice Assistant",
+    voicePause: "Pause voice",
+    voiceResume: "Resume voice",
 
     // HERO
     heroBadge: "Real-time road status",
@@ -237,6 +252,15 @@ export const translations = {
     tutorialToolsText: "From the top bar you can check weather, switch language, and toggle theme.",
     tutorialDownloadTitle: "Download the app",
     tutorialDownloadText: "In the footer you can download the APK to install the Android version of Ecuavial.",
+    tutorialVoiceTitle: "Enable the voice assistant",
+    tutorialVoiceText: "This button reads aloud a summary and then lets users hear elements when hovering or focusing controls.",
+    voiceUnsupported: "Your browser does not support voice reading.",
+    voiceIntro: "Welcome to Ecuavial. This is an accessible summary of Morona Santiago road status.",
+    voiceStats: "Report summary",
+    voiceNoRoads: "There are no incidents to read with the current filter.",
+    shuarWarningTitle: "Shuar translation under review",
+    shuarWarningText: "The Shuar translation is not one hundred percent reliable and may contain errors. It should be validated with speakers or translators from the community.",
+    shuarWarningAccept: "Understood",
 
     // FOOTER
     footerDescription: "Road monitoring platform for Morona Santiago",
@@ -249,8 +273,141 @@ export const translations = {
   }
 };
 
+translations.sh = {
+  ...translations.es,
+  appTitle: "Ecuavial",
+  appSubtitle: "Morona Santiago jintia nekamuri",
+  openMenu: "Menu urakma",
+  climate: "Nayaimpin",
+  languageToggle: "Idioma / Language / Shuar",
+  theme: "Penkermamu",
+  tutorialButton: "Nekapmamu",
+  downloadAndroid: "Androidnum jukimpramu",
+  voiceAssistant: "Chicham yaimkiamu",
+  voicePause: "Chicham ankankamu",
+  voiceResume: "Chicham nekapeamu",
+
+  heroBadge: "Jintia nekamuri yamaram",
+  heroTitle: "Jintia awajun, jintia najankamu nekata",
+  heroText: "Morona Santiago jintia unuimiata mapa najanamunam.",
+
+  filtersTitle: "Akanmamu",
+  control: "Iniamu",
+  stateLabel: "Nekamu",
+  statsTitle: "Nekapmamu",
+  summary: "Yamai etserma",
+  roadsTitle: "Jintia",
+  incidentsPill: "Awajun",
+  resetMap: "Mapa iwiakmamu",
+
+  optionAll: "Mash",
+  optionOpen: "Urakmamu",
+  optionPartial: "Aintsak urakmamu",
+  optionClosed: "Epentmamu",
+
+  total: "Mash",
+  open: "Urakmamu",
+  partial: "Aintsak",
+  closed: "Epentmamu",
+
+  province: "Provincia",
+  observation: "Iismamu",
+  alternateRoute: "Jintia chikich",
+  source: "Nuyá jukimpramu",
+  lastUpdated: "ECU 911 yamaram najanamamu",
+  viewMap: "Mapanam iista",
+  drawRoute: "Jintia najanata",
+  road: "Jintia",
+  noRoads: "Jintia iistin atsawai.",
+  noLoadRoads: "Jintia nekamuri jukimaitsui.",
+  noLoadStats: "Nekapmamu jukimaitsui.",
+  noCoordinates: "Ju jintia coordenada atsawai.",
+  noRoute: "Jintia najanamaitsui.",
+  noNews: "ECU 911num yamaram etserma atsawai.",
+  noReport: "Etserma atsawai",
+  noObservation: "Iismamu atsawai.",
+
+  mapStart: "Nankama",
+  mapEnd: "Amua",
+  mapCardTitle: "Jintia mapa",
+  mapCardSubtitle: "Awajun nuya jintia mapa iismamu",
+  online: "En linea",
+  startTrip: "Jintia nankamata",
+  stopTrip: "Jintia ankankamu",
+  yourLocation: "Ame pujamurin",
+  nearestRoad: "Jintia jeachat",
+  distanceToRoad: "Jintia jeachat tsawantai",
+  locationAccuracy: "GPS nekasrik",
+  noRoadNearby: "Jintia jeachat atsawai",
+  noRoadState: "Etserma jintia pujamunam atsawai",
+
+  loadingStats: "Nekamuri jukimui...",
+  loadingRoads: "Jintia jukimui...",
+
+  weatherTitle: "Nayaimpin",
+  weatherLocation: "Pujamuri",
+  weatherTemp: "Tsueri",
+  weatherWind: "Tampu",
+  weatherMax: "Nunka tsueri",
+  weatherMin: "Nunka yumiri",
+  weatherLoading: "Jukimui...",
+  weatherError: "Nayaimpin arantukma",
+  weatherPointTitle: "Mapanam pujamunam nayaimpin",
+
+  close: "Epentma",
+  tutorialStep: "Nankama",
+  tutorialPrev: "Tura",
+  tutorialNext: "Nua",
+  tutorialFinish: "Amua",
+  tutorialIntroTitle: "Sistema nekata",
+  tutorialIntroText: "Ju panel jintia nekamuri, akanmamu, nekapmamu nuya awajun iistiniawai.",
+  tutorialFilterTitle: "Nekamujai akanma",
+  tutorialFilterText: "Ju selectorjai jintia mash, urakmamu, aintsak urakmamu nuya epentmamu iista.",
+  tutorialStatsTitle: "Nekapmamu iista",
+  tutorialStatsText: "Juinkia nekamuri estadojai mash nekapmamu iistin atsumamu.",
+  tutorialRoadsTitle: "Awajun iista",
+  tutorialRoadsText: "Cardnum jintia, provincia, estado, iismamu, fuente nuya yamaram tsawan iistinawai.",
+  tutorialMapButtonTitle: "Jintia eakma",
+  tutorialMapButtonText: "Mapanam iista takakui jintia centro najanawai nuya marcador urakui.",
+  tutorialMapTitle: "Mapa nampekta",
+  tutorialMapText: "Mapanam jeachat iista, arantukma iista nuya marcador nekata.",
+  tutorialTripTitle: "Jintia nankamata",
+  tutorialTripText: "Ju botón GPS urakui, auto marcadorjai ame weamuri iistiniawai.",
+  tutorialResetTitle: "Iismamu iwiakma",
+  tutorialResetText: "Ju botón mapa nankamta iismamunam waketui nuya marcador epentui.",
+  tutorialToolsTitle: "Yaimkiamu",
+  tutorialToolsText: "Yakata barra nayaimpin, idioma nuya tema yapajiata.",
+  tutorialDownloadTitle: "App jukimprata",
+  tutorialDownloadText: "Footernum APK jukimpratin Androidnum Ecuavial apujtustinian.",
+  tutorialVoiceTitle: "Chicham yaimkiamu urakma",
+  tutorialVoiceText: "Ju botón resumen chichamjai aujmatsui nuya elemento pasamunam chicham etserui.",
+  voiceUnsupported: "Ame navegador chicham aujmatsamu takakchayi.",
+  voiceIntro: "Ecuavialnum penker tarimiat. Ju Morona Santiago jintia nekamuri resumen.",
+  voiceStats: "Etserma nekapmamu",
+  voiceNoRoads: "Filtro yamainkia awajun aujmatsatin atsawai.",
+
+  shuarWarningTitle: "Traducción Shuar en revisión",
+  shuarWarningText: "La traducción Shuar no es cien por ciento fiable y puede contener errores. Se recomienda validarla con hablantes o traductores de la comunidad.",
+  shuarWarningAccept: "Entendido",
+
+  footerDescription: "Morona Santiago jintia nekamuri plataforma",
+  officialSource: "Fuente oficial:",
+  footerLinksLabel: "Redes nuya contacto",
+  touristms: "MoronaBus",
+  instagram: "Instagram",
+  linkedin: "LinkedIn",
+  whatsapp: "WhatsApp"
+};
+
 export function translateState(state = "", lang = "es") {
   const value = String(state).toLowerCase();
+
+  if (lang === "sh") {
+    if (value.includes("cerrada") || value.includes("closed")) return translations.sh.optionClosed;
+    if (value.includes("parcial") || value.includes("partially")) return translations.sh.optionPartial;
+    if (value.includes("sin reporte") || value.includes("no report")) return translations.sh.noReport;
+    return translations.sh.optionOpen;
+  }
 
   if (lang === "en") {
     if (value.includes("cerrada") || value.includes("closed")) return "Closed";

@@ -55,7 +55,7 @@ function renderWeatherModal(data, lat, lon, lang = "es") {
   const box = document.getElementById("weatherModalBody");
   if (!box || !data?.current || !data?.daily) return;
 
-  const t = {
+  const labels = {
     es: {
       title: "Clima del punto actual del mapa",
       location: "Ubicación",
@@ -71,8 +71,17 @@ function renderWeatherModal(data, lat, lon, lang = "es") {
       wind: "Wind",
       max: "High",
       min: "Low"
+    },
+    sh: {
+      title: "Mapanam pujamunam nayaimpin",
+      location: "Pujamuri",
+      temp: "Tsueri",
+      wind: "Tampu",
+      max: "Nunka tsueri",
+      min: "Nunka yumiri"
     }
-  }[lang];
+  };
+  const t = labels[lang] || labels.es;
 
   box.innerHTML = `
     <div class="weather-card">
@@ -110,7 +119,11 @@ export async function updateWeatherFromMapCenter(map, lang = "es") {
 
   const textEl = document.getElementById("weatherText");
   if (textEl) {
-    textEl.textContent = lang === "en" ? "Loading..." : "Cargando...";
+    textEl.textContent = lang === "en"
+      ? "Loading..."
+      : lang === "sh"
+        ? "Jukimui..."
+        : "Cargando...";
   }
 
   try {
@@ -122,7 +135,11 @@ export async function updateWeatherFromMapCenter(map, lang = "es") {
     console.error("Error Open-Meteo:", error);
 
     if (textEl) {
-      textEl.textContent = lang === "en" ? "Weather error" : "Error clima";
+      textEl.textContent = lang === "en"
+        ? "Weather error"
+        : lang === "sh"
+          ? "Nayaimpin arantukma"
+          : "Error clima";
     }
   }
 }

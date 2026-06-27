@@ -9,6 +9,14 @@ function getStateClass(state = "") {
   return "badge-ok";
 }
 
+function escapeAttribute(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
 function formatIncidentDate(value, lang = "es") {
   if (!value) return "";
 
@@ -61,12 +69,15 @@ export function renderIncidents(roads, handlers, lang = "es") {
       const observation = item.observaciones || t.noNews;
       const stateText = translateState(item.estado, lang);
       const updatedAt = formatIncidentDate(item.updatedAt, lang);
+      const voiceLabel = lang === "en"
+        ? `Road ${item.via}. Status: ${stateText}. Observation: ${observation}.`
+        : `Vía ${item.via}. Estado: ${stateText}. Observación: ${observation}.`;
       const updatedLine = updatedAt
         ? `<p class="small-text"><strong>${t.lastUpdated}:</strong> ${updatedAt}</p>`
         : "";
 
       return `
-        <article class="incident-card">
+        <article class="incident-card" data-voice-label="${escapeAttribute(voiceLabel)}">
           <div class="incident-top">
             <div>
               <h3>${item.via}</h3>

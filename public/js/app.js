@@ -14,13 +14,19 @@ import {
 import { renderIncidents,showToast,showRouteNotice , renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
 import { initLanguage, getCurrentLanguage } from "./translate.js";
-import { initWeather, bindWeatherToMap } from "./weather.js";
-import { translations } from "./i18n.js";
+import { initWeather, bindWeatherToMap, updateWeatherFromMapCenter } from "./weather.js";
+import { translations, translateState } from "./i18n.js";
 
 let allRoads = [];
+let visibleRoads = [];
 let tripWatchId = null;
 let isTripTracking = false;
 let lastTripErrorAt = 0;
+let isVoiceReading = false;
+let isVoicePaused = false;
+let isVoiceHintsEnabled = false;
+let voiceHintTimer = null;
+let lastVoiceHint = "";
 
 function buildStats(roads) {
   return {
@@ -213,6 +219,217 @@ function stopTripTracking({ clearMap = true, notify = false } = {}) {
   }
 }
 
+function getVoiceButtonLabel() {
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+
+  if (isVoicePaused) return t.voiceResume;
+  if (isVoiceReading) return t.voicePause;
+  return t.voiceAssistant;
+}
+
+function updateVoiceButton() {
+  const btn = document.getElementById("btnVoiceAssistant");
+  const label = btn?.querySelector("span");
+
+  if (!btn || !label) return;
+
+  btn.classList.toggle("is-active", isVoiceReading);
+  btn.classList.toggle("is-listening", isVoiceHintsEnabled && !isVoiceReading);
+  btn.setAttribute("aria-pressed", String(isVoiceReading && !isVoicePaused));
+  label.textContent = getVoiceButtonLabel();
+}
+
+function getPreferredVoice(lang) {
+  const voices = window.speechSynthesis?.getVoices?.() || [];
+  const locale = lang === "en" ? "en" : "es";
+
+  return voices.find((voice) => voice.lang?.toLowerCase().startsWith(locale)) || voices[0] || null;
+}
+
+function buildVoiceSummary() {
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+  const stats = buildStats(visibleRoads);
+  const selectedState = document.getElementById("filterState")?.value;
+  const filterText = selectedState
+    ? lang === "en"
+      ? `Current filter: ${translateState(selectedState, lang)}.`
+      : `Filtro actual: ${translateState(selectedState, lang)}.`
+    : lang === "en"
+      ? "Current filter: all road statuses."
+      : "Filtro actual: todos los estados viales.";
+  const intro = [
+    t.voiceIntro,
+    filterText,
+    `${t.voiceStats}: ${stats.total} ${t.total}, ${stats.habilitada} ${t.open}, ${stats.parcial} ${t.partial}, ${stats.cerrada} ${t.closed}.`
+  ];
+
+  if (!visibleRoads.length) {
+    return [...intro, t.voiceNoRoads].join(" ");
+  }
+
+  const roadLines = visibleRoads.slice(0, 8).map((road, index) => {
+    const state = translateState(road.estado, lang);
+    const observation = road.observaciones || t.noNews;
+    const alternate = road.viaAlterna || "N/A";
+
+    return lang === "en"
+      ? `Incident ${index + 1}. Road ${road.via}. Status: ${state}. Observation: ${observation}. Alternate route: ${alternate}.`
+      : `Incidente ${index + 1}. Vía ${road.via}. Estado: ${state}. Observación: ${observation}. Vía alterna: ${alternate}.`;
+  });
+
+  if (visibleRoads.length > roadLines.length) {
+    roadLines.push(
+      lang === "en"
+        ? `There are ${visibleRoads.length - roadLines.length} additional incidents in the current list.`
+        : `Hay ${visibleRoads.length - roadLines.length} incidentes adicionales en la lista actual.`
+    );
+  }
+
+  return [...intro, ...roadLines].join(" ");
+}
+
+function stopVoiceAssistant() {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+
+  isVoiceReading = false;
+  isVoicePaused = false;
+  updateVoiceButton();
+}
+
+function speakText(text, options = {}) {
+  const lang = getCurrentLanguage();
+  const utterance = new SpeechSynthesisUtterance(text);
+  const voice = getPreferredVoice(lang);
+
+  utterance.lang = lang === "en" ? "en-US" : "es-EC";
+  utterance.rate = options.rate || 0.95;
+  utterance.pitch = 1;
+  if (voice) utterance.voice = voice;
+  if (options.onend) utterance.onend = options.onend;
+  if (options.onerror) utterance.onerror = options.onerror;
+
+  window.speechSynthesis.speak(utterance);
+  return utterance;
+}
+
+function startVoiceAssistant() {
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+
+  if (!("speechSynthesis" in window) || !window.SpeechSynthesisUtterance) {
+    showToast(t.voiceUnsupported, "error");
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  isVoiceReading = true;
+  isVoicePaused = false;
+  isVoiceHintsEnabled = true;
+  updateVoiceButton();
+  speakText(buildVoiceSummary(), {
+    onend: () => {
+      isVoiceReading = false;
+      isVoicePaused = false;
+      updateVoiceButton();
+    },
+    onerror: () => {
+      isVoiceReading = false;
+      isVoicePaused = false;
+      updateVoiceButton();
+    }
+  });
+}
+
+function getVoiceHintForElement(element) {
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+  const target = element.closest(
+    "[data-voice-label], button, a, select, input, .incident-card, .stat-card, .map-card, #map"
+  );
+
+  if (!target || target.closest(".tutorial-overlay")) return "";
+
+  if (target.dataset.voiceLabel) return target.dataset.voiceLabel.trim();
+
+  if (target.matches("#btnVoiceAssistant")) return t.voiceAssistant;
+  if (target.matches("#btnDownloadAndroid")) return t.downloadAndroid;
+  if (target.matches("[data-tutorial-open]")) return t.tutorialButton;
+  if (target.matches("#filterState")) return `${t.stateLabel}. ${target.options[target.selectedIndex]?.text || ""}`;
+  if (target.matches("#btnStartTrip")) return target.textContent.trim();
+  if (target.matches("#btnResetMap")) return t.resetMap;
+  if (target.matches("#btnOpenIncidents")) return target.textContent.trim();
+  if (target.matches("#weatherBadge")) return `${t.weatherTitle}. ${target.textContent.trim()}`;
+  if (target.matches("#btnLang")) return t.languageToggle;
+  if (target.matches("#btnTheme")) return t.theme;
+  if (target.matches("#map")) return `${t.mapCardTitle}. ${t.tutorialMapText}`;
+
+  const text = target.textContent?.replace(/\s+/g, " ").trim();
+
+  return text || target.getAttribute("aria-label") || target.getAttribute("title") || "";
+}
+
+function speakVoiceHint(text) {
+  if (!isVoiceHintsEnabled || isVoiceReading || isVoicePaused) return;
+  if (!text || text === lastVoiceHint) return;
+  if (!("speechSynthesis" in window) || !window.SpeechSynthesisUtterance) return;
+
+  lastVoiceHint = text;
+  window.speechSynthesis.cancel();
+  speakText(text, { rate: 1 });
+}
+
+function queueVoiceHint(event) {
+  window.clearTimeout(voiceHintTimer);
+
+  const text = getVoiceHintForElement(event.target);
+  if (!text) return;
+
+  voiceHintTimer = window.setTimeout(() => {
+    speakVoiceHint(text);
+  }, event.type === "focusin" ? 80 : 280);
+}
+
+function clearVoiceHintQueue() {
+  window.clearTimeout(voiceHintTimer);
+}
+
+function toggleVoiceAssistant() {
+  if (!isVoiceReading) {
+    startVoiceAssistant();
+    return;
+  }
+
+  if (isVoicePaused) {
+    window.speechSynthesis.resume();
+    isVoicePaused = false;
+    updateVoiceButton();
+    return;
+  }
+
+  window.speechSynthesis.pause();
+  isVoicePaused = true;
+  updateVoiceButton();
+}
+
+function initVoiceAssistant() {
+  const btn = document.getElementById("btnVoiceAssistant");
+
+  updateVoiceButton();
+  btn?.addEventListener("click", toggleVoiceAssistant);
+  document.addEventListener("mouseover", queueVoiceHint);
+  document.addEventListener("focusin", queueVoiceHint);
+  document.addEventListener("mouseout", clearVoiceHintQueue);
+
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.addEventListener?.("voiceschanged", updateVoiceButton);
+  }
+}
+
 function handleTripPosition(position) {
   const coords = position.coords;
   const location = {
@@ -380,6 +597,15 @@ const tutorialSteps = [
     exactHighlight: true,
     title: "tutorialDownloadTitle",
     text: "tutorialDownloadText",
+    mobilePanel: false
+  },
+  {
+    selector: "#btnVoiceAssistant",
+    focusSelector: "#btnVoiceAssistant",
+    highlightSelector: "#btnVoiceAssistant",
+    exactHighlight: true,
+    title: "tutorialVoiceTitle",
+    text: "tutorialVoiceText",
     mobilePanel: false
   }
 ];
@@ -788,6 +1014,7 @@ function applyFilters() {
     filtered = filtered.filter((item) => item.estado === state);
   }
 
+  visibleRoads = filtered;
   renderStats(buildStats(filtered), lang);
   renderIncidentMarkers(filtered, {
     onSelect: focusRoadOnMap
@@ -866,10 +1093,13 @@ async function initApp() {
   initMobileSidebar();
   initTutorial();
   initTripTracking();
+  initVoiceAssistant();
 
   initLanguage(() => {
+    stopVoiceAssistant();
     applyFilters();
     updateTripButton();
+    updateVoiceButton();
     const tutorialOverlay = document.getElementById("tutorialOverlay");
     if (tutorialOverlay?.classList.contains("show")) {
       renderTutorialStep();
@@ -878,6 +1108,7 @@ async function initApp() {
     const map = getMapInstance();
     if (map) {
       bindWeatherToMap(map, getCurrentLanguage);
+      updateWeatherFromMapCenter(map, getCurrentLanguage());
     }
   });
 
