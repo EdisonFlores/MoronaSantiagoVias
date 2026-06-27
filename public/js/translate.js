@@ -3,6 +3,11 @@ import { translations } from "./i18n.js";
 
 const STORAGE_KEY = "ecuavial-lang";
 const LANGUAGE_ORDER = ["es", "en", "sh"];
+const LANGUAGE_LABELS = {
+  es: "Español",
+  en: "English",
+  sh: "Shuar"
+};
 
 function getSafeLanguage(value) {
   return LANGUAGE_ORDER.includes(value) ? value : "es";
@@ -18,7 +23,7 @@ function updateLanguageControl(lang) {
   const options = document.querySelectorAll(".language-option");
 
   if (trigger) trigger.dataset.lang = lang;
-  if (display) display.textContent = lang.toUpperCase();
+  if (display) display.textContent = LANGUAGE_LABELS[lang] || LANGUAGE_LABELS.es;
   options.forEach((option) => {
     const isSelected = option.dataset.lang === lang;
     option.classList.toggle("is-selected", isSelected);

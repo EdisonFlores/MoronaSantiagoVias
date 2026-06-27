@@ -86,7 +86,7 @@
   align-items: center;
   gap: 7px;
   min-height: 38px;
-  min-width: 76px;
+  min-width: 118px;
   border: 1px solid rgba(14, 165, 233, 0.28);
   background:
     radial-gradient(circle at top right, rgba(14, 165, 233, 0.14), transparent 42%),
@@ -132,7 +132,7 @@
   color: var(--text);
   font-weight: 800;
   line-height: 1;
-  min-width: 22px;
+  min-width: 62px;
   text-align: center;
 }
 
@@ -157,7 +157,7 @@
   right: 0;
   z-index: 1700;
   display: none;
-  min-width: 132px;
+  min-width: 154px;
   padding: 6px;
   border: 1px solid var(--border);
   border-radius: 14px;
