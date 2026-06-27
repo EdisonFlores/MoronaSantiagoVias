@@ -98,7 +98,9 @@ export function initLanguage(onLanguageChanged) {
   applyTranslations(saved);
   updateLanguageControl(saved);
 
-  document.getElementById("btnLang")?.addEventListener("click", () => {
+  document.querySelector(".language-select-wrap")?.addEventListener("click", (event) => {
+    if (event.target.closest(".language-option")) return;
+
     const menu = document.getElementById("languageMenu");
     setLanguageMenuState(!menu?.classList.contains("show"));
   });
