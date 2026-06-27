@@ -9,6 +9,8 @@ export const translations = {
     languageToggle: "Idioma / Language",
     theme: "Tema",
     tutorialButton: "Tutorial",
+    downloadApk: "Descargar APK",
+    downloadAndroid: "Descargar para Android",
 
     // HERO
     heroBadge: "Estado vial en tiempo real",
@@ -108,7 +110,9 @@ export const translations = {
     tutorialResetTitle: "Limpia la vista",
     tutorialResetText: "Este botón vuelve el mapa a la vista inicial y elimina rutas o marcadores enfocados.",
     tutorialToolsTitle: "Herramientas rápidas",
-    tutorialToolsText: "Desde la barra superior puedes consultar el clima, cambiar idioma, alternar el tema y volver a abrir este tutorial.",
+    tutorialToolsText: "Desde la barra superior puedes consultar el clima, cambiar idioma y alternar el tema.",
+    tutorialDownloadTitle: "Descarga la app",
+    tutorialDownloadText: "En el footer puedes descargar la APK para instalar la versión Android de Ecuavial.",
 
     // FOOTER
     footerDescription: "Plataforma de monitoreo vial de Morona Santiago",
@@ -129,6 +133,8 @@ export const translations = {
     languageToggle: "Language / Idioma",
     theme: "Theme",
     tutorialButton: "Tutorial",
+    downloadApk: "Download APK",
+    downloadAndroid: "Download for Android",
 
     // HERO
     heroBadge: "Real-time road status",
@@ -228,7 +234,9 @@ export const translations = {
     tutorialResetTitle: "Clear the view",
     tutorialResetText: "This button returns the map to the initial view and removes focused routes or markers.",
     tutorialToolsTitle: "Quick tools",
-    tutorialToolsText: "From the top bar you can check weather, switch language, toggle theme, and reopen this tutorial.",
+    tutorialToolsText: "From the top bar you can check weather, switch language, and toggle theme.",
+    tutorialDownloadTitle: "Download the app",
+    tutorialDownloadText: "In the footer you can download the APK to install the Android version of Ecuavial.",
 
     // FOOTER
     footerDescription: "Road monitoring platform for Morona Santiago",

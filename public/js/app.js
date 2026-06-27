@@ -372,6 +372,15 @@ const tutorialSteps = [
     text: "tutorialToolsText",
     mobilePanel: false,
     mobileHeader: true
+  },
+  {
+    selector: "#btnDownloadAndroid",
+    focusSelector: "#btnDownloadAndroid",
+    highlightSelector: "#btnDownloadAndroid",
+    exactHighlight: true,
+    title: "tutorialDownloadTitle",
+    text: "tutorialDownloadText",
+    mobilePanel: false
   }
 ];
 
@@ -590,13 +599,15 @@ function openTutorial() {
 }
 
 function initTutorial() {
-  const openBtn = document.getElementById("btnTutorial");
+  const openBtns = document.querySelectorAll("[data-tutorial-open]");
   const closeBtn = document.getElementById("tutorialClose");
   const prevBtn = document.getElementById("tutorialPrev");
   const nextBtn = document.getElementById("tutorialNext");
   const overlay = document.getElementById("tutorialOverlay");
 
-  openBtn?.addEventListener("click", openTutorial);
+  openBtns.forEach((openBtn) => {
+    openBtn.addEventListener("click", openTutorial);
+  });
   closeBtn?.addEventListener("click", closeTutorial);
 
   prevBtn?.addEventListener("click", () => {
