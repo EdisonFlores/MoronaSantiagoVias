@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T15:21:34.436Z",
+  "updatedAt": "2026-06-29T07:01:41.598Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -39,18 +39,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "7a23da27-1df4-40c6-b3d9-e07e8ac87a90",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "SAN JUAN BOSCO - TUCUMBATZA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2020-05-24 11:42:48",
-      "source": "ECU 911"
-    },
-    {
       "id": "725982f5-a045-44da-8bcb-b587c3b09d27",
       "provincia": "MORONA SANTIAGO",
       "canton": "SANTIAGO",
@@ -60,6 +48,18 @@
       "observaciones": "DESLIZAMIENTO TRAMO BELLA UNION - MENDEZ",
       "viaAlterna": "N/A",
       "modified": "2021-07-23 20:50:17",
+      "source": "ECU 911"
+    },
+    {
+      "id": "7a23da27-1df4-40c6-b3d9-e07e8ac87a90",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "GUALAQUIZA",
+      "via": "SAN JUAN BOSCO - TUCUMBATZA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "HABILITADA",
+      "viaAlterna": "N/A",
+      "modified": "2020-05-24 11:42:48",
       "source": "ECU 911"
     },
     {
