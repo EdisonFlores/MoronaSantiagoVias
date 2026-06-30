@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T07:01:41.598Z",
+  "updatedAt": "2026-06-30T05:52:17.998Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -39,18 +39,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "725982f5-a045-44da-8bcb-b587c3b09d27",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "SANTIAGO",
-      "via": "BELLA UNION - MENDEZ",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "DESLIZAMIENTO TRAMO BELLA UNION - MENDEZ",
-      "viaAlterna": "N/A",
-      "modified": "2021-07-23 20:50:17",
-      "source": "ECU 911"
-    },
-    {
       "id": "7a23da27-1df4-40c6-b3d9-e07e8ac87a90",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
@@ -63,15 +51,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "f04eb4a2-4457-40a3-9d2e-834a3413ebc6",
+      "id": "725982f5-a045-44da-8bcb-b587c3b09d27",
       "provincia": "MORONA SANTIAGO",
-      "canton": "LOGROÑO",
-      "via": "LOGROÑO - BELLA UNION",
+      "canton": "SANTIAGO",
+      "via": "BELLA UNION - MENDEZ",
       "ref": "",
       "estado": "Habilitada",
-      "observaciones": "HABILITADA",
+      "observaciones": "DESLIZAMIENTO TRAMO BELLA UNION - MENDEZ",
       "viaAlterna": "N/A",
-      "modified": "2021-10-02 19:18:19",
+      "modified": "2021-07-23 20:50:17",
       "source": "ECU 911"
     },
     {
@@ -84,6 +72,18 @@
       "observaciones": "PARCIALMENTE HABILITADA EN EL SECTOR SACRE Y KM 61. CONDUCIR CON PRECAUCION EN EL KM 44,105,107. CIERRE DEL PASO LATERAL VÍA MENDEZ-GUARUMALES, A 200 METROS DEL HOSPITAL, POR SOCAVÓN.",
       "viaAlterna": "N/A",
       "modified": "2026-04-21 20:43:11",
+      "source": "ECU 911"
+    },
+    {
+      "id": "f04eb4a2-4457-40a3-9d2e-834a3413ebc6",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "LOGROÑO",
+      "via": "LOGROÑO - BELLA UNION",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "HABILITADA",
+      "viaAlterna": "N/A",
+      "modified": "2021-10-02 19:18:19",
       "source": "ECU 911"
     },
     {
