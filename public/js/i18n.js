@@ -1,4 +1,4 @@
-//i18n.js
+// Diccionario central de textos. Cada clave se reutiliza desde data-i18n y JS.
 export const translations = {
   es: {
     // APP / HEADER
@@ -399,6 +399,7 @@ translations.sh = {
   whatsapp: "WhatsApp"
 };
 
+// Traduce estados provenientes de ECU 911 sin alterar el valor original del dato.
 export function translateState(state = "", lang = "es") {
   const value = String(state).toLowerCase();
 

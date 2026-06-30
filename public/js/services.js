@@ -1,4 +1,5 @@
-// services.js
+// Capa de acceso HTTP usada por el frontend para no mezclar fetch con UI.
+// Solicita al backend la red vial ya combinada con incidentes ECU 911.
 export async function fetchIncidents() {
   const response = await fetch("/api/incidents");
   const data = await response.json();
@@ -10,6 +11,7 @@ export async function fetchIncidents() {
   return data;
 }
 
+// Pide al backend una ruta OSRM y controla el timeout desde el cliente.
 export async function fetchOsrmRoute(segment, options = {}) {
   if (!segment?.start || !segment?.end) {
     throw new Error("El tramo no tiene coordenadas start/end");

@@ -3,6 +3,7 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 
+// Este script mantiene data/ecu911-morona-santiago.json como respaldo versionado.
 const outputUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
 const outputPath = fileURLToPath(outputUrl);
 const sourceUrl =
@@ -11,6 +12,7 @@ const sourceUrl =
   "&limit=500" +
   "&start=0";
 
+// Lee el cache actual para compararlo o conservarlo si ECU 911 falla.
 async function readCurrentCache() {
   try {
     return JSON.parse(await readFile(outputPath, "utf8"));
@@ -19,6 +21,7 @@ async function readCurrentCache() {
   }
 }
 
+// Reintenta porque el servicio ECU 911 puede fallar o tardar de forma intermitente.
 async function scrapeWithRetries(maxAttempts = 3) {
   let lastError = null;
 
@@ -43,6 +46,7 @@ let items = [];
 try {
   items = await scrapeWithRetries();
 } catch (error) {
+  // Si ya existe cache valido, no se rompe el flujo de CI por una caida temporal.
   if (currentCache?.items?.length) {
     console.error(`No se pudo actualizar ECU 911; se conserva cache previo: ${error.message}`);
     process.exit(0);

@@ -1,8 +1,9 @@
-//weather.js
+// Consulta Open-Meteo segun el centro actual del mapa y actualiza badge/modal.
 let weatherAbortController = null;
 let weatherTimer = null;
 let weatherBound = false;
 
+// Mapea codigos Open-Meteo a iconos compactos para el chip superior.
 function getWeatherIcon(weatherCode = 0, isDay = 1) {
   const day = Number(isDay) === 1;
 
@@ -18,10 +19,12 @@ function getWeatherIcon(weatherCode = 0, isDay = 1) {
   return "🌡️";
 }
 
+// Formatea latitud/longitud para titulos y modal de clima.
 function formatLocationLabel(lat, lon) {
   return `${lat.toFixed(3)}, ${lon.toFixed(3)}`;
 }
 
+// Open-Meteo no requiere API key; se consulta desde el navegador con cancelacion.
 async function fetchOpenMeteoWeather(lat, lon, signal) {
   const url =
     `https://api.open-meteo.com/v1/forecast` +
@@ -40,6 +43,7 @@ async function fetchOpenMeteoWeather(lat, lon, signal) {
   return response.json();
 }
 
+// Actualiza el chip superior con icono y temperatura actual.
 function renderWeatherBadge(data, lat, lon) {
   const textEl = document.getElementById("weatherText");
   if (!textEl || !data?.current) return;
@@ -51,6 +55,7 @@ function renderWeatherBadge(data, lat, lon) {
   textEl.title = formatLocationLabel(lat, lon);
 }
 
+// El modal usa etiquetas locales para no depender del diccionario general.
 function renderWeatherModal(data, lat, lon, lang = "es") {
   const box = document.getElementById("weatherModalBody");
   if (!box || !data?.current || !data?.daily) return;
@@ -95,6 +100,7 @@ function renderWeatherModal(data, lat, lon, lang = "es") {
   `;
 }
 
+// Conecta apertura y cierre del modal de clima.
 export function initWeather() {
   const modal = document.getElementById("weatherModal");
   const closeBtn = document.getElementById("weatherModalClose");
@@ -104,6 +110,7 @@ export function initWeather() {
   closeBtn?.addEventListener("click", () => modal?.classList.remove("show"));
 }
 
+// Cancela la peticion anterior cuando el usuario mueve el mapa rapidamente.
 export async function updateWeatherFromMapCenter(map, lang = "es") {
   if (!map) return;
 
@@ -144,6 +151,7 @@ export async function updateWeatherFromMapCenter(map, lang = "es") {
   }
 }
 
+// Debounce del evento moveend para evitar consultar clima en cada pequeno ajuste.
 export function bindWeatherToMap(map, getLang) {
   if (!map || weatherBound) return;
   weatherBound = true;

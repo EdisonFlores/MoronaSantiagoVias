@@ -1,4 +1,4 @@
-//map.js
+// Centraliza la integracion con Leaflet: capas base, rutas, incidentes y recorrido GPS.
 import { getCurrentLanguage } from "./translate.js";
 import { translations } from "./i18n.js";
 
@@ -13,6 +13,7 @@ let userAccuracyCircle = null;
 let userPathLine = null;
 let userPathCoords = [];
 
+// Usa el estado vial para mantener colores consistentes entre mapa y tarjetas.
 function getLineColorByState(state = "") {
   const value = String(state).toLowerCase();
 
@@ -22,6 +23,7 @@ function getLineColorByState(state = "") {
   return "#16a34a";
 }
 
+// Devuelve estilos inline para el estado dentro de popups de Leaflet.
 function getIncidentBadgeClass(state = "") {
   const value = String(state).toLowerCase();
 
@@ -31,6 +33,7 @@ function getIncidentBadgeClass(state = "") {
   return "color:#16a34a;font-weight:700;";
 }
 
+// Escapa texto antes de insertarlo en HTML generado para popups.
 function escapeHtml(value = "") {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -40,6 +43,7 @@ function escapeHtml(value = "") {
     .replaceAll("'", "&#039;");
 }
 
+// Marcador personalizado del recorrido; rota con el rumbo cuando el GPS lo entrega.
 function buildUserLocationIcon(heading = null) {
   const rotation = Number.isFinite(heading) ? heading : 0;
 
@@ -52,6 +56,7 @@ function buildUserLocationIcon(heading = null) {
   });
 }
 
+// Formatea fechas de reportes para mostrarlas compactas en popups.
 function formatIncidentDate(value, lang = "es") {
   if (!value) return "";
 
@@ -66,6 +71,7 @@ function formatIncidentDate(value, lang = "es") {
   }).format(date);
 }
 
+// Normaliza coordenadas que pueden venir como [lat,lng] o como objeto.
 function getSafeCoord(point) {
   if (!point) return null;
 
@@ -85,6 +91,7 @@ function getSafeCoord(point) {
   return null;
 }
 
+// Popup reutilizable para incidentes y marcadores enfocados.
 function buildIncidentPopup(incident) {
   const lang = getCurrentLanguage();
   const t = translations[lang] || translations.es;
@@ -112,6 +119,7 @@ function buildIncidentPopup(incident) {
   `;
 }
 
+// Crea el mapa Leaflet base, agrega OpenStreetMap y prepara capa de incidentes.
 export function initMap() {
   map = L.map("map").setView([-2.30814, -78.11135], 8);
 
@@ -125,10 +133,12 @@ export function initMap() {
   return map;
 }
 
+// Expone la instancia Leaflet para otros modulos que necesitan leer el mapa.
 export function getMapInstance() {
   return map;
 }
 
+// Limpia solo la ruta dibujada, sin borrar marcadores ECU 911 ni ubicacion del usuario.
 export function clearRoadGeometry() {
   if (!map) return;
 
@@ -148,6 +158,7 @@ export function clearRoadGeometry() {
   }
 }
 
+// Limpia el marcador temporal que se abre al enfocar un incidente.
 export function clearIncidentFocus() {
   if (!map) return;
 
@@ -157,16 +168,19 @@ export function clearIncidentFocus() {
   }
 }
 
+// Elimina todos los marcadores ECU 911 visibles.
 export function clearEcu911Markers() {
   ecu911MarkersLayer?.clearLayers();
 }
 
+// Limpia rutas, foco e incidentes sin tocar el seguimiento GPS.
 export function clearAllMapElements() {
   clearRoadGeometry();
   clearIncidentFocus();
   clearEcu911Markers();
 }
 
+// Borra el marcador de auto, circulo de precision y estela del recorrido.
 export function clearTravelTracking() {
   if (!map) return;
 
@@ -188,6 +202,7 @@ export function clearTravelTracking() {
   userPathCoords = [];
 }
 
+// Actualiza en vivo la ubicacion del usuario y dibuja el rastro recorrido.
 export function updateTravelPosition(location, nearestRoad = null, options = {}) {
   if (!map || !location) return;
 
@@ -271,6 +286,7 @@ export function updateTravelPosition(location, nearestRoad = null, options = {})
   }
 }
 
+// Dibuja la geometria real devuelta por OSRM y ajusta el mapa a sus limites.
 export function drawRouteGeometry(routeCoords, road) {
   if (!map || !Array.isArray(routeCoords) || routeCoords.length < 2) return;
 
@@ -299,6 +315,7 @@ export function drawRouteGeometry(routeCoords, road) {
 
   map.fitBounds(L.latLngBounds(routeCoords), { padding: [32, 32] });
 }
+// Fallback visual cuando OSRM falla: conecta origen/destino con linea punteada.
 export function drawFallbackPolyline(segment, road) {
   if (!map || !segment?.start || !segment?.end) return;
 
@@ -338,6 +355,7 @@ export function drawFallbackPolyline(segment, road) {
 
   map.fitBounds(L.latLngBounds(routeCoords), { padding: [32, 32] });
 }
+// Agrega un marcador individual de incidente sobre el inicio del tramo asociado.
 export function addIncidentMarker(incident, handlers = {}) {
   if (!map || !ecu911MarkersLayer) return;
 
@@ -357,6 +375,7 @@ export function addIncidentMarker(incident, handlers = {}) {
   return marker;
 }
 
+// Redibuja la capa completa de marcadores segun los incidentes visibles.
 export function renderIncidentMarkers(incidents = [], handlers = {}) {
   if (!map || !ecu911MarkersLayer) return;
 
@@ -367,6 +386,7 @@ export function renderIncidentMarkers(incidents = [], handlers = {}) {
   });
 }
 
+// Centra el mapa en un tramo y abre informacion del incidente si esta disponible.
 export function focusIncidentOnMap(segment, incident = null) {
   if (!map) return;
 
@@ -392,6 +412,7 @@ export function focusIncidentOnMap(segment, incident = null) {
   map.setView(start, 10, { animate: true });
 }
 
+// Devuelve el mapa a la vista provincial inicial y limpia elementos temporales.
 export function resetMapView() {
   clearAllMapElements();
   clearTravelTracking();

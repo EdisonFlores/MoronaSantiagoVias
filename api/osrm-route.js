@@ -1,4 +1,5 @@
-// api/osrm-route.js
+// Proxy ligero hacia OSRM para evitar exponer logica de rutas dentro del frontend.
+// Valida parametros, consulta OSRM y devuelve coordenadas en formato Leaflet.
 export default async function handler(req, res) {
   try {
     if (req.method !== "GET") {
@@ -35,6 +36,7 @@ export default async function handler(req, res) {
     const [startLat, startLng] = startParts;
     const [endLat, endLng] = endParts;
 
+    // OSRM espera longitud,latitud aunque la app trabaja internamente con lat,lng.
     const coords = `${startLng},${startLat};${endLng},${endLat}`;
 
     const url =
@@ -59,6 +61,7 @@ export default async function handler(req, res) {
       });
     }
 
+    // Se regresa a formato Leaflet [lat, lng] para dibujar sin conversion adicional.
     const routeCoords = data.routes[0].geometry.coordinates.map(([lon, lat]) => [lat, lon]);
 
     return res.status(200).json({

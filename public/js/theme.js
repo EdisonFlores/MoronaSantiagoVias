@@ -1,5 +1,6 @@
 const STORAGE_KEY = "ecuavial-theme";
 
+// Aplica el tema guardado y alterna entre claro/oscuro desde el boton superior.
 export function initTheme() {
   const saved = localStorage.getItem(STORAGE_KEY) || "light";
   document.documentElement.setAttribute("data-theme", saved);
@@ -14,6 +15,7 @@ export function initTheme() {
   });
 }
 
+// Solo cambia el icono; los colores reales viven en las variables CSS del tema.
 function updateThemeIcon(theme) {
   const icon = document.getElementById("themeIcon");
   if (!icon) return;

@@ -1,4 +1,4 @@
-// api/incidents.js
+// Construye la respuesta principal de la app combinando ECU 911 y tramos base.
 import { readFile } from "node:fs/promises";
 import { viasTramos } from "../lib/viasTramosData.js";
 import { matchRoadSegment } from "../lib/roadMatcher.js";
@@ -7,6 +7,7 @@ import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
 const ecu911CacheUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
 const apifyRecordKey = process.env.APIFY_CACHE_KEY || "latest";
 
+// Cache local generada por GitHub Actions o por el script de actualizacion.
 async function loadCachedEcu911Items() {
   const raw = await readFile(ecu911CacheUrl, "utf8");
   const cache = JSON.parse(raw);
@@ -17,6 +18,7 @@ async function loadCachedEcu911Items() {
   };
 }
 
+// En Vercel se usa Apify como cache externo porque el filesystem es de solo lectura.
 async function loadApifyEcu911Items() {
   if (!process.env.APIFY_TOKEN || !process.env.APIFY_STORE_ID) {
     throw new Error("APIFY_TOKEN o APIFY_STORE_ID no configurado.");
@@ -44,6 +46,7 @@ async function loadApifyEcu911Items() {
   };
 }
 
+// Prioridad de datos: ECU 911 en vivo, cache Apify, cache del repositorio.
 async function getEcu911Items() {
   try {
     const items = await scrapeEcu911MoronaSantiago();
@@ -91,6 +94,7 @@ async function getEcu911Items() {
   };
 }
 
+// Une reportes ECU 911 con la red base para mostrar todos los tramos siempre.
 async function buildNetworkStatus() {
   const { items: ecu911Items, sourceWarning } = await getEcu911Items();
 
@@ -141,6 +145,7 @@ async function buildNetworkStatus() {
   };
 }
 
+// Endpoint consumido por el frontend para listar estado, fuente y tramo asociado.
 export default async function handler(req, res) {
   try {
     const { roads, sourceWarning } = await buildNetworkStatus();

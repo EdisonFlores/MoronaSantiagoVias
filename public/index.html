@@ -91,6 +91,7 @@
 <link rel="icon" href="/assests/icons/favicon.svg" type="image/svg+xml">
 </head>
 <body>
+  <!-- Header: marca y controles globales visibles en toda la app. -->
   <header class="app-header">
     <div class="container-fluid px-0">
       <div class="topbar">
@@ -147,6 +148,7 @@
   </header>
 
   <main class="app-shell container-fluid">
+    <!-- Sidebar: filtros, resumen estadistico y lista de incidentes. -->
     <aside id="mobileSidebar" class="sidebar" aria-label="Panel lateral">
       <div class="sidebar-scroll">
         <section class="panel hero-panel">
@@ -210,6 +212,7 @@
 
     <div id="mobileSidebarBackdrop" class="mobile-sidebar-backdrop" aria-hidden="true"></div>
 
+    <!-- Mapa principal: rutas, marcadores ECU 911 y recorrido GPS del usuario. -->
     <section class="map-area" aria-label="Mapa vial">
       <div class="map-card">
         <div class="map-card-head">
@@ -250,6 +253,7 @@
     </section>
   </main>
 
+  <!-- Tutorial dinamico: JS posiciona el foco segun el elemento y la pantalla. -->
   <div id="tutorialOverlay" class="tutorial-overlay" aria-hidden="true">
     <div id="tutorialSpotlight" class="tutorial-spotlight"></div>
     <div class="tutorial-card" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
@@ -268,6 +272,7 @@
     </div>
   </div>
 
+  <!-- Modal de clima alimentado por Open-Meteo con el centro actual del mapa. -->
   <div id="weatherModal" class="weather-modal" aria-hidden="true">
     <div class="weather-modal-content">
       <button
@@ -282,6 +287,7 @@
     </div>
   </div>
 
+  <!-- Footer: accesos secundarios, tutorial, asistente de voz y descarga Android. -->
   <footer class="main-footer">
     <div class="container-fluid px-0">
       <div class="tm-footer">

@@ -1,7 +1,8 @@
-//translate.js
+// Gestiona el idioma global de la interfaz y el selector personalizado.
 import { translations } from "./i18n.js";
 
 const STORAGE_KEY = "ecuavial-lang";
+// Orden fijo usado para pintar opciones y validar cualquier valor guardado.
 const LANGUAGE_ORDER = ["es", "en", "sh"];
 const LANGUAGE_LABELS = {
   es: "Español",
@@ -9,14 +10,17 @@ const LANGUAGE_LABELS = {
   sh: "Shuar"
 };
 
+// Evita idiomas desconocidos y vuelve a espanol como valor seguro.
 function getSafeLanguage(value) {
   return LANGUAGE_ORDER.includes(value) ? value : "es";
 }
 
+// Lee el idioma guardado en el navegador.
 export function getCurrentLanguage() {
   return getSafeLanguage(localStorage.getItem(STORAGE_KEY) || "es");
 }
 
+// Actualiza etiqueta visible, data-lang y opcion marcada del selector.
 function updateLanguageControl(lang) {
   const trigger = document.getElementById("btnLang");
   const display = document.getElementById("langDisplay");
@@ -31,6 +35,7 @@ function updateLanguageControl(lang) {
   });
 }
 
+// El menu es propio para que toda la capsula sea clicable y tenga mejor estilo.
 function setLanguageMenuState(isOpen) {
   const trigger = document.getElementById("btnLang");
   const menu = document.getElementById("languageMenu");
@@ -41,6 +46,7 @@ function setLanguageMenuState(isOpen) {
   menu.classList.toggle("show", isOpen);
 }
 
+// Guarda el idioma, traduce la pagina y avisa al resto de modulos.
 function applyLanguage(next, onLanguageChanged) {
   localStorage.setItem(STORAGE_KEY, next);
   applyTranslations(next);
@@ -55,6 +61,7 @@ function applyLanguage(next, onLanguageChanged) {
   }
 }
 
+// La advertencia se mantiene en espanol aunque la interfaz cambie a Shuar.
 function showShuarWarning() {
   const dict = translations.es;
   let modal = document.getElementById("shuarWarningModal");
@@ -98,6 +105,7 @@ function showShuarWarning() {
   modal.classList.add("show");
 }
 
+// Inicializa selector, cierre por click externo y atajo Escape.
 export function initLanguage(onLanguageChanged) {
   const saved = getCurrentLanguage();
   applyTranslations(saved);
@@ -131,6 +139,7 @@ export function initLanguage(onLanguageChanged) {
   });
 }
 
+// Traduce todos los nodos marcados con data-i18n sin reconstruir la pagina completa.
 export function applyTranslations(lang) {
   const safeLang = getSafeLanguage(lang);
   const dict = { ...translations.es, ...(translations[safeLang] || {}) };

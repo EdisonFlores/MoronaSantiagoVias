@@ -1,4 +1,5 @@
-//public/js/app.js
+// Orquesta la experiencia principal: carga datos, filtros, mapa, tutorial,
+// recorrido GPS, asistente de voz y sincronizacion de idioma/tema.
 import { fetchIncidents, fetchOsrmRoute } from "./services.js";
 import {
   initMap,
@@ -28,6 +29,7 @@ let isVoiceHintsEnabled = false;
 let voiceHintTimer = null;
 let lastVoiceHint = "";
 
+// Resume la red vial visible para alimentar las tarjetas de estadisticas.
 function buildStats(roads) {
   return {
     total: roads.length,
@@ -37,10 +39,12 @@ function buildStats(roads) {
   };
 }
 
+// Detecta el punto de corte donde la interfaz cambia a drawer y mapa apilado.
 function isMobileLayout() {
   return window.innerWidth <= 992;
 }
 
+// Lleva al usuario al mapa despues de acciones relevantes en telefono/tablet.
 function scrollToMapOnSmallScreens() {
   if (isMobileLayout()) {
     const mapEl = document.getElementById("map");
@@ -53,6 +57,7 @@ function scrollToMapOnSmallScreens() {
   }
 }
 
+// Activa el menu colapsable de acciones en cabecera para pantallas pequenas.
 function initMobileMenu() {
   const btnMenu = document.getElementById("btnMenu");
   const headerActions = document.getElementById("headerActions");
@@ -65,6 +70,7 @@ function initMobileMenu() {
   });
 }
 
+// Abre o cierra el grupo de acciones de cabecera solo en layout movil.
 function setMobileHeaderActionsState(isOpen) {
   const btnMenu = document.getElementById("btnMenu");
   const headerActions = document.getElementById("headerActions");
@@ -81,6 +87,7 @@ function setMobileHeaderActionsState(isOpen) {
   btnMenu.setAttribute("aria-expanded", String(isOpen));
 }
 
+// Controla el drawer lateral de incidentes y su backdrop en movil/tablet.
 function setMobileSidebarState(isOpen) {
   const sidebar = document.getElementById("mobileSidebar");
   const backdrop = document.getElementById("mobileSidebarBackdrop");
@@ -102,10 +109,12 @@ function setMobileSidebarState(isOpen) {
   openBtn.setAttribute("aria-expanded", String(isOpen));
 }
 
+// Cierra el drawer lateral reutilizando la funcion central de estado.
 function closeMobileSidebar() {
   setMobileSidebarState(false);
 }
 
+// Acepta coordenadas como arreglo [lat, lng] u objeto { lat, lng }.
 function getSafeCoord(point) {
   if (!point) return null;
 
@@ -124,6 +133,7 @@ function getSafeCoord(point) {
   return null;
 }
 
+// Convierte lat/lng a metros aproximados usando una latitud de referencia.
 function projectToMeters(point, referenceLat) {
   const metersPerDegreeLat = 111320;
   const metersPerDegreeLng = 111320 * Math.cos((referenceLat * Math.PI) / 180);
@@ -134,6 +144,7 @@ function projectToMeters(point, referenceLat) {
   };
 }
 
+// Aproxima distancias en metros proyectando lat/lng sobre un plano local.
 function getPointSegmentDistanceMeters(point, start, end) {
   const referenceLat = (point.lat + start.lat + end.lat) / 3;
   const p = projectToMeters(point, referenceLat);
@@ -156,6 +167,7 @@ function getPointSegmentDistanceMeters(point, start, end) {
   return Math.hypot(p.x - closest.x, p.y - closest.y);
 }
 
+// Busca el tramo base mas cercano a la ubicacion del usuario durante el recorrido.
 function findNearestRoadFromLocation(location) {
   const point = {
     lat: Number(location.lat),
@@ -183,6 +195,7 @@ function findNearestRoadFromLocation(location) {
   return nearest && nearest.distanceMeters <= 1500 ? nearest : null;
 }
 
+// Mantiene el boton "Iniciar recorrido" sincronizado con el estado del GPS.
 function updateTripButton() {
   const btn = document.getElementById("btnStartTrip");
   const label = btn?.querySelector("span");
@@ -196,6 +209,7 @@ function updateTripButton() {
   label.textContent = isTripTracking ? t.stopTrip : t.startTrip;
 }
 
+// Detiene el seguimiento GPS y opcionalmente limpia el marcador del mapa.
 function stopTripTracking({ clearMap = true, notify = false } = {}) {
   const lang = getCurrentLanguage();
 
@@ -219,6 +233,7 @@ function stopTripTracking({ clearMap = true, notify = false } = {}) {
   }
 }
 
+// Decide el texto del boton de voz segun si esta leyendo, pausado o inactivo.
 function getVoiceButtonLabel() {
   const lang = getCurrentLanguage();
   const t = translations[lang] || translations.es;
@@ -228,6 +243,7 @@ function getVoiceButtonLabel() {
   return t.voiceAssistant;
 }
 
+// Refleja en el boton el estado actual del asistente de voz.
 function updateVoiceButton() {
   const btn = document.getElementById("btnVoiceAssistant");
   const label = btn?.querySelector("span");
@@ -240,6 +256,7 @@ function updateVoiceButton() {
   label.textContent = getVoiceButtonLabel();
 }
 
+// Selecciona una voz instalada compatible con el idioma activo.
 function getPreferredVoice(lang) {
   const voices = window.speechSynthesis?.getVoices?.() || [];
   const locale = lang === "en" ? "en" : "es";
@@ -247,6 +264,7 @@ function getPreferredVoice(lang) {
   return voices.find((voice) => voice.lang?.toLowerCase().startsWith(locale)) || voices[0] || null;
 }
 
+// Construye el resumen hablado con filtros, estadisticas y primeras vias visibles.
 function buildVoiceSummary() {
   const lang = getCurrentLanguage();
   const t = translations[lang] || translations.es;
@@ -290,6 +308,7 @@ function buildVoiceSummary() {
   return [...intro, ...roadLines].join(" ");
 }
 
+// Cancela cualquier lectura y devuelve el asistente de voz al estado inicial.
 function stopVoiceAssistant() {
   if ("speechSynthesis" in window) {
     window.speechSynthesis.cancel();
@@ -300,6 +319,7 @@ function stopVoiceAssistant() {
   updateVoiceButton();
 }
 
+// Encapsula Web Speech para reutilizar idioma, voz y velocidad en lecturas/hints.
 function speakText(text, options = {}) {
   const lang = getCurrentLanguage();
   const utterance = new SpeechSynthesisUtterance(text);
@@ -316,6 +336,7 @@ function speakText(text, options = {}) {
   return utterance;
 }
 
+// Inicia la lectura general del estado vial y habilita pistas por foco/hover.
 function startVoiceAssistant() {
   const lang = getCurrentLanguage();
   const t = translations[lang] || translations.es;
@@ -345,6 +366,7 @@ function startVoiceAssistant() {
   });
 }
 
+// Convierte elementos interactivos en frases cortas para lectura al pasar/focalizar.
 function getVoiceHintForElement(element) {
   const lang = getCurrentLanguage();
   const t = translations[lang] || translations.es;
@@ -373,6 +395,7 @@ function getVoiceHintForElement(element) {
   return text || target.getAttribute("aria-label") || target.getAttribute("title") || "";
 }
 
+// Lee una pista corta para elementos cuando el modo de ayuda por voz esta activo.
 function speakVoiceHint(text) {
   if (!isVoiceHintsEnabled || isVoiceReading || isVoicePaused) return;
   if (!text || text === lastVoiceHint) return;
@@ -383,6 +406,7 @@ function speakVoiceHint(text) {
   speakText(text, { rate: 1 });
 }
 
+// Espera un instante antes de leer para no disparar voz con movimientos rapidos.
 function queueVoiceHint(event) {
   window.clearTimeout(voiceHintTimer);
 
@@ -394,10 +418,12 @@ function queueVoiceHint(event) {
   }, event.type === "focusin" ? 80 : 280);
 }
 
+// Cancela una pista pendiente cuando el cursor sale del elemento.
 function clearVoiceHintQueue() {
   window.clearTimeout(voiceHintTimer);
 }
 
+// Alterna iniciar, pausar y reanudar la lectura del asistente de voz.
 function toggleVoiceAssistant() {
   if (!isVoiceReading) {
     startVoiceAssistant();
@@ -416,6 +442,7 @@ function toggleVoiceAssistant() {
   updateVoiceButton();
 }
 
+// Registra eventos de voz, mouse y foco para lectura general y pistas.
 function initVoiceAssistant() {
   const btn = document.getElementById("btnVoiceAssistant");
 
@@ -430,6 +457,7 @@ function initVoiceAssistant() {
   }
 }
 
+// watchPosition entrega coordenadas continuas; aqui se actualiza mapa y tramo cercano.
 function handleTripPosition(position) {
   const coords = position.coords;
   const location = {
@@ -444,6 +472,7 @@ function handleTripPosition(position) {
   updateTravelPosition(location, nearestRoad, { follow: true });
 }
 
+// Maneja errores de geolocalizacion y detiene el recorrido si falta permiso.
 function handleTripError(error) {
   const lang = getCurrentLanguage();
   const denied = error?.code === error?.PERMISSION_DENIED;
@@ -467,6 +496,7 @@ function handleTripError(error) {
   }
 }
 
+// Activa el seguimiento GPS solo bajo accion explicita del usuario.
 function startTripTracking() {
   const lang = getCurrentLanguage();
 
@@ -499,6 +529,7 @@ function startTripTracking() {
   );
 }
 
+// Conecta el boton de recorrido con iniciar/detener seguimiento GPS.
 function initTripTracking() {
   const btn = document.getElementById("btnStartTrip");
 
@@ -514,6 +545,7 @@ function initTripTracking() {
   });
 }
 
+// Pasos del tutorial. Cada selector apunta al elemento real que se resalta en pantalla.
 const tutorialSteps = [
   {
     selector: ".hero-panel",
@@ -613,6 +645,7 @@ const tutorialSteps = [
 let tutorialIndex = 0;
 let currentTutorialTarget = null;
 
+// Busca el objetivo principal del paso o usa su fallback si no existe.
 function getTutorialElement(step) {
   return (
     document.querySelector(step.selector) ||
@@ -620,6 +653,7 @@ function getTutorialElement(step) {
   );
 }
 
+// Obtiene el elemento que debe recibir scroll antes de resaltar el paso.
 function getTutorialFocusElement(step) {
   return (
     (step.focusSelector ? document.querySelector(step.focusSelector) : null) ||
@@ -627,6 +661,7 @@ function getTutorialFocusElement(step) {
   );
 }
 
+// Obtiene el elemento exacto que se debe encuadrar con el spotlight.
 function getTutorialHighlightElement(step) {
   return (
     (step.highlightSelector ? document.querySelector(step.highlightSelector) : null) ||
@@ -634,28 +669,33 @@ function getTutorialHighlightElement(step) {
   );
 }
 
+// Espera dos frames para que el navegador termine de pintar cambios de layout.
 function waitForTutorialFrame() {
   return new Promise((resolve) => {
     requestAnimationFrame(() => requestAnimationFrame(resolve));
   });
 }
 
+// Pausa breve usada cuando drawer/header necesitan tiempo de transicion.
 function waitForTutorialDelay(ms) {
   return new Promise((resolve) => {
     window.setTimeout(resolve, ms);
   });
 }
 
+// Limita un valor numerico dentro de un rango seguro de pantalla.
 function clampTutorialValue(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
+// Clasifica el viewport para aplicar reglas distintas en telefono/tablet/escritorio.
 function getTutorialViewportMode() {
   if (window.innerWidth <= 576) return "phone";
   if (window.innerWidth <= 992) return "tablet";
   return "desktop";
 }
 
+// En movil/tablet se desplazan paneles y pagina antes de calcular el foco visual.
 function scrollTutorialTarget(target, step) {
   const scroller = target.closest(".sidebar-scroll");
   const mode = getTutorialViewportMode();
@@ -687,6 +727,7 @@ function scrollTutorialTarget(target, step) {
   }
 }
 
+// Ajusta el rectangulo resaltado para evitar focos estrechos en pantallas pequenas.
 function getSpotlightRect(target, mode, step = {}) {
   const rect = target.getBoundingClientRect();
 
@@ -705,6 +746,7 @@ function getSpotlightRect(target, mode, step = {}) {
   return targetArea.width >= 90 ? targetArea : panelRect;
 }
 
+// Posiciona la tarjeta del tutorial: lateral en escritorio, anclada abajo en movil.
 function placeTutorialCard(target, card, spotlight, step = {}) {
   const mode = getTutorialViewportMode();
   const rect = getSpotlightRect(target, mode, step);
@@ -753,6 +795,7 @@ function placeTutorialCard(target, card, spotlight, step = {}) {
   card.style.left = `${left}px`;
 }
 
+// Renderiza el paso activo y recalcula foco, textos y posicion de la tarjeta.
 async function renderTutorialStep() {
   const overlay = document.getElementById("tutorialOverlay");
   const card = overlay?.querySelector(".tutorial-card");
@@ -802,6 +845,7 @@ async function renderTutorialStep() {
   placeTutorialCard(updatedHighlightTarget, card, spotlight, step);
 }
 
+// Oculta tutorial y restaura estados temporales de la interfaz movil.
 function closeTutorial() {
   const overlay = document.getElementById("tutorialOverlay");
 
@@ -812,6 +856,7 @@ function closeTutorial() {
   currentTutorialTarget = null;
 }
 
+// Abre el tutorial desde el primer paso y calcula el foco inicial.
 function openTutorial() {
   const overlay = document.getElementById("tutorialOverlay");
 
@@ -824,6 +869,7 @@ function openTutorial() {
   renderTutorialStep();
 }
 
+// Conecta botones, teclado y resize del tutorial dinamico.
 function initTutorial() {
   const openBtns = document.querySelectorAll("[data-tutorial-open]");
   const closeBtn = document.getElementById("tutorialClose");
@@ -866,6 +912,7 @@ function initTutorial() {
   });
 }
 
+// Intenta dibujar la ruta real con OSRM; si falla, usa una linea aproximada.
 async function focusRoadOnMap(road) {
   const lang = getCurrentLanguage();
 
@@ -932,6 +979,7 @@ async function focusRoadOnMap(road) {
   }
 }
 
+// Registra el drawer lateral de incidentes para abrir/cerrar desde movil.
 function initMobileSidebar() {
   const openBtn = document.getElementById("btnOpenIncidents");
   const backdrop = document.getElementById("mobileSidebarBackdrop");
@@ -957,6 +1005,7 @@ function initMobileSidebar() {
   });
 }
 
+// Muestra esqueletos simples mientras se descargan incidentes y estadisticas.
 function showLoadingState() {
   const lang = getCurrentLanguage();
 
@@ -982,6 +1031,7 @@ function showLoadingState() {
   }
 }
 
+// Muestra estados vacios cuando falla la carga inicial de datos.
 function showLoadError() {
   const lang = getCurrentLanguage();
   const incidentsList = document.getElementById("incidentsList");
@@ -1004,6 +1054,7 @@ function showLoadError() {
   }
 }
 
+// Recalcula lista, estadisticas y marcadores cada vez que cambia el filtro/idioma.
 function applyFilters() {
   const state = document.getElementById("filterState").value;
   const lang = getCurrentLanguage();
@@ -1087,6 +1138,7 @@ scrollToMapOnSmallScreens();
   }, lang);
 }
 
+// Punto de entrada de la aplicacion: inicializa UI, mapa, clima y datos remotos.
 async function initApp() {
   initTheme();
   initMobileMenu();
@@ -1133,6 +1185,7 @@ async function initApp() {
     showLoadError();
   }
 }
+// Registra el Service Worker para habilitar cache/PWA cuando el navegador lo permite.
 function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
 

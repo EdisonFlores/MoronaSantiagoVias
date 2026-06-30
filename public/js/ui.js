@@ -1,6 +1,7 @@
-// public/js/ui.js
+// Funciones puras de interfaz: tarjetas, estadisticas, avisos y modales simples.
 import { translations, translateState } from "./i18n.js";
 
+// La clase del badge depende del texto normalizado del estado vial.
 function getStateClass(state = "") {
   const value = state.toLowerCase();
 
@@ -9,6 +10,7 @@ function getStateClass(state = "") {
   return "badge-ok";
 }
 
+// Escapa valores usados dentro de atributos HTML generados dinamicamente.
 function escapeAttribute(value = "") {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -17,6 +19,7 @@ function escapeAttribute(value = "") {
     .replaceAll(">", "&gt;");
 }
 
+// Mantiene fechas legibles para Ecuador/Espanol y Estados Unidos/Ingles.
 function formatIncidentDate(value, lang = "es") {
   if (!value) return "";
 
@@ -31,6 +34,7 @@ function formatIncidentDate(value, lang = "es") {
   }).format(date);
 }
 
+// Pinta las cuatro metricas principales del panel de estadisticas.
 export function renderStats(stats, lang = "es") {
   const t = translations[lang] || translations.es;
   const box = document.getElementById("statsBox");
@@ -55,6 +59,7 @@ export function renderStats(stats, lang = "es") {
   `;
 }
 
+// Renderiza la lista visible y conecta el boton "Ver en mapa" con el controlador.
 export function renderIncidents(roads, handlers, lang = "es") {
   const t = translations[lang] || translations.es;
   const container = document.getElementById("incidentsList");
@@ -111,6 +116,7 @@ export function renderIncidents(roads, handlers, lang = "es") {
     });
   });
 }
+// Toast flotante reutilizado por GPS, rutas, carga y errores de permisos.
 export function showToast(message, type = "warning", duration = 4000) {
   let container = document.querySelector(".toast-container");
 
@@ -143,6 +149,7 @@ export function showToast(message, type = "warning", duration = 4000) {
     setTimeout(() => toast.remove(), 250);
   }, duration);
 }
+// Modal breve para explicar cuando se dibujo una ruta aproximada.
 export function showRouteNotice(message, type = "warning") {
   let modal = document.getElementById("routeNoticeModal");
 

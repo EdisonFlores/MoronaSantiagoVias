@@ -30,6 +30,7 @@
 }
 
 .app-shell {
+  /* Dos columnas en escritorio: panel lateral fijo y mapa flexible. */
   display: grid;
   grid-template-columns: 390px minmax(0, 1fr);
   gap: 20px;
@@ -48,6 +49,7 @@
 }
 
 .sidebar-scroll {
+  /* El scroll vive dentro del panel para que header/footer permanezcan visibles. */
   flex: 1;
   height: calc(100vh - 58px - 64px - 32px);
   min-height: 0;
@@ -154,6 +156,7 @@
 }
 
 @media (max-width: 992px) {
+  /* En movil y tablet el panel lateral se convierte en drawer superpuesto. */
   body.drawer-open {
     overflow: hidden;
   }
@@ -222,6 +225,7 @@
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
+  /* Rango tablet: el mapa gana altura sin invadir el footer. */
   .app-shell {
     padding: 14px;
     gap: 14px;
@@ -254,6 +258,7 @@
 }
 
 @media (min-width: 769px) and (max-width: 992px) and (max-height: 760px) {
+  /* Tabletas con poca altura necesitan un mapa mas compacto. */
   .map-card {
     min-height: auto;
   }
@@ -265,6 +270,7 @@
 }
 
 @media (max-width: 768px) {
+  /* Telefonos: acciones y mapa se apilan para evitar desbordes horizontales. */
   .app-header {
     padding: 10px 12px;
   }
