@@ -14,6 +14,8 @@ export const translations = {
     voiceAssistant: "Asistente de Voz",
     voicePause: "Pausar voz",
     voiceResume: "Continuar voz",
+    voiceDisable: "Desactivar voz",
+    voiceGuideEnabled: "Asistente de voz activado. Pasa el mouse o toca un elemento para escucharlo.",
 
     // HERO
     heroBadge: "Estado vial en tiempo real",
@@ -117,7 +119,7 @@ export const translations = {
     tutorialDownloadTitle: "Descarga la app",
     tutorialDownloadText: "En el footer puedes descargar la APK para instalar la versión Android de Ecuavial.",
     tutorialVoiceTitle: "Activa el asistente de voz",
-    tutorialVoiceText: "Este botón lee en voz alta un resumen y luego permite escuchar elementos al pasar el cursor o enfocar controles.",
+    tutorialVoiceText: "Este botón activa una guía por voz: en computadora lee al pasar el mouse o enfocar controles, y en teléfono lee al tocar elementos.",
     voiceUnsupported: "Tu navegador no soporta lectura por voz.",
     voiceIntro: "Bienvenido a Ecuavial. Este es un resumen accesible del estado vial de Morona Santiago.",
     voiceStats: "Resumen de reportes",
@@ -150,6 +152,8 @@ export const translations = {
     voiceAssistant: "Voice Assistant",
     voicePause: "Pause voice",
     voiceResume: "Resume voice",
+    voiceDisable: "Turn voice off",
+    voiceGuideEnabled: "Voice assistant enabled. Hover, focus, or tap an element to hear it.",
 
     // HERO
     heroBadge: "Real-time road status",
@@ -253,7 +257,7 @@ export const translations = {
     tutorialDownloadTitle: "Download the app",
     tutorialDownloadText: "In the footer you can download the APK to install the Android version of Ecuavial.",
     tutorialVoiceTitle: "Enable the voice assistant",
-    tutorialVoiceText: "This button reads aloud a summary and then lets users hear elements when hovering or focusing controls.",
+    tutorialVoiceText: "This button enables a voice guide: on desktop it reads hovered or focused controls, and on mobile it reads tapped elements.",
     voiceUnsupported: "Your browser does not support voice reading.",
     voiceIntro: "Welcome to Ecuavial. This is an accessible summary of Morona Santiago road status.",
     voiceStats: "Report summary",
@@ -286,6 +290,8 @@ translations.sh = {
   voiceAssistant: "Chicham yaimkiamu",
   voicePause: "Chicham ankankamu",
   voiceResume: "Chicham nekapeamu",
+  voiceDisable: "Chicham yaimkiamu epentma",
+  voiceGuideEnabled: "Chicham yaimkiamu urakmamu. Elemento achikta nuya chicham antukta.",
 
   heroBadge: "Jintia nekamuri yamaram",
   heroTitle: "Jintia awajun, jintia najankamu nekata",
@@ -380,7 +386,7 @@ translations.sh = {
   tutorialDownloadTitle: "App jukimprata",
   tutorialDownloadText: "Footernum APK jukimpratin Androidnum Ecuavial apujtustinian.",
   tutorialVoiceTitle: "Chicham yaimkiamu urakma",
-  tutorialVoiceText: "Ju botón resumen chichamjai aujmatsui nuya elemento pasamunam chicham etserui.",
+  tutorialVoiceText: "Ju botón chicham yaimkiamu urakui. Computadornum mouse pasamunam aujmatsui, telefononam elemento achikmatai aujmatsui.",
   voiceUnsupported: "Ame navegador chicham aujmatsamu takakchayi.",
   voiceIntro: "Ecuavialnum penker tarimiat. Ju Morona Santiago jintia nekamuri resumen.",
   voiceStats: "Etserma nekapmamu",

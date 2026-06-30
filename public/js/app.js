@@ -23,8 +23,6 @@ let visibleRoads = [];
 let tripWatchId = null;
 let isTripTracking = false;
 let lastTripErrorAt = 0;
-let isVoiceReading = false;
-let isVoicePaused = false;
 let isVoiceHintsEnabled = false;
 let voiceHintTimer = null;
 let lastVoiceHint = "";
@@ -238,8 +236,7 @@ function getVoiceButtonLabel() {
   const lang = getCurrentLanguage();
   const t = translations[lang] || translations.es;
 
-  if (isVoicePaused) return t.voiceResume;
-  if (isVoiceReading) return t.voicePause;
+  if (isVoiceHintsEnabled) return t.voiceDisable || t.voicePause;
   return t.voiceAssistant;
 }
 
@@ -250,9 +247,9 @@ function updateVoiceButton() {
 
   if (!btn || !label) return;
 
-  btn.classList.toggle("is-active", isVoiceReading);
-  btn.classList.toggle("is-listening", isVoiceHintsEnabled && !isVoiceReading);
-  btn.setAttribute("aria-pressed", String(isVoiceReading && !isVoicePaused));
+  btn.classList.toggle("is-active", isVoiceHintsEnabled);
+  btn.classList.toggle("is-listening", isVoiceHintsEnabled);
+  btn.setAttribute("aria-pressed", String(isVoiceHintsEnabled));
   label.textContent = getVoiceButtonLabel();
 }
 
@@ -314,8 +311,8 @@ function stopVoiceAssistant() {
     window.speechSynthesis.cancel();
   }
 
-  isVoiceReading = false;
-  isVoicePaused = false;
+  isVoiceHintsEnabled = false;
+  lastVoiceHint = "";
   updateVoiceButton();
 }
 
@@ -336,7 +333,7 @@ function speakText(text, options = {}) {
   return utterance;
 }
 
-// Inicia la lectura general del estado vial y habilita pistas por foco/hover.
+// Activa el modo guia: no lee resumen automatico, solo elementos enfocados/tocados.
 function startVoiceAssistant() {
   const lang = getCurrentLanguage();
   const t = translations[lang] || translations.es;
@@ -348,22 +345,10 @@ function startVoiceAssistant() {
 
   window.speechSynthesis.cancel();
 
-  isVoiceReading = true;
-  isVoicePaused = false;
   isVoiceHintsEnabled = true;
+  lastVoiceHint = "";
   updateVoiceButton();
-  speakText(buildVoiceSummary(), {
-    onend: () => {
-      isVoiceReading = false;
-      isVoicePaused = false;
-      updateVoiceButton();
-    },
-    onerror: () => {
-      isVoiceReading = false;
-      isVoicePaused = false;
-      updateVoiceButton();
-    }
-  });
+  showToast(t.voiceGuideEnabled || t.voiceAssistant, "success", 2600);
 }
 
 // Convierte elementos interactivos en frases cortas para lectura al pasar/focalizar.
@@ -397,7 +382,7 @@ function getVoiceHintForElement(element) {
 
 // Lee una pista corta para elementos cuando el modo de ayuda por voz esta activo.
 function speakVoiceHint(text) {
-  if (!isVoiceHintsEnabled || isVoiceReading || isVoicePaused) return;
+  if (!isVoiceHintsEnabled) return;
   if (!text || text === lastVoiceHint) return;
   if (!("speechSynthesis" in window) || !window.SpeechSynthesisUtterance) return;
 
@@ -413,9 +398,10 @@ function queueVoiceHint(event) {
   const text = getVoiceHintForElement(event.target);
   if (!text) return;
 
+  const delay = event.type === "focusin" || event.type === "touchstart" ? 80 : 280;
   voiceHintTimer = window.setTimeout(() => {
     speakVoiceHint(text);
-  }, event.type === "focusin" ? 80 : 280);
+  }, delay);
 }
 
 // Cancela una pista pendiente cuando el cursor sale del elemento.
@@ -423,23 +409,14 @@ function clearVoiceHintQueue() {
   window.clearTimeout(voiceHintTimer);
 }
 
-// Alterna iniciar, pausar y reanudar la lectura del asistente de voz.
+// Alterna el modo guia del asistente de voz.
 function toggleVoiceAssistant() {
-  if (!isVoiceReading) {
+  if (!isVoiceHintsEnabled) {
     startVoiceAssistant();
     return;
   }
 
-  if (isVoicePaused) {
-    window.speechSynthesis.resume();
-    isVoicePaused = false;
-    updateVoiceButton();
-    return;
-  }
-
-  window.speechSynthesis.pause();
-  isVoicePaused = true;
-  updateVoiceButton();
+  stopVoiceAssistant();
 }
 
 // Registra eventos de voz, mouse y foco para lectura general y pistas.
@@ -450,6 +427,7 @@ function initVoiceAssistant() {
   btn?.addEventListener("click", toggleVoiceAssistant);
   document.addEventListener("mouseover", queueVoiceHint);
   document.addEventListener("focusin", queueVoiceHint);
+  document.addEventListener("touchstart", queueVoiceHint, { passive: true });
   document.addEventListener("mouseout", clearVoiceHintQueue);
 
   if ("speechSynthesis" in window) {
