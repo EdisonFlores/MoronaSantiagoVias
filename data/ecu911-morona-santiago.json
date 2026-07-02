@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-02T19:45:38.125Z",
+  "updatedAt": "2026-07-02T21:19:39.853Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -75,6 +75,30 @@
       "source": "ECU 911"
     },
     {
+      "id": "1843c7a7-f5c9-4c23-b6d3-5f88fe73e9d9",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "LIMON INDANZA",
+      "via": "LIMON - GUALACEO",
+      "ref": "",
+      "estado": "Parcialmente habilitada",
+      "observaciones": "PRECAUCIÓN, DESLIZAMIENTO DE TIERRA E INESTABILIDAD DE TALUD EN EL SECTOR CHACRAS.",
+      "viaAlterna": "N/A",
+      "modified": "2026-06-15 07:31:42",
+      "source": "ECU 911"
+    },
+    {
+      "id": "931ee900-cce6-4960-a579-9fc4473fae4d",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "GUALAQUIZA",
+      "via": "GUALAQUIZA - CHUCHUMBLETZA (LIMITE PROVINCIAL ZAMORA)",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "*",
+      "viaAlterna": "N/A",
+      "modified": "2022-07-01 16:47:38",
+      "source": "ECU 911"
+    },
+    {
       "id": "3c77edd7-e40b-4718-b18e-7f1c48405246",
       "provincia": "MORONA SANTIAGO",
       "canton": "LIMON INDANZA",
@@ -111,15 +135,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "931ee900-cce6-4960-a579-9fc4473fae4d",
+      "id": "9076be3f-1a07-44f0-9aa6-1c5dd7e72b1a",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
-      "via": "GUALAQUIZA - CHUCHUMBLETZA (LIMITE PROVINCIAL ZAMORA)",
+      "via": "TUCUMBATZA - GUALAQUIZA",
       "ref": "",
       "estado": "Habilitada",
-      "observaciones": "*",
+      "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
-      "modified": "2022-07-01 16:47:38",
+      "modified": "2020-05-24 11:43:02",
       "source": "ECU 911"
     },
     {
@@ -135,30 +159,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "9076be3f-1a07-44f0-9aa6-1c5dd7e72b1a",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "TUCUMBATZA - GUALAQUIZA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2020-05-24 11:43:02",
-      "source": "ECU 911"
-    },
-    {
-      "id": "725982f5-a045-44da-8bcb-b587c3b09d27",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "SANTIAGO",
-      "via": "BELLA UNION - MENDEZ",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "DESLIZAMIENTO TRAMO BELLA UNION - MENDEZ",
-      "viaAlterna": "N/A",
-      "modified": "2021-07-23 20:50:17",
-      "source": "ECU 911"
-    },
-    {
       "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
       "provincia": "MORONA SANTIAGO",
       "canton": "TAISHA",
@@ -168,18 +168,6 @@
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
       "modified": "2026-05-23 05:37:35",
-      "source": "ECU 911"
-    },
-    {
-      "id": "1843c7a7-f5c9-4c23-b6d3-5f88fe73e9d9",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "LIMON INDANZA",
-      "via": "LIMON - GUALACEO",
-      "ref": "",
-      "estado": "Parcialmente habilitada",
-      "observaciones": "PRECAUCIÓN, DESLIZAMIENTO DE TIERRA E INESTABILIDAD DE TALUD EN EL SECTOR CHACRAS.",
-      "viaAlterna": "N/A",
-      "modified": "2026-06-15 07:31:42",
       "source": "ECU 911"
     },
     {
@@ -207,6 +195,18 @@
       "source": "ECU 911"
     },
     {
+      "id": "725982f5-a045-44da-8bcb-b587c3b09d27",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "SANTIAGO",
+      "via": "BELLA UNION - MENDEZ",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "DESLIZAMIENTO TRAMO BELLA UNION - MENDEZ",
+      "viaAlterna": "N/A",
+      "modified": "2021-07-23 20:50:17",
+      "source": "ECU 911"
+    },
+    {
       "id": "2f548f2a-6d38-491c-81f7-2a699e70a2b9",
       "provincia": "MORONA SANTIAGO",
       "canton": "SUCUA",
@@ -231,6 +231,18 @@
       "source": "ECU 911"
     },
     {
+      "id": "cabef7e8-4475-4877-b93b-f6740c4e477c",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "GUALAQUIZA",
+      "via": "GUALAQUIZA - CHIGUINDA - SIGSIG - CUENCA",
+      "ref": "",
+      "estado": "Parcialmente habilitada",
+      "observaciones": "CON PRECAUCIÓN DESLIZAMIENTO DE TIERRA EN EL SECTOR GALLO CANTANA (CHIGUINDA)",
+      "viaAlterna": "N/A",
+      "modified": "2026-02-01 21:51:23",
+      "source": "ECU 911"
+    },
+    {
       "id": "263d339c-8e65-4a9f-9af8-3ed8833b1532",
       "provincia": "MORONA SANTIAGO",
       "canton": "MORONA",
@@ -252,18 +264,6 @@
       "observaciones": "VIA ALTERNA AL PUYO",
       "viaAlterna": "N/A",
       "modified": "2022-05-18 04:14:12",
-      "source": "ECU 911"
-    },
-    {
-      "id": "cabef7e8-4475-4877-b93b-f6740c4e477c",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "GUALAQUIZA - CHIGUINDA - SIGSIG - CUENCA",
-      "ref": "",
-      "estado": "Parcialmente habilitada",
-      "observaciones": "CON PRECAUCIÓN DESLIZAMIENTO DE TIERRA EN EL SECTOR GALLO CANTANA (CHIGUINDA)",
-      "viaAlterna": "N/A",
-      "modified": "2026-02-01 21:51:23",
       "source": "ECU 911"
     }
   ]
