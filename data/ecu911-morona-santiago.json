@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T05:52:17.998Z",
+  "updatedAt": "2026-07-02T04:44:12.801Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -189,9 +189,9 @@
       "via": "BELLA UNION - LIMON",
       "ref": "",
       "estado": "Parcialmente habilitada",
-      "observaciones": "PRECAUCIÓN DESLIZAMIENTO DE TIERRA EN EL SECTOR CORAZON DE YANANAS",
+      "observaciones": "DESLIZAMIENTO DE TIERRA SECTOR EL ROSARIO",
       "viaAlterna": "N/A",
-      "modified": "2026-03-13 09:16:06",
+      "modified": "2026-07-01 18:25:17",
       "source": "ECU 911"
     },
     {
