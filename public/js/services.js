@@ -56,7 +56,10 @@ export async function createUserIncident(payload) {
   const data = await readJsonResponse(response);
 
   if (!response.ok || !data.ok) {
-    throw new Error(data.message || "No se pudo registrar el incidente");
+    const details = Array.isArray(data.errors) && data.errors.length
+      ? ` ${data.errors.join(" ")}`
+      : "";
+    throw new Error(`${data.message || "No se pudo registrar el incidente"}${details}`);
   }
 
   return data;
