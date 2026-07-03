@@ -8,6 +8,9 @@ let startMarker = null;
 let endMarker = null;
 let focusMarker = null;
 let ecu911MarkersLayer = null;
+let userReportsLayer = null;
+let reportDraftMarker = null;
+let reportPickHandler = null;
 let userLocationMarker = null;
 let userAccuracyCircle = null;
 let userPathLine = null;
@@ -53,6 +56,28 @@ function buildUserLocationIcon(heading = null) {
     iconSize: [40, 40],
     iconAnchor: [20, 20],
     popupAnchor: [0, -18]
+  });
+}
+
+// Icono diferenciado para incidentes reportados por usuarios.
+function buildUserReportIcon() {
+  return L.divIcon({
+    className: "leaflet-user-report-marker",
+    html: `<div class="user-report-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>`,
+    iconSize: [38, 38],
+    iconAnchor: [19, 34],
+    popupAnchor: [0, -30]
+  });
+}
+
+// Icono temporal usado mientras el usuario elige el punto del incidente.
+function buildReportDraftIcon() {
+  return L.divIcon({
+    className: "leaflet-report-draft-marker",
+    html: `<div class="report-draft-icon"><i class="bi bi-geo-alt-fill"></i></div>`,
+    iconSize: [38, 38],
+    iconAnchor: [19, 34],
+    popupAnchor: [0, -30]
   });
 }
 
@@ -119,6 +144,35 @@ function buildIncidentPopup(incident) {
   `;
 }
 
+// Popup para reportes ciudadanos con aviso de que no son reportes oficiales.
+function buildUserReportPopup(report) {
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+  const location = report?.ubicacion || {};
+  const road = report?.viaDetectada || {};
+  const reporterName = report?.reportante?.nombre || t.noReport;
+  const createdAt = formatIncidentDate(report?.creadoEn, lang);
+  const createdLine = createdAt
+    ? `<div style="margin-top:4px;"><b>${escapeHtml(t.reportCreatedAt || "Reportado")}:</b> ${escapeHtml(createdAt)}</div>`
+    : "";
+
+  return `
+    <div style="min-width:220px; max-width:280px; line-height:1.45;">
+      <div style="font-weight:800; margin-bottom:6px;">${escapeHtml(report?.tipoTexto || t.userReport || "Reporte ciudadano")}</div>
+      <div style="margin-bottom:4px;"><b>${escapeHtml(t.road)}:</b> ${escapeHtml(road.nombreVia || t.noRoadNearby)}</div>
+      <div style="margin-bottom:4px;"><b>${escapeHtml(t.location)}:</b> ${escapeHtml(report?.canton || "")} ${escapeHtml(report?.parroquia || "")}</div>
+      <div style="margin-bottom:4px;"><b>${escapeHtml(t.reporter)}:</b> ${escapeHtml(reporterName)}</div>
+      <div style="margin-bottom:4px;"><b>${escapeHtml(t.observation)}:</b> ${escapeHtml(report?.descripcion || t.noObservation)}</div>
+      <div style="margin-bottom:4px;"><b>${escapeHtml(t.source)}:</b> ${escapeHtml(t.userReports)}</div>
+      <div style="color:#ca8a04; font-weight:700;">${escapeHtml(t.unverifiedReport)}</div>
+      ${createdLine}
+      ${Number.isFinite(Number(location.lat)) && Number.isFinite(Number(location.lng))
+        ? `<div style="margin-top:4px; font-size:12px;">${Number(location.lat).toFixed(5)}, ${Number(location.lng).toFixed(5)}</div>`
+        : ""}
+    </div>
+  `;
+}
+
 // Crea el mapa Leaflet base, agrega OpenStreetMap y prepara capa de incidentes.
 export function initMap() {
   map = L.map("map").setView([-2.30814, -78.11135], 8);
@@ -129,6 +183,7 @@ export function initMap() {
   }).addTo(map);
 
   ecu911MarkersLayer = L.layerGroup().addTo(map);
+  userReportsLayer = L.layerGroup().addTo(map);
 
   return map;
 }
@@ -173,11 +228,17 @@ export function clearEcu911Markers() {
   ecu911MarkersLayer?.clearLayers();
 }
 
+// Elimina los marcadores ciudadanos visibles.
+export function clearUserReportMarkers() {
+  userReportsLayer?.clearLayers();
+}
+
 // Limpia rutas, foco e incidentes sin tocar el seguimiento GPS.
 export function clearAllMapElements() {
   clearRoadGeometry();
   clearIncidentFocus();
   clearEcu911Markers();
+  clearUserReportMarkers();
 }
 
 // Borra el marcador de auto, circulo de precision y estela del recorrido.
@@ -384,6 +445,115 @@ export function renderIncidentMarkers(incidents = [], handlers = {}) {
   incidents.forEach((incident) => {
     addIncidentMarker(incident, handlers);
   });
+}
+
+// Agrega un marcador ciudadano individual en su coordenada exacta.
+export function addUserReportMarker(report, handlers = {}) {
+  if (!map || !userReportsLayer) return;
+
+  const lat = Number(report?.ubicacion?.lat);
+  const lng = Number(report?.ubicacion?.lng);
+
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+  const marker = L.marker([lat, lng], {
+    icon: buildUserReportIcon()
+  }).bindPopup(buildUserReportPopup(report));
+
+  marker.on("click", () => handlers.onSelect?.(report));
+  userReportsLayer.addLayer(marker);
+
+  return marker;
+}
+
+// Redibuja todos los reportes ciudadanos visibles.
+export function renderUserReportMarkers(reports = [], handlers = {}) {
+  if (!map || !userReportsLayer) return;
+
+  clearUserReportMarkers();
+  reports.forEach((report) => addUserReportMarker(report, handlers));
+}
+
+// Centra el mapa sobre un reporte ciudadano y muestra su popup.
+export function focusUserReportOnMap(report) {
+  if (!map) return;
+
+  const lat = Number(report?.ubicacion?.lat);
+  const lng = Number(report?.ubicacion?.lng);
+
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+  clearIncidentFocus();
+  focusMarker = L.marker([lat, lng], {
+    icon: buildUserReportIcon()
+  }).addTo(map);
+  focusMarker.bindPopup(buildUserReportPopup(report)).openPopup();
+  map.setView([lat, lng], Math.max(map.getZoom(), 14), { animate: true });
+}
+
+// Marca visualmente el punto que se enviara en el formulario ciudadano.
+export function setReportDraftLocation(location) {
+  if (!map || !location) return;
+
+  const lat = Number(location.lat);
+  const lng = Number(location.lng);
+
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+  const latLng = [lat, lng];
+
+  if (!reportDraftMarker) {
+    reportDraftMarker = L.marker(latLng, {
+      icon: buildReportDraftIcon()
+    }).addTo(map);
+  } else {
+    reportDraftMarker.setLatLng(latLng);
+  }
+
+  reportDraftMarker.bindPopup("Punto del reporte").openPopup();
+}
+
+// Quita el punto temporal del formulario.
+export function clearReportDraftLocation() {
+  if (!map || !reportDraftMarker) return;
+
+  map.removeLayer(reportDraftMarker);
+  reportDraftMarker = null;
+}
+
+// Permite tomar una coordenada desde el siguiente clic sobre el mapa.
+export function enableReportLocationPicker(onPick) {
+  if (!map) return () => {};
+
+  cancelReportLocationPicker();
+  map.getContainer().classList.add("is-picking-report-location");
+
+  reportPickHandler = (event) => {
+    const location = {
+      lat: event.latlng.lat,
+      lng: event.latlng.lng
+    };
+
+    setReportDraftLocation(location);
+    onPick?.(location);
+    cancelReportLocationPicker();
+  };
+
+  map.once("click", reportPickHandler);
+
+  return cancelReportLocationPicker;
+}
+
+// Cancela el modo de seleccion en mapa si el usuario cierra el modal.
+export function cancelReportLocationPicker() {
+  if (!map) return;
+
+  if (reportPickHandler) {
+    map.off("click", reportPickHandler);
+    reportPickHandler = null;
+  }
+
+  map.getContainer().classList.remove("is-picking-report-location");
 }
 
 // Centra el mapa en un tramo y abre informacion del incidente si esta disponible.

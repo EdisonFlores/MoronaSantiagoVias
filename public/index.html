@@ -205,6 +205,24 @@
             </button>
           </div>
 
+          <div class="source-switch" aria-label="Fuente de incidentes">
+            <button class="source-switch-btn is-active" type="button" data-source-view="official" data-i18n="officialReports">
+              Reportes ECU 911
+            </button>
+            <button class="source-switch-btn" type="button" data-source-view="users" data-i18n="userReports">
+              Reportes ciudadanos
+            </button>
+          </div>
+
+          <button
+            id="btnReportIncident"
+            class="source-action-btn"
+            type="button"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <span data-i18n="reportIncident">Reportar incidente</span>
+          </button>
+
           <div id="incidentsList" class="incidents-list"></div>
         </section>
       </div>
@@ -284,6 +302,119 @@
         ✕
       </button>
       <div id="weatherModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal de reporte ciudadano: guarda un punto unico en Firestore desde el backend. -->
+  <div id="reportIncidentModal" class="report-modal" aria-hidden="true">
+    <div class="report-card" role="dialog" aria-modal="true" aria-labelledby="reportIncidentTitle">
+      <button id="reportModalClose" class="report-close" type="button" aria-label="Cerrar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <div class="report-card-head">
+        <div class="report-icon">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+        </div>
+        <div>
+          <h3 id="reportIncidentTitle" data-i18n="reportIncidentTitle">Reportar incidente ciudadano</h3>
+          <p data-i18n="reportIncidentHelp">Registra un punto de incidente vial. La informacion sera visible como reporte ciudadano no verificado.</p>
+        </div>
+      </div>
+
+      <form id="userIncidentForm" class="report-form">
+        <div class="report-grid">
+          <div class="field">
+            <label for="reportName" data-i18n="reportName">Nombre</label>
+            <input
+              id="reportName"
+              class="form-control custom-input"
+              name="nombre"
+              type="text"
+              maxlength="90"
+              placeholder="Tu nombre y apellido"
+              required
+            />
+            <small class="field-help" data-i18n="reportNameHelp">Ingresa el nombre de quien reporta el incidente.</small>
+          </div>
+
+          <div class="field">
+            <label for="reportType" data-i18n="reportType">Tipo de incidente</label>
+            <select id="reportType" class="form-select custom-select" name="tipo" required>
+              <option value="choque" data-i18n="reportTypeCrash">Choque</option>
+              <option value="bache" data-i18n="reportTypeBump">Bache</option>
+              <option value="derrumbe" data-i18n="reportTypeCollapse">Derrumbe</option>
+              <option value="deslizamiento" data-i18n="reportTypeLandslide">Deslizamiento</option>
+              <option value="via_cerrada" data-i18n="reportTypeClosedRoad">Via cerrada</option>
+              <option value="obstaculo" data-i18n="reportTypeObstacle">Obstaculo</option>
+              <option value="inundacion" data-i18n="reportTypeFlood">Inundación</option>
+              <option value="otro" data-i18n="reportTypeOther">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="reportDescription" data-i18n="reportDescription">Descripción</label>
+          <textarea
+            id="reportDescription"
+            class="form-control custom-input"
+            name="descripcion"
+            rows="4"
+            maxlength="700"
+            placeholder="Ejemplo: Choque, derrumbe u obstaculo cerca de una curva."
+            required
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label data-i18n="reportLocation">Ubicación del incidente</label>
+          <small class="field-help" data-i18n="reportLocationHelp">Puedes usar tu GPS o elegir manualmente el punto exacto en el mapa.</small>
+          <div class="report-location-actions">
+            <button id="btnUseCurrentReportLocation" class="btn-secondary" type="button">
+              <i class="bi bi-crosshair"></i>
+              <span data-i18n="reportUseCurrentLocation">Usar mi ubicación</span>
+            </button>
+            <button id="btnPickReportLocation" class="btn-secondary" type="button">
+              <i class="bi bi-geo-alt-fill"></i>
+              <span data-i18n="reportPickOnMap">Elegir en el mapa</span>
+            </button>
+          </div>
+          <div id="reportLocationStatus" class="report-location-status" data-i18n="reportLocationPending">
+            Selecciona una ubicación para continuar.
+          </div>
+          <div class="report-mini-map-wrap">
+            <div id="reportMiniMap" class="report-mini-map" aria-label="Mapa para elegir ubicación del incidente"></div>
+            <small class="field-help" data-i18n="reportMiniMapHint">Haz clic dentro de este mapa para marcar el punto exacto del incidente.</small>
+          </div>
+        </div>
+
+        <div class="report-grid report-grid-3">
+          <div class="field">
+            <label for="reportProvince" data-i18n="reportProvince">Provincia</label>
+            <input id="reportProvince" class="form-control custom-input" name="provincia" type="text" value="MORONA SANTIAGO" required />
+          </div>
+
+          <div class="field">
+            <label for="reportCanton" data-i18n="reportCanton">Cantón</label>
+            <input id="reportCanton" class="form-control custom-input" name="canton" type="text" placeholder="Ejemplo: Morona" required />
+          </div>
+
+          <div class="field">
+            <label for="reportParish" data-i18n="reportParish">Parroquia</label>
+            <input id="reportParish" class="form-control custom-input" name="parroquia" type="text" placeholder="Ejemplo: Macas" required />
+          </div>
+        </div>
+
+        <label class="responsibility-check">
+          <input id="reportResponsibility" type="checkbox" required />
+          <span data-i18n="reportResponsibility">Confirmo que el reporte es responsable y entiendo que sera mostrado como información ciudadana no verificada.</span>
+        </label>
+
+        <div class="report-form-actions">
+          <button id="reportCancel" class="btn-secondary" type="button" data-i18n="cancel">Cancelar</button>
+          <button id="reportSubmit" class="btn-primary" type="submit" data-i18n="reportSubmit">Enviar reporte</button>
+        </div>
+      </form>
     </div>
   </div>
 

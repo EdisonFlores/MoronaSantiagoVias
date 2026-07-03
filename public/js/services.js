@@ -11,6 +11,57 @@ export async function fetchIncidents() {
   return data;
 }
 
+// Lee JSON de forma segura para que un error HTML del servidor no rompa la UI.
+async function readJsonResponse(response) {
+  try {
+    return await response.json();
+  } catch {
+    return {
+      ok: false,
+      message: "Respuesta invalida del servidor"
+    };
+  }
+}
+
+// Solicita los reportes ciudadanos guardados en Firestore.
+export async function fetchUserIncidents(options = {}) {
+  const limit = Number(options.limit) || 50;
+  const params = new URLSearchParams({
+    limit: String(limit)
+  });
+
+  if (options.cursor) {
+    params.set("cursor", options.cursor);
+  }
+
+  const response = await fetch(`/api/user-incidents?${params.toString()}`);
+  const data = await readJsonResponse(response);
+
+  if (!response.ok || !data.ok) {
+    throw new Error(data.message || "No se pudieron cargar los reportes ciudadanos");
+  }
+
+  return data;
+}
+
+// Registra un incidente ciudadano usando el backend seguro con Firebase Admin.
+export async function createUserIncident(payload) {
+  const response = await fetch("/api/user-incidents", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+  const data = await readJsonResponse(response);
+
+  if (!response.ok || !data.ok) {
+    throw new Error(data.message || "No se pudo registrar el incidente");
+  }
+
+  return data;
+}
+
 // Pide al backend una ruta OSRM y controla el timeout desde el cliente.
 export async function fetchOsrmRoute(segment, options = {}) {
   if (!segment?.start || !segment?.end) {

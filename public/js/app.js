@@ -1,6 +1,6 @@
 // Orquesta la experiencia principal: carga datos, filtros, mapa, tutorial,
 // recorrido GPS, asistente de voz y sincronizacion de idioma/tema.
-import { fetchIncidents, fetchOsrmRoute } from "./services.js";
+import { createUserIncident, fetchIncidents, fetchOsrmRoute, fetchUserIncidents } from "./services.js";
 import {
   initMap,
   getMapInstance,
@@ -9,10 +9,16 @@ import {
   focusIncidentOnMap,
   resetMapView,
   renderIncidentMarkers,
+  renderUserReportMarkers,
+  focusUserReportOnMap,
+  setReportDraftLocation,
+  clearReportDraftLocation,
+  cancelReportLocationPicker,
+  clearUserReportMarkers,
   clearTravelTracking,
   updateTravelPosition
 } from "./map.js";
-import { renderIncidents,showToast,showRouteNotice , renderStats } from "./ui.js";
+import { renderIncidents, renderUserIncidents, showToast, showRouteNotice, renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
 import { initLanguage, getCurrentLanguage } from "./translate.js";
 import { initWeather, bindWeatherToMap, updateWeatherFromMapCenter } from "./weather.js";
@@ -20,12 +26,24 @@ import { translations, translateState } from "./i18n.js";
 
 let allRoads = [];
 let visibleRoads = [];
+let userReports = [];
+let userReportsLoadedAt = 0;
+let userReportsNextCursor = null;
+let userReportsError = "";
+let isLoadingUserReports = false;
+let activeIncidentSource = "official";
+let reportDraftLocation = null;
+let reportMiniMap = null;
+let reportMiniMarker = null;
 let tripWatchId = null;
 let isTripTracking = false;
 let lastTripErrorAt = 0;
 let isVoiceHintsEnabled = false;
 let voiceHintTimer = null;
 let lastVoiceHint = "";
+
+const USER_REPORTS_PAGE_LIMIT = 50;
+const USER_REPORTS_CACHE_MS = 60 * 1000;
 
 // Resume la red vial visible para alimentar las tarjetas de estadisticas.
 function buildStats(roads) {
@@ -240,6 +258,105 @@ function getVoiceButtonLabel() {
   return t.voiceAssistant;
 }
 
+// Normaliza texto libre antes de enviarlo al backend.
+function normalizeFormText(value) {
+  return String(value || "").trim();
+}
+
+// Cambia visualmente entre reportes ECU 911 y reportes ciudadanos.
+function setIncidentSource(source) {
+  activeIncidentSource = source === "users" ? "users" : "official";
+
+  document.querySelectorAll("[data-source-view]").forEach((button) => {
+    const isActive = button.dataset.sourceView === activeIncidentSource;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  applyFilters();
+
+  if (activeIncidentSource === "users") {
+    loadUserReports();
+  }
+}
+
+// Mantiene el estado textual del punto seleccionado en el formulario.
+function updateReportLocationStatus() {
+  const status = document.getElementById("reportLocationStatus");
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+
+  if (!status) return;
+
+  if (!reportDraftLocation) {
+    status.classList.remove("is-ready");
+    status.textContent = t.reportLocationPending;
+    return;
+  }
+
+  status.classList.add("is-ready");
+  status.textContent = `${t.reportLocationSelected}: ${reportDraftLocation.lat.toFixed(5)}, ${reportDraftLocation.lng.toFixed(5)}`;
+}
+
+// Guarda una coordenada temporal para el reporte ciudadano.
+function setReportLocation(location) {
+  const lat = Number(location?.lat);
+  const lng = Number(location?.lng);
+
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+  reportDraftLocation = { lat, lng };
+  setReportDraftLocation(reportDraftLocation);
+  updateReportMiniMapMarker(reportDraftLocation);
+  updateReportLocationStatus();
+}
+
+// Prepara un mapa pequeño dentro del formulario para escoger el punto del reporte.
+function initReportMiniMap() {
+  const mapEl = document.getElementById("reportMiniMap");
+
+  if (!mapEl || !window.L) return;
+
+  if (!reportMiniMap) {
+    reportMiniMap = L.map(mapEl, {
+      attributionControl: false
+    }).setView([-2.30814, -78.11135], 8);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19
+    }).addTo(reportMiniMap);
+
+    reportMiniMap.on("click", (event) => {
+      setReportLocation({
+        lat: event.latlng.lat,
+        lng: event.latlng.lng
+      });
+    });
+  }
+
+  window.setTimeout(() => {
+    reportMiniMap.invalidateSize();
+    if (reportDraftLocation) {
+      updateReportMiniMapMarker(reportDraftLocation);
+    }
+  }, 120);
+}
+
+// Sincroniza el marcador del mapa interno con la ubicacion seleccionada.
+function updateReportMiniMapMarker(location) {
+  if (!reportMiniMap || !location) return;
+
+  const latLng = [location.lat, location.lng];
+
+  if (!reportMiniMarker) {
+    reportMiniMarker = L.marker(latLng).addTo(reportMiniMap);
+  } else {
+    reportMiniMarker.setLatLng(latLng);
+  }
+
+  reportMiniMap.setView(latLng, Math.max(reportMiniMap.getZoom(), 13));
+}
+
 // Refleja en el boton el estado actual del asistente de voz.
 function updateVoiceButton() {
   const btn = document.getElementById("btnVoiceAssistant");
@@ -368,6 +485,10 @@ function getVoiceHintForElement(element) {
   if (target.matches("[data-tutorial-open]")) return t.tutorialButton;
   if (target.matches("#filterState")) return `${t.stateLabel}. ${target.options[target.selectedIndex]?.text || ""}`;
   if (target.matches("#btnStartTrip")) return target.textContent.trim();
+  if (target.matches("#btnReportIncident")) return t.reportIncident;
+  if (target.matches("#btnUseCurrentReportLocation")) return t.reportUseCurrentLocation;
+  if (target.matches("#btnPickReportLocation")) return t.reportPickOnMap;
+  if (target.matches("#reportSubmit")) return t.reportSubmit;
   if (target.matches("#btnResetMap")) return t.resetMap;
   if (target.matches("#btnOpenIncidents")) return target.textContent.trim();
   if (target.matches("#weatherBadge")) return `${t.weatherTitle}. ${target.textContent.trim()}`;
@@ -523,6 +644,222 @@ function initTripTracking() {
   });
 }
 
+// Abre el modal de reporte y prepara el estado inicial del formulario.
+function openReportModal() {
+  const modal = document.getElementById("reportIncidentModal");
+
+  if (!modal) return;
+
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+  updateReportLocationStatus();
+  initReportMiniMap();
+  scrollToMapOnSmallScreens();
+}
+
+// Cierra el modal y limpia selecciones temporales del mapa.
+function closeReportModal({ clearForm = false } = {}) {
+  const modal = document.getElementById("reportIncidentModal");
+  const form = document.getElementById("userIncidentForm");
+
+  modal?.classList.remove("show");
+  modal?.setAttribute("aria-hidden", "true");
+  cancelReportLocationPicker();
+  clearReportDraftLocation();
+  reportDraftLocation = null;
+  updateReportLocationStatus();
+
+  if (clearForm) {
+    form?.reset();
+    const province = document.getElementById("reportProvince");
+    if (province) province.value = "MORONA SANTIAGO";
+    if (reportMiniMarker && reportMiniMap) {
+      reportMiniMap.removeLayer(reportMiniMarker);
+      reportMiniMarker = null;
+    }
+  }
+}
+
+// Obtiene la ubicacion actual para rellenar el punto del reporte ciudadano.
+function useCurrentLocationForReport() {
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+
+  if (!("geolocation" in navigator)) {
+    showToast(t.locationUnsupported, "error");
+    return;
+  }
+
+  showToast(t.reportGettingLocation, "success", 1800);
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      setReportLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      });
+      showToast(t.reportLocationReady, "success");
+    },
+    (error) => {
+      const denied = error?.code === error?.PERMISSION_DENIED;
+      showToast(denied ? t.reportGpsDenied : t.reportGpsError, "error");
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 3000
+    }
+  );
+}
+
+// Activa un clic unico sobre el mapa para elegir el punto del incidente.
+function pickReportLocationOnMap() {
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+  const miniMap = document.getElementById("reportMiniMap");
+
+  showToast(t.reportPickHint, "success", 3500);
+  miniMap?.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+  reportMiniMap?.invalidateSize();
+}
+
+// Lee el formulario, valida la ubicacion y crea el documento en Firestore.
+async function submitUserIncident(event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const submitBtn = document.getElementById("reportSubmit");
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+
+  if (!reportDraftLocation) {
+    showToast(t.reportLocationRequired, "error");
+    return;
+  }
+
+  const formData = new FormData(form);
+  const payload = {
+    tipo: normalizeFormText(formData.get("tipo")),
+    descripcion: normalizeFormText(formData.get("descripcion")),
+    provincia: normalizeFormText(formData.get("provincia")),
+    canton: normalizeFormText(formData.get("canton")),
+    parroquia: normalizeFormText(formData.get("parroquia")),
+    ubicacion: reportDraftLocation,
+    reportante: {
+      nombre: normalizeFormText(formData.get("nombre"))
+    },
+    responsabilidadAceptada: Boolean(document.getElementById("reportResponsibility")?.checked)
+  };
+
+  submitBtn?.setAttribute("disabled", "true");
+  if (submitBtn) submitBtn.textContent = t.reportSending;
+
+  try {
+    const result = await createUserIncident(payload);
+
+    if (result.incident) {
+      userReports = [result.incident, ...userReports.filter((item) => item.id !== result.incident.id)];
+      userReportsLoadedAt = Date.now();
+    } else {
+      await loadUserReports({ silent: true, force: true });
+    }
+
+    closeReportModal({ clearForm: true });
+    setIncidentSource("users");
+    showToast(t.reportCreatedSuccess, "success");
+  } catch (error) {
+    console.error(error);
+    showToast(error.message || t.reportCreateError, "error");
+  } finally {
+    submitBtn?.removeAttribute("disabled");
+    if (submitBtn) submitBtn.textContent = t.reportSubmit;
+  }
+}
+
+// Conecta todos los controles del formulario ciudadano.
+function initUserIncidentReporting() {
+  const modal = document.getElementById("reportIncidentModal");
+
+  document.getElementById("btnReportIncident")?.addEventListener("click", openReportModal);
+  document.getElementById("reportModalClose")?.addEventListener("click", () => closeReportModal());
+  document.getElementById("reportCancel")?.addEventListener("click", () => closeReportModal());
+  document.getElementById("btnUseCurrentReportLocation")?.addEventListener("click", useCurrentLocationForReport);
+  document.getElementById("btnPickReportLocation")?.addEventListener("click", pickReportLocationOnMap);
+  document.getElementById("userIncidentForm")?.addEventListener("submit", submitUserIncident);
+
+  modal?.addEventListener("click", (event) => {
+    if (event.target === modal) closeReportModal();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal?.classList.contains("show")) {
+      closeReportModal();
+    }
+  });
+}
+
+// Carga reportes ciudadanos y actualiza la vista si el usuario esta en esa fuente.
+async function loadUserReports(options = {}) {
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+  const now = Date.now();
+  const hasFreshCache = userReports.length > 0 && now - userReportsLoadedAt < USER_REPORTS_CACHE_MS;
+
+  if (!options.force && !options.append && hasFreshCache) {
+    if (activeIncidentSource === "users") {
+      applyFilters();
+    }
+    return;
+  }
+
+  if (isLoadingUserReports) return;
+
+  try {
+    isLoadingUserReports = true;
+    userReportsError = "";
+
+    const data = await fetchUserIncidents({
+      limit: USER_REPORTS_PAGE_LIMIT,
+      cursor: options.append ? userReportsNextCursor : null
+    });
+    const incomingReports = data.incidents || [];
+
+    userReports = options.append
+      ? [...userReports, ...incomingReports.filter((incoming) => !userReports.some((item) => item.id === incoming.id))]
+      : incomingReports;
+    userReportsNextCursor = data.nextCursor || null;
+    userReportsLoadedAt = Date.now();
+
+    if (activeIncidentSource === "users") {
+      applyFilters();
+    }
+  } catch (error) {
+    console.error(error);
+    userReportsError = error.message || t.noLoadUserReports;
+
+    if (activeIncidentSource === "users") {
+      applyFilters();
+    }
+
+    if (!options.silent) {
+      showToast(userReportsError, "error");
+    }
+  } finally {
+    isLoadingUserReports = false;
+  }
+}
+
+// Inicializa el cambio entre informacion oficial y reportes ciudadanos.
+function initIncidentSourceSwitch() {
+  document.querySelectorAll("[data-source-view]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.sourceView === activeIncidentSource));
+    button.addEventListener("click", () => setIncidentSource(button.dataset.sourceView));
+  });
+}
+
 // Pasos del tutorial. Cada selector apunta al elemento real que se resalta en pantalla.
 const tutorialSteps = [
   {
@@ -555,6 +892,24 @@ const tutorialSteps = [
     highlightSelector: "#roadsPanel",
     title: "tutorialRoadsTitle",
     text: "tutorialRoadsText",
+    mobilePanel: true
+  },
+  {
+    selector: ".source-switch",
+    focusSelector: ".source-switch",
+    highlightSelector: ".source-switch",
+    exactHighlight: true,
+    title: "tutorialSourceTitle",
+    text: "tutorialSourceText",
+    mobilePanel: true
+  },
+  {
+    selector: "#btnReportIncident",
+    focusSelector: "#btnReportIncident",
+    highlightSelector: "#btnReportIncident",
+    exactHighlight: true,
+    title: "tutorialReportTitle",
+    text: "tutorialReportText",
     mobilePanel: true
   },
   {
@@ -1037,6 +1392,41 @@ function applyFilters() {
   const state = document.getElementById("filterState").value;
   const lang = getCurrentLanguage();
 
+  if (activeIncidentSource === "users") {
+    visibleRoads = [];
+    renderStats({
+      total: userReports.length,
+      habilitada: 0,
+      parcial: 0,
+      cerrada: 0
+    }, lang);
+    renderIncidentMarkers([]);
+    renderUserReportMarkers(userReports, {
+      onSelect: focusUserReportOnMap
+    });
+
+    if (userReportsError && !userReports.length) {
+      const incidentsList = document.getElementById("incidentsList");
+      if (incidentsList) {
+        incidentsList.innerHTML = `
+          <div class="empty-state">
+            ${userReportsError || (translations[lang] || translations.es).noLoadUserReports}
+          </div>
+        `;
+      }
+      return;
+    }
+
+    renderUserIncidents(userReports, {
+      onFocus: (report) => {
+        focusUserReportOnMap(report);
+        closeMobileSidebar();
+        scrollToMapOnSmallScreens();
+      }
+    }, lang);
+    return;
+  }
+
   let filtered = [...allRoads];
 
   if (state) {
@@ -1045,6 +1435,7 @@ function applyFilters() {
 
   visibleRoads = filtered;
   renderStats(buildStats(filtered), lang);
+  clearUserReportMarkers();
   renderIncidentMarkers(filtered, {
     onSelect: focusRoadOnMap
   });
@@ -1121,6 +1512,8 @@ async function initApp() {
   initTheme();
   initMobileMenu();
   initMobileSidebar();
+  initIncidentSourceSwitch();
+  initUserIncidentReporting();
   initTutorial();
   initTripTracking();
   initVoiceAssistant();
@@ -1128,6 +1521,7 @@ async function initApp() {
   initLanguage(() => {
     stopVoiceAssistant();
     applyFilters();
+    updateReportLocationStatus();
     updateTripButton();
     updateVoiceButton();
     const tutorialOverlay = document.getElementById("tutorialOverlay");
@@ -1158,6 +1552,7 @@ async function initApp() {
     const data = await fetchIncidents();
     allRoads = data.incidents || [];
     applyFilters();
+    loadUserReports();
   } catch (error) {
     console.error(error);
     showLoadError();

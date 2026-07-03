@@ -5,6 +5,7 @@
   --panel-2: #edf4ff;
   --text: #162033;
   --muted: #61748d;
+  --muted-strong: #40536c;
   --border: #cfe0f7;
   --primary: #2563eb;
   --primary-soft: #dbeafe;
@@ -25,6 +26,7 @@ html[data-theme="dark"] {
   --panel-2: #101c31;
   --text: #edf4ff;
   --muted: #9fb0c7;
+  --muted-strong: #c8d5e8;
   --border: #21324b;
   --primary: #3b82f6;
   --primary-soft: rgba(37, 99, 235, 0.18);

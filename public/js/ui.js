@@ -116,6 +116,67 @@ export function renderIncidents(roads, handlers, lang = "es") {
     });
   });
 }
+
+// Renderiza reportes ciudadanos en una lista separada de ECU 911.
+export function renderUserIncidents(reports, handlers, lang = "es") {
+  const t = translations[lang] || translations.es;
+  const container = document.getElementById("incidentsList");
+
+  if (!reports.length) {
+    container.innerHTML = `<div class="empty-state">${t.noUserReports}</div>`;
+    return;
+  }
+
+  container.innerHTML = reports
+    .map((item) => {
+      const road = item.viaDetectada || {};
+      const createdAt = formatIncidentDate(item.creadoEn, lang);
+      const roadName = road.nombreVia || t.noRoadNearby;
+      const reporterName = item.reportante?.nombre || t.noReport;
+      const voiceLabel = lang === "en"
+        ? `Citizen report. ${item.tipoTexto}. Road: ${roadName}. Description: ${item.descripcion}.`
+        : `Reporte ciudadano. ${item.tipoTexto}. VÃ­a: ${roadName}. DescripciÃ³n: ${item.descripcion}.`;
+      const createdLine = createdAt
+        ? `<p class="small-text"><strong>${t.reportCreatedAt}:</strong> ${createdAt}</p>`
+        : "";
+
+      return `
+        <article class="incident-card user-report-card" data-voice-label="${escapeAttribute(voiceLabel)}">
+          <div class="incident-top">
+            <div>
+              <h3>${item.tipoTexto || t.userReport}</h3>
+              <div class="small-text">${t.road}: ${roadName}</div>
+            </div>
+            <span class="badge-state badge-citizen">${t.userReportBadge}</span>
+          </div>
+
+          <p><strong>${t.observation}:</strong> ${item.descripcion || t.noObservation}</p>
+          <p><strong>${t.reporter}:</strong> ${reporterName}</p>
+          <p><strong>${t.location}:</strong> ${item.provincia || ""} / ${item.canton || ""} / ${item.parroquia || ""}</p>
+          <p class="small-text"><strong>${t.source}:</strong> ${t.userReports}</p>
+          <p class="small-text report-warning"><i class="bi bi-exclamation-triangle-fill"></i> ${t.unverifiedReport}</p>
+          ${createdLine}
+
+          <div class="incident-actions">
+            <button class="btn-primary" data-action="focus-user-report" data-id="${item.id}">
+              ${t.viewMap}
+            </button>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+
+  container.querySelectorAll('button[data-action="focus-user-report"]').forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      const report = reports.find((x) => x.id === id);
+      if (!report) return;
+
+      handlers.onFocus?.(report);
+    });
+  });
+}
 // Toast flotante reutilizado por GPS, rutas, carga y errores de permisos.
 export function showToast(message, type = "warning", duration = 4000) {
   let container = document.querySelector(".toast-container");
