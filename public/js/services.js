@@ -18,7 +18,7 @@ async function readJsonResponse(response) {
   } catch {
     return {
       ok: false,
-      message: "Respuesta invalida del servidor"
+      message: "Respuesta inválida del servidor"
     };
   }
 }

@@ -135,7 +135,7 @@ export function renderUserIncidents(reports, handlers, lang = "es") {
       const reporterName = item.reportante?.nombre || t.noReport;
       const voiceLabel = lang === "en"
         ? `Citizen report. ${item.tipoTexto}. Road: ${roadName}. Description: ${item.descripcion}.`
-        : `Reporte ciudadano. ${item.tipoTexto}. VÃ­a: ${roadName}. DescripciÃ³n: ${item.descripcion}.`;
+        : `Reporte ciudadano. ${item.tipoTexto}. Vía: ${roadName}. Descripción: ${item.descripcion}.`;
       const createdLine = createdAt
         ? `<p class="small-text"><strong>${t.reportCreatedAt}:</strong> ${createdAt}</p>`
         : "";

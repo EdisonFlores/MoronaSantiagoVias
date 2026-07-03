@@ -146,7 +146,7 @@ export async function updateWeatherFromMapCenter(map, lang = "es") {
         ? "Weather error"
         : lang === "sh"
           ? "Nayaimpin arantukma"
-          : "Error clima";
+          : "Error de clima";
     }
   }
 }

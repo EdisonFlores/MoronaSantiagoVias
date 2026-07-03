@@ -22,13 +22,20 @@ function getSafeCursor(value) {
   return cursor || null;
 }
 
+function getActiveReportsCutoff() {
+  const twoWeeksMs = 14 * 24 * 60 * 60 * 1000;
+  return Timestamp.fromDate(new Date(Date.now() - twoWeeksMs));
+}
+
 // Lista reportes ciudadanos publicos ordenados por fecha reciente.
 async function listUserIncidents(req, res) {
   const limit = getSafeLimit(req.query?.limit);
   const cursor = getSafeCursor(req.query?.cursor);
   const collection = getUserIncidentsCollection();
+  const activeCutoff = getActiveReportsCutoff();
   let query = collection
     .where("visibilidad", "==", "publico")
+    .where("creadoEn", ">=", activeCutoff)
     .orderBy("creadoEn", "desc")
     .limit(limit);
 
@@ -58,7 +65,15 @@ async function listUserIncidents(req, res) {
     snapshot = fallbackSnapshot;
     incidents = fallbackSnapshot.docs
       .map(serializeUserIncident)
-      .filter((incident) => incident.visibilidad === "publico")
+      .filter((incident) => {
+        const createdAt = incident.creadoEn ? new Date(incident.creadoEn) : null;
+        return (
+          incident.visibilidad === "publico" &&
+          createdAt &&
+          !Number.isNaN(createdAt.getTime()) &&
+          createdAt >= activeCutoff.toDate()
+        );
+      })
       .slice(0, limit);
   }
 
@@ -100,7 +115,7 @@ export default async function handler(req, res) {
 
     sendJson(res, 405, {
       ok: false,
-      message: "Metodo no permitido."
+      message: "Método no permitido."
     });
   } catch (error) {
     handleApiError(res, error);

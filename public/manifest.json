@@ -1,7 +1,7 @@
 {
   "name": "Morona Santiago Vial",
   "short_name": "MS Vial",
-  "description": "Consulta el estado de las vias de Morona Santiago, incidentes y rutas en un mapa interactivo.",
+  "description": "Consulta el estado de las vías de Morona Santiago, incidentes y rutas en un mapa interactivo.",
   "id": "/",
   "start_url": "/",
   "scope": "/",

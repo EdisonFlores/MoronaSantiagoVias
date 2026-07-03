@@ -44,6 +44,7 @@ let lastVoiceHint = "";
 
 const USER_REPORTS_PAGE_LIMIT = 50;
 const USER_REPORTS_CACHE_MS = 60 * 1000;
+const USER_REPORTS_VISIBLE_MS = 14 * 24 * 60 * 60 * 1000;
 
 // Resume la red vial visible para alimentar las tarjetas de estadisticas.
 function buildStats(roads) {
@@ -241,6 +242,10 @@ function stopTripTracking({ clearMap = true, notify = false } = {}) {
     clearTravelTracking();
   }
 
+  if (activeIncidentSource === "official") {
+    clearUserReportMarkers();
+  }
+
   if (notify) {
     showToast(
       lang === "en" ? "Trip tracking stopped." : "Recorrido detenido.",
@@ -261,6 +266,20 @@ function getVoiceButtonLabel() {
 // Normaliza texto libre antes de enviarlo al backend.
 function normalizeFormText(value) {
   return String(value || "").trim();
+}
+
+// Mantiene visibles solo reportes ciudadanos recientes para no mostrar alertas caducadas.
+function isActiveUserReport(report) {
+  if (!report?.creadoEn) return false;
+
+  const createdAt = new Date(report.creadoEn);
+  if (Number.isNaN(createdAt.getTime())) return false;
+
+  return Date.now() - createdAt.getTime() <= USER_REPORTS_VISIBLE_MS;
+}
+
+function getActiveUserReports() {
+  return userReports.filter(isActiveUserReport);
 }
 
 // Cambia visualmente entre reportes ECU 911 y reportes ciudadanos.
@@ -613,6 +632,7 @@ function startTripTracking() {
   lastTripErrorAt = 0;
   updateTripButton();
   scrollToMapOnSmallScreens();
+  loadUserReports({ silent: true });
 
   tripWatchId = navigator.geolocation.watchPosition(handleTripPosition, handleTripError, {
     enableHighAccuracy: true,
@@ -809,7 +829,7 @@ async function loadUserReports(options = {}) {
   const hasFreshCache = userReports.length > 0 && now - userReportsLoadedAt < USER_REPORTS_CACHE_MS;
 
   if (!options.force && !options.append && hasFreshCache) {
-    if (activeIncidentSource === "users") {
+    if (activeIncidentSource === "users" || isTripTracking) {
       applyFilters();
     }
     return;
@@ -833,14 +853,14 @@ async function loadUserReports(options = {}) {
     userReportsNextCursor = data.nextCursor || null;
     userReportsLoadedAt = Date.now();
 
-    if (activeIncidentSource === "users") {
+    if (activeIncidentSource === "users" || isTripTracking) {
       applyFilters();
     }
   } catch (error) {
     console.error(error);
     userReportsError = error.message || t.noLoadUserReports;
 
-    if (activeIncidentSource === "users") {
+    if (activeIncidentSource === "users" || isTripTracking) {
       applyFilters();
     }
 
@@ -1391,21 +1411,22 @@ function showLoadError() {
 function applyFilters() {
   const state = document.getElementById("filterState").value;
   const lang = getCurrentLanguage();
+  const activeUserReports = getActiveUserReports();
 
   if (activeIncidentSource === "users") {
     visibleRoads = [];
     renderStats({
-      total: userReports.length,
+      total: activeUserReports.length,
       habilitada: 0,
       parcial: 0,
       cerrada: 0
     }, lang);
     renderIncidentMarkers([]);
-    renderUserReportMarkers(userReports, {
+    renderUserReportMarkers(activeUserReports, {
       onSelect: focusUserReportOnMap
     });
 
-    if (userReportsError && !userReports.length) {
+    if (userReportsError && !activeUserReports.length) {
       const incidentsList = document.getElementById("incidentsList");
       if (incidentsList) {
         incidentsList.innerHTML = `
@@ -1417,7 +1438,7 @@ function applyFilters() {
       return;
     }
 
-    renderUserIncidents(userReports, {
+    renderUserIncidents(activeUserReports, {
       onFocus: (report) => {
         focusUserReportOnMap(report);
         closeMobileSidebar();
@@ -1435,7 +1456,13 @@ function applyFilters() {
 
   visibleRoads = filtered;
   renderStats(buildStats(filtered), lang);
-  clearUserReportMarkers();
+  if (isTripTracking) {
+    renderUserReportMarkers(activeUserReports, {
+      onSelect: focusUserReportOnMap
+    });
+  } else {
+    clearUserReportMarkers();
+  }
   renderIncidentMarkers(filtered, {
     onSelect: focusRoadOnMap
   });

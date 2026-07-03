@@ -63,7 +63,7 @@ function buildAdminUpdate(payload) {
 
   if (payload.visibilidad !== undefined) {
     if (!ALLOWED_VISIBILITY.has(payload.visibilidad)) {
-      const error = new Error("visibilidad debe ser publico u oculto.");
+      const error = new Error("visibilidad debe ser público u oculto.");
       error.statusCode = 400;
       throw error;
     }
@@ -84,7 +84,7 @@ function buildAdminUpdate(payload) {
   }
 
   if (!Object.keys(update).length) {
-    const error = new Error("No hay campos validos para actualizar.");
+    const error = new Error("No hay campos válidos para actualizar.");
     error.statusCode = 400;
     throw error;
   }
@@ -143,7 +143,7 @@ export default async function handler(req, res) {
 
     sendJson(res, 405, {
       ok: false,
-      message: "Metodo no permitido."
+      message: "Método no permitido."
     });
   } catch (error) {
     handleApiError(res, error);
