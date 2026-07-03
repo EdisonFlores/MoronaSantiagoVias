@@ -210,6 +210,10 @@
   transform: translateY(-1px);
 }
 
+.sidebar-mobile-brand {
+  display: none;
+}
+
 .travel-toggle {
   /* Boton de recorrido GPS; cambia de color cuando el seguimiento esta activo. */
   display: inline-flex;
@@ -977,6 +981,29 @@ textarea.custom-input {
 }
 
 @media (max-width: 992px) {
+  .sidebar-mobile-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 40px;
+    margin-bottom: 12px;
+    color: var(--text);
+    font-weight: 900;
+    letter-spacing: 0;
+  }
+
+  .sidebar-mobile-brand i {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: #fff;
+    box-shadow: 0 12px 26px rgba(29, 78, 216, 0.22);
+  }
+
   .mobile-incidents-toggle {
     display: inline-flex;
   }
@@ -984,8 +1011,29 @@ textarea.custom-input {
 
 @media (max-width: 768px) {
   /* En telefonos, los controles del header se despliegan desde el boton menu. */
+  .brand {
+    flex: 1 1 0;
+    max-width: calc(100% - 54px);
+    gap: 10px;
+  }
+
+  .brand-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+  }
+
+  .brand-title {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1rem;
+  }
+
   .menu-toggle {
     display: inline-flex;
+    flex: 0 0 42px;
   }
 
   .header-actions {
