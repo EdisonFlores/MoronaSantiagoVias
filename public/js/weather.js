@@ -1,22 +1,27 @@
-// Consulta Open-Meteo segun el centro actual del mapa y actualiza badge/modal.
+// Consulta el proxy de clima segun el centro actual del mapa y actualiza badge/modal.
 let weatherAbortController = null;
 let weatherTimer = null;
 let weatherBound = false;
+let lastWeatherData = null;
+let lastWeatherPoint = null;
+
+const WEATHER_TIMEOUT_MS = 7000;
 
 // Mapea codigos Open-Meteo a iconos compactos para el chip superior.
 function getWeatherIcon(weatherCode = 0, isDay = 1) {
+  const code = Number(weatherCode);
   const day = Number(isDay) === 1;
 
-  if ([0].includes(weatherCode)) return day ? "☀️" : "🌙";
-  if ([1, 2].includes(weatherCode)) return day ? "🌤️" : "☁️";
-  if ([3].includes(weatherCode)) return "☁️";
-  if ([45, 48].includes(weatherCode)) return "🌫️";
-  if ([51, 53, 55, 56, 57].includes(weatherCode)) return "🌦️";
-  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(weatherCode)) return "🌧️";
-  if ([71, 73, 75, 77, 85, 86].includes(weatherCode)) return "❄️";
-  if ([95, 96, 99].includes(weatherCode)) return "⛈️";
+  if (code === 0) return day ? "Soleado" : "Noche";
+  if ([1, 2].includes(code)) return "Parcial";
+  if (code === 3) return "Nublado";
+  if ([45, 48].includes(code)) return "Neblina";
+  if ([51, 53, 55, 56, 57].includes(code)) return "Llovizna";
+  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return "Lluvia";
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return "Frio";
+  if ([95, 96, 99].includes(code)) return "Tormenta";
 
-  return "🌡️";
+  return "Clima";
 }
 
 // Formatea latitud/longitud para titulos y modal de clima.
@@ -24,23 +29,96 @@ function formatLocationLabel(lat, lon) {
   return `${lat.toFixed(3)}, ${lon.toFixed(3)}`;
 }
 
-// Open-Meteo no requiere API key; se consulta desde el navegador con cancelacion.
-async function fetchOpenMeteoWeather(lat, lon, signal) {
-  const url =
-    `https://api.open-meteo.com/v1/forecast` +
-    `?latitude=${encodeURIComponent(lat)}` +
-    `&longitude=${encodeURIComponent(lon)}` +
-    `&current=temperature_2m,weather_code,is_day,wind_speed_10m` +
-    `&daily=temperature_2m_max,temperature_2m_min` +
-    `&timezone=auto`;
+// Evita que un proveedor de clima deje la interfaz esperando indefinidamente.
+function createTimeoutSignal(parentSignal, timeoutMs = WEATHER_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  const abort = () => controller.abort();
 
-  const response = await fetch(url, { signal });
-
-  if (!response.ok) {
-    throw new Error("No se pudo consultar Open-Meteo");
+  if (parentSignal?.aborted) {
+    controller.abort();
+  } else {
+    parentSignal?.addEventListener("abort", abort, { once: true });
   }
 
-  return response.json();
+  controller.signal.addEventListener("abort", () => {
+    clearTimeout(timeoutId);
+    parentSignal?.removeEventListener("abort", abort);
+  }, { once: true });
+
+  return controller.signal;
+}
+
+// Normaliza la respuesta antigua current_weather para usar el mismo renderizado.
+function normalizeWeatherData(data) {
+  if (data?.current) return data;
+  if (!data?.current_weather) return data;
+
+  return {
+    ...data,
+    current: {
+      temperature_2m: data.current_weather.temperature,
+      weather_code: data.current_weather.weathercode,
+      is_day: data.current_weather.is_day,
+      wind_speed_10m: data.current_weather.windspeed
+    },
+    daily: data.daily || {
+      temperature_2m_max: [data.current_weather.temperature],
+      temperature_2m_min: [data.current_weather.temperature]
+    }
+  };
+}
+
+// En desarrollo puede usar la API publicada para evitar bloqueos locales del navegador.
+function getWeatherProxyUrls(lat, lon) {
+  const params = new URLSearchParams({
+    lat: String(lat),
+    lon: String(lon)
+  });
+  const localHosts = ["localhost", "127.0.0.1"];
+  const urls = [`/api/weather?${params.toString()}`];
+
+  if (localHosts.includes(window.location.hostname)) {
+    urls.push(`https://morona-santiago-vias.vercel.app/api/weather?${params.toString()}`);
+  }
+
+  return urls;
+}
+
+// Primero consulta el proxy backend; si falla, intenta Open-Meteo directo como respaldo.
+async function fetchOpenMeteoWeather(lat, lon, signal) {
+  const base = "https://api.open-meteo.com/v1/forecast";
+  const params = `latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}`;
+  const daily = "daily=temperature_2m_max,temperature_2m_min&timezone=auto";
+  const urls = [
+    ...getWeatherProxyUrls(lat, lon),
+    `${base}?${params}&current=temperature_2m,weather_code,is_day,wind_speed_10m&${daily}`,
+    `${base}?${params}&current_weather=true&${daily}`
+  ];
+
+  let lastError = null;
+
+  for (const url of urls) {
+    try {
+      const response = await fetch(url, {
+        cache: "no-store",
+        signal: createTimeoutSignal(signal)
+      });
+
+      const payload = await response.json();
+
+      if (!response.ok) {
+        throw new Error(payload?.message || `Open-Meteo respondio ${response.status}`);
+      }
+
+      return normalizeWeatherData(payload.weather || payload);
+    } catch (error) {
+      if (signal?.aborted || error.name === "AbortError") throw error;
+      lastError = error;
+    }
+  }
+
+  throw lastError || new Error("No se pudo consultar el clima");
 }
 
 // Actualiza el chip superior con icono y temperatura actual.
@@ -51,8 +129,46 @@ function renderWeatherBadge(data, lat, lon) {
   const temp = Math.round(data.current.temperature_2m);
   const icon = getWeatherIcon(data.current.weather_code, data.current.is_day);
 
-  textEl.textContent = `${icon} ${temp}°C`;
+  textEl.textContent = `${icon} ${temp} C`;
   textEl.title = formatLocationLabel(lat, lon);
+}
+
+// Muestra un estado entendible cuando no hay clima disponible.
+function renderWeatherUnavailable(lang = "es") {
+  const textEl = document.getElementById("weatherText");
+  const box = document.getElementById("weatherModalBody");
+  const labels = {
+    es: {
+      badge: "Clima no disponible",
+      title: "Clima no disponible",
+      text: "No se pudo consultar el clima en este momento. Revisa tu conexion e intenta nuevamente."
+    },
+    en: {
+      badge: "Weather unavailable",
+      title: "Weather unavailable",
+      text: "Weather could not be loaded right now. Check your connection and try again."
+    },
+    sh: {
+      badge: "Nayaimpin atsawai",
+      title: "Nayaimpin atsawai",
+      text: "Yamai nayaimpin jukimaitsui. Internet iista nuya ataksha takasta."
+    }
+  };
+  const t = labels[lang] || labels.es;
+
+  if (textEl) {
+    textEl.textContent = t.badge;
+    textEl.title = t.text;
+  }
+
+  if (box) {
+    box.innerHTML = `
+      <div class="weather-card">
+        <h3>${t.title}</h3>
+        <p>${t.text}</p>
+      </div>
+    `;
+  }
 }
 
 // El modal usa etiquetas locales para no depender del diccionario general.
@@ -63,11 +179,11 @@ function renderWeatherModal(data, lat, lon, lang = "es") {
   const labels = {
     es: {
       title: "Clima del punto actual del mapa",
-      location: "Ubicación",
+      location: "Ubicacion",
       temp: "Temperatura",
       wind: "Viento",
-      max: "Máxima",
-      min: "Mínima"
+      max: "Maxima",
+      min: "Minima"
     },
     en: {
       title: "Weather at the current map center",
@@ -92,10 +208,10 @@ function renderWeatherModal(data, lat, lon, lang = "es") {
     <div class="weather-card">
       <h3>${t.title}</h3>
       <p><strong>${t.location}:</strong> ${formatLocationLabel(lat, lon)}</p>
-      <p><strong>${t.temp}:</strong> ${Math.round(data.current.temperature_2m)}°C</p>
+      <p><strong>${t.temp}:</strong> ${Math.round(data.current.temperature_2m)} C</p>
       <p><strong>${t.wind}:</strong> ${Math.round(data.current.wind_speed_10m)} km/h</p>
-      <p><strong>${t.max}:</strong> ${Math.round(data.daily.temperature_2m_max[0])}°C</p>
-      <p><strong>${t.min}:</strong> ${Math.round(data.daily.temperature_2m_min[0])}°C</p>
+      <p><strong>${t.max}:</strong> ${Math.round(data.daily.temperature_2m_max[0])} C</p>
+      <p><strong>${t.min}:</strong> ${Math.round(data.daily.temperature_2m_min[0])} C</p>
     </div>
   `;
 }
@@ -106,8 +222,16 @@ export function initWeather() {
   const closeBtn = document.getElementById("weatherModalClose");
   const badge = document.getElementById("weatherBadge");
 
-  badge?.addEventListener("click", () => modal?.classList.add("show"));
-  closeBtn?.addEventListener("click", () => modal?.classList.remove("show"));
+  badge?.addEventListener("click", () => {
+    if (!lastWeatherData) renderWeatherUnavailable(document.documentElement.lang || "es");
+    modal?.classList.add("show");
+    modal?.setAttribute("aria-hidden", "false");
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    modal?.classList.remove("show");
+    modal?.setAttribute("aria-hidden", "true");
+  });
 }
 
 // Cancela la peticion anterior cuando el usuario mueve el mapa rapidamente.
@@ -135,19 +259,21 @@ export async function updateWeatherFromMapCenter(map, lang = "es") {
 
   try {
     const data = await fetchOpenMeteoWeather(lat, lon, weatherAbortController.signal);
+    lastWeatherData = data;
+    lastWeatherPoint = { lat, lon };
     renderWeatherBadge(data, lat, lon);
     renderWeatherModal(data, lat, lon, lang);
   } catch (error) {
     if (error.name === "AbortError") return;
-    console.error("Error Open-Meteo:", error);
+    console.error("Error de clima:", error);
 
-    if (textEl) {
-      textEl.textContent = lang === "en"
-        ? "Weather error"
-        : lang === "sh"
-          ? "Nayaimpin arantukma"
-          : "Error de clima";
+    if (lastWeatherData && lastWeatherPoint) {
+      renderWeatherBadge(lastWeatherData, lastWeatherPoint.lat, lastWeatherPoint.lon);
+      renderWeatherModal(lastWeatherData, lastWeatherPoint.lat, lastWeatherPoint.lon, lang);
+      return;
     }
+
+    renderWeatherUnavailable(lang);
   }
 }
 

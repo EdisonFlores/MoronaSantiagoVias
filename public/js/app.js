@@ -21,7 +21,7 @@ import {
 import { renderIncidents, renderUserIncidents, showToast, showRouteNotice, renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
 import { initLanguage, getCurrentLanguage } from "./translate.js";
-import { initWeather, bindWeatherToMap, updateWeatherFromMapCenter } from "./weather.js";
+import { initWeather, bindWeatherToMap, updateWeatherFromMapCenter } from "./weather.js?v=20260703-weather-3";
 import { translations, translateState } from "./i18n.js";
 
 let allRoads = [];
@@ -573,6 +573,37 @@ function initVoiceAssistant() {
   if ("speechSynthesis" in window) {
     window.speechSynthesis.addEventListener?.("voiceschanged", updateVoiceButton);
   }
+}
+
+// Abre y cierra el modal informativo que resume el alcance de la plataforma.
+function initInfoModal() {
+  const modal = document.getElementById("infoModal");
+  const openBtn = document.getElementById("btnInfoModal");
+  const closeBtn = document.getElementById("infoModalClose");
+
+  if (!modal || !openBtn || !closeBtn) return;
+
+  const openInfoModal = () => {
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+  };
+
+  const closeInfoModal = () => {
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+  };
+
+  openBtn.addEventListener("click", openInfoModal);
+  closeBtn.addEventListener("click", closeInfoModal);
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeInfoModal();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal.classList.contains("show")) {
+      closeInfoModal();
+    }
+  });
 }
 
 // watchPosition entrega coordenadas continuas; aqui se actualiza mapa y tramo cercano.
@@ -1544,6 +1575,7 @@ async function initApp() {
   initTutorial();
   initTripTracking();
   initVoiceAssistant();
+  initInfoModal();
 
   initLanguage(() => {
     stopVoiceAssistant();

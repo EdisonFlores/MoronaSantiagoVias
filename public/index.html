@@ -51,7 +51,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Morona Santiago Vial | Estado de vías en tiempo real</title>
+  <title>Morona Santiago Vial | Estado de vías, incidentes y reportes ciudadanos</title>
   <meta
     name="description"
     content="Consulta el estado actual de las vías de Morona Santiago, revisa incidentes reportados por ECU 911 y visualiza rutas en un mapa interactivo antes de viajar."
@@ -81,8 +81,8 @@
 
   <link rel="stylesheet" href="/css/themes.css" />
   <link rel="stylesheet" href="/css/styles.css" />
-  <link rel="stylesheet" href="/css/layout.css?v=20260626-tablet" />
-  <link rel="stylesheet" href="/css/components.css?v=20260626-language-names-1" />
+  <link rel="stylesheet" href="/css/layout.css?v=20260703-design-1" />
+  <link rel="stylesheet" href="/css/components.css?v=20260703-design-1" />
   <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#06111f">
 <meta name="mobile-web-app-capable" content="yes">
@@ -101,7 +101,7 @@
             <i class="bi bi-signpost-2-fill"></i>
           </div>
           <div>
-            <span id="appTitle" class="brand-title" data-i18n="appTitle">MoronaSantiagoVial</span>
+            <span id="appTitle" class="brand-title" data-i18n="appTitle">Morona Santiago Vial</span>
             <div class="brand-subtitle">Monitoreo vial inteligente de Morona Santiago</div>
           </div>
         </div>
@@ -143,6 +143,38 @@
           <button id="btnTheme" class="chip" type="button" title="Tema">
             <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
           </button>
+
+          <button id="btnInfoModal" class="chip header-tool" type="button">
+            <i class="bi bi-info-circle-fill"></i>
+            <span data-i18n="infoButton">Información</span>
+          </button>
+
+          <button class="chip header-tool" type="button" data-tutorial-open>
+            <i class="bi bi-question-circle-fill"></i>
+            <span data-i18n="tutorialButton">Tutorial</span>
+          </button>
+
+          <button
+            id="btnVoiceAssistant"
+            class="chip header-tool"
+            type="button"
+            aria-pressed="false"
+          >
+            <i class="bi bi-volume-up-fill"></i>
+            <span data-i18n="voiceAssistant">Asistente de Voz</span>
+          </button>
+
+          <a
+            id="btnDownloadAndroid"
+            class="chip header-tool"
+            href="https://drive.google.com/uc?export=download&id=15s7BptIZDNKgZUUoalH7mU79pQprEmmv"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Descargar para Android"
+          >
+            <i class="bi bi-android2"></i>
+            <span data-i18n="downloadAndroid">Descargar para Android</span>
+          </a>
         </div>
       </div>
     </div>
@@ -153,7 +185,7 @@
     <aside id="mobileSidebar" class="sidebar" aria-label="Panel lateral">
       <div class="sidebar-mobile-brand" aria-hidden="true">
         <i class="bi bi-signpost-2-fill"></i>
-        <span data-i18n="appTitle">Ecuavial</span>
+        <span data-i18n="appTitle">Morona Santiago Vial</span>
       </div>
 
       <div class="sidebar-scroll">
@@ -277,6 +309,39 @@
     </section>
   </main>
 
+  <!-- Informacion de la plataforma: se abre desde el footer para no cargar la pantalla principal. -->
+  <div id="infoModal" class="info-modal" aria-hidden="true">
+    <div class="info-card" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+      <button id="infoModalClose" class="info-close" type="button" aria-label="Cerrar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <div class="info-copy">
+        <span class="section-pill" data-i18n="seoEyebrow">Guía vial de Morona Santiago</span>
+        <h2 id="infoModalTitle" data-i18n="seoTitle">Consulta el estado vial de Morona Santiago antes de viajar</h2>
+        <p data-i18n="seoText">
+          Morona Santiago Vial permite revisar incidentes oficiales de ECU 911, reportes ciudadanos,
+          rutas y condiciones de vías en un mapa interactivo pensado para conductores y viajeros.
+        </p>
+      </div>
+
+      <div class="info-list" aria-label="Funciones principales">
+        <div>
+          <strong data-i18n="seoFeatureMap">Mapa interactivo</strong>
+          <span data-i18n="seoFeatureMapText">Ubica tramos, marcadores e incidencias viales.</span>
+        </div>
+        <div>
+          <strong data-i18n="seoFeatureReports">Reportes ciudadanos</strong>
+          <span data-i18n="seoFeatureReportsText">Visualiza avisos recientes enviados por usuarios.</span>
+        </div>
+        <div>
+          <strong data-i18n="seoFeatureTrip">Recorrido GPS</strong>
+          <span data-i18n="seoFeatureTripText">Sigue tu avance y detecta el tramo vial cercano.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Tutorial dinamico: JS posiciona el foco segun el elemento y la pantalla. -->
   <div id="tutorialOverlay" class="tutorial-overlay" aria-hidden="true">
     <div id="tutorialSpotlight" class="tutorial-spotlight"></div>
@@ -296,7 +361,7 @@
     </div>
   </div>
 
-  <!-- Modal de clima alimentado por Open-Meteo con el centro actual del mapa. -->
+  <!-- Modal de clima alimentado por el proxy backend con el centro actual del mapa. -->
   <div id="weatherModal" class="weather-modal" aria-hidden="true">
     <div class="weather-modal-content">
       <button
@@ -431,13 +496,13 @@
         <div class="tm-footer-left">
           <div class="tm-footer-brand">
             <i class="bi bi-signpost-2-fill"></i>
-            <span>MoronaSantiagoVial</span>
+            <span data-i18n="appTitle">Morona Santiago Vial</span>
           </div>
 
-          <p>Plataforma de monitoreo vial de Morona Santiago</p>
+          <p data-i18n="footerDescription">Plataforma de monitoreo vial de Morona Santiago</p>
 
           <p>
-            Fuente oficial:
+            <span data-i18n="officialSource">Fuente oficial:</span>
             <a
               href="https://www.ecu911.gob.ec/consulta-de-vias/"
               target="_blank"
@@ -449,94 +514,108 @@
         </div>
 
         <div class="tm-footer-right" aria-label="Redes y contacto">
-          <button class="footer-action" type="button" data-tutorial-open>
-            <i class="bi bi-question-circle-fill"></i>
-            <span data-i18n="tutorialButton">Tutorial</span>
-          </button>
+          <div class="footer-action-group" aria-label="Acciones de la plataforma">
+            <button id="footerBtnInfoModal" class="footer-action" type="button">
+              <i class="bi bi-info-circle-fill"></i>
+              <span data-i18n="infoButton">Información</span>
+            </button>
 
-          <button
-            id="btnVoiceAssistant"
-            class="footer-action"
-            type="button"
-            aria-pressed="false"
-          >
-            <i class="bi bi-volume-up-fill"></i>
-            <span data-i18n="voiceAssistant">Asistente de Voz</span>
-          </button>
+            <button class="footer-action" type="button" data-tutorial-open>
+              <i class="bi bi-question-circle-fill"></i>
+              <span data-i18n="tutorialButton">Tutorial</span>
+            </button>
 
-          <a
-            id="btnDownloadAndroid"
-            class="footer-action"
-            href="https://drive.google.com/uc?export=download&id=15s7BptIZDNKgZUUoalH7mU79pQprEmmv"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Descargar para Android"
-          >
-            <i class="bi bi-android2"></i>
-            <span data-i18n="downloadAndroid">Descargar para Android</span>
-          </a>
+            <button
+              id="footerBtnVoiceAssistant"
+              class="footer-action"
+              type="button"
+              aria-pressed="false"
+            >
+              <i class="bi bi-volume-up-fill"></i>
+              <span data-i18n="voiceAssistant">Asistente de Voz</span>
+            </button>
 
-          <a
-            class="social-link"
-            href="https://moronabus.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="MoronaBus"
-            aria-label="MoronaBus"
-          >
-            <i class="bi bi-map-fill"></i>
-          </a>
+            <a
+              id="footerBtnDownloadAndroid"
+              class="footer-action"
+              href="https://drive.google.com/uc?export=download&id=15s7BptIZDNKgZUUoalH7mU79pQprEmmv"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Descargar para Android"
+            >
+              <i class="bi bi-android2"></i>
+              <span data-i18n="downloadAndroid">Descargar para Android</span>
+            </a>
+          </div>
 
-          <a
-            class="social-link"
-            href="https://calinagua.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="CALINAGUA"
-            aria-label="CALINAGUA"
-          >
-            <i class="bi bi-droplet-half"></i>
-          </a>
+          <div class="footer-link-group" aria-label="Proyectos y contacto">
+            <a
+              class="social-link"
+              href="https://moronabus.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="MoronaBus"
+              aria-label="MoronaBus"
+            >
+              <i class="bi bi-map-fill"></i>
+              <span>MoronaBus</span>
+            </a>
 
-          <a
-            class="social-link"
-            href="https://www.instagram.com/3d150n_f10r35?igsh=dXhlNGdzb3AzdGpm"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Instagram"
-            aria-label="Instagram"
-          >
-            <i class="bi bi-instagram"></i>
-          </a>
+            <a
+              class="social-link"
+              href="https://calinagua.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="CALINAGUA"
+              aria-label="CALINAGUA"
+            >
+              <i class="bi bi-droplet-half"></i>
+              <span>CALINAGUA</span>
+            </a>
 
-          <a
-            class="social-link"
-            href="https://www.linkedin.com/in/edison-flores-8a7b61268?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="LinkedIn"
-            aria-label="LinkedIn"
-          >
-            <i class="bi bi-linkedin"></i>
-          </a>
+            <a
+              class="social-link"
+              href="https://www.instagram.com/3d150n_f10r35?igsh=dXhlNGdzb3AzdGpm"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Instagram"
+              aria-label="Instagram"
+            >
+              <i class="bi bi-instagram"></i>
+              <span>Instagram</span>
+            </a>
 
-          <a
-            class="social-link"
-            href="https://wa.me/qr/BBZ7JE34GZ77H1"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="WhatsApp"
-            aria-label="WhatsApp"
-          >
-            <i class="bi bi-whatsapp"></i>
-          </a>
+            <a
+              class="social-link"
+              href="https://www.linkedin.com/in/edison-flores-8a7b61268?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="LinkedIn"
+              aria-label="LinkedIn"
+            >
+              <i class="bi bi-linkedin"></i>
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              class="social-link"
+              href="https://wa.me/qr/BBZ7JE34GZ77H1"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="WhatsApp"
+              aria-label="WhatsApp"
+            >
+              <i class="bi bi-whatsapp"></i>
+              <span>WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module" src="/js/app.js?v=20260626-language-names-1"></script>
+  <script type="module" src="/js/app.js?v=20260703-weather-3"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
