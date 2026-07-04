@@ -222,16 +222,24 @@ export function initWeather() {
   const closeBtn = document.getElementById("weatherModalClose");
   const badge = document.getElementById("weatherBadge");
 
+  const closeWeatherModal = () => {
+    if (modal?.contains(document.activeElement)) {
+      document.activeElement.blur();
+      badge?.focus({ preventScroll: true });
+    }
+
+    modal?.classList.remove("show");
+    modal?.setAttribute("aria-hidden", "true");
+  };
+
   badge?.addEventListener("click", () => {
     if (!lastWeatherData) renderWeatherUnavailable(document.documentElement.lang || "es");
     modal?.classList.add("show");
     modal?.setAttribute("aria-hidden", "false");
+    closeBtn?.focus({ preventScroll: true });
   });
 
-  closeBtn?.addEventListener("click", () => {
-    modal?.classList.remove("show");
-    modal?.setAttribute("aria-hidden", "true");
-  });
+  closeBtn?.addEventListener("click", closeWeatherModal);
 }
 
 // Cancela la peticion anterior cuando el usuario mueve el mapa rapidamente.

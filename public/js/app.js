@@ -21,7 +21,7 @@ import {
 import { renderIncidents, renderUserIncidents, showToast, showRouteNotice, renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
 import { initLanguage, getCurrentLanguage } from "./translate.js";
-import { initWeather, bindWeatherToMap, updateWeatherFromMapCenter } from "./weather.js?v=20260703-weather-3";
+import { initWeather, bindWeatherToMap, updateWeatherFromMapCenter } from "./weather.js?v=20260703-weather-5";
 import { translations, translateState } from "./i18n.js";
 
 let allRoads = [];
@@ -586,9 +586,15 @@ function initInfoModal() {
   const openInfoModal = () => {
     modal.classList.add("show");
     modal.setAttribute("aria-hidden", "false");
+    closeBtn.focus({ preventScroll: true });
   };
 
   const closeInfoModal = () => {
+    if (modal.contains(document.activeElement)) {
+      document.activeElement.blur();
+      openBtn.focus({ preventScroll: true });
+    }
+
     modal.classList.remove("show");
     modal.setAttribute("aria-hidden", "true");
   };
@@ -698,6 +704,7 @@ function initTripTracking() {
 // Abre el modal de reporte y prepara el estado inicial del formulario.
 function openReportModal() {
   const modal = document.getElementById("reportIncidentModal");
+  const closeBtn = document.getElementById("reportModalClose");
 
   if (!modal) return;
 
@@ -706,12 +713,19 @@ function openReportModal() {
   updateReportLocationStatus();
   initReportMiniMap();
   scrollToMapOnSmallScreens();
+  closeBtn?.focus({ preventScroll: true });
 }
 
 // Cierra el modal y limpia selecciones temporales del mapa.
 function closeReportModal({ clearForm = false } = {}) {
   const modal = document.getElementById("reportIncidentModal");
   const form = document.getElementById("userIncidentForm");
+  const openBtn = document.getElementById("btnReportIncident");
+
+  if (modal?.contains(document.activeElement)) {
+    document.activeElement.blur();
+    openBtn?.focus({ preventScroll: true });
+  }
 
   modal?.classList.remove("show");
   modal?.setAttribute("aria-hidden", "true");
@@ -1232,6 +1246,12 @@ async function renderTutorialStep() {
 // Oculta tutorial y restaura estados temporales de la interfaz movil.
 function closeTutorial() {
   const overlay = document.getElementById("tutorialOverlay");
+  const openBtn = document.querySelector("[data-tutorial-open]");
+
+  if (overlay?.contains(document.activeElement)) {
+    document.activeElement.blur();
+    openBtn?.focus({ preventScroll: true });
+  }
 
   overlay?.classList.remove("show");
   overlay?.setAttribute("aria-hidden", "true");
