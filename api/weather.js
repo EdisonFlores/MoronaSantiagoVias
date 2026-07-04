@@ -1,7 +1,9 @@
 // Proxy del clima para que el navegador no dependa de consultar proveedores directamente.
 const WEATHER_TIMEOUT_MS = 8000;
 const WEATHER_CACHE_MS = 10 * 60 * 1000;
+const OPEN_METEO_COOLDOWN_MS = 15 * 60 * 1000;
 const weatherCache = new Map();
+let openMeteoPausedUntil = 0;
 
 function setCorsHeaders(res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -135,6 +137,10 @@ async function fetchJsonWithTimeout(url, provider, headers = {}) {
 }
 
 async function fetchOpenMeteoWeather(lat, lon) {
+  if (Date.now() < openMeteoPausedUntil) {
+    throw new Error("Open-Meteo pausado temporalmente");
+  }
+
   const base = "https://api.open-meteo.com/v1/forecast";
   const params = new URLSearchParams({
     latitude: String(lat),
@@ -163,6 +169,7 @@ async function fetchOpenMeteoWeather(lat, lon) {
     }
   }
 
+  openMeteoPausedUntil = Date.now() + OPEN_METEO_COOLDOWN_MS;
   throw lastError || new Error("Open-Meteo no devolvio clima");
 }
 
@@ -215,7 +222,10 @@ export default async function handler(req, res) {
     });
   }
 
-  const providers = [fetchOpenMeteoWeather, fetchMetNorwayWeather];
+  const useBackupFirst = Date.now() < openMeteoPausedUntil;
+  const providers = useBackupFirst
+    ? [fetchMetNorwayWeather, fetchOpenMeteoWeather]
+    : [fetchOpenMeteoWeather, fetchMetNorwayWeather];
   const errors = [];
 
   for (const fetchProvider of providers) {
