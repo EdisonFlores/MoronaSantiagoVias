@@ -5,10 +5,10 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Morona Santiago Vial",
+  "name": "EcuaVial",
   "url": "https://morona-santiago-vias.vercel.app/",
   "inLanguage": "es-EC",
-  "description": "Plataforma para consultar el estado de las vías de Morona Santiago, incidentes reportados y rutas en mapa interactivo."
+  "description": "Plataforma para consultar el estado de las vías del Ecuador, incidentes reportados y rutas en mapa interactivo."
 }
 </script>
 
@@ -16,7 +16,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Morona Santiago Vial",
+  "name": "EcuaVial",
   "url": "https://morona-santiago-vias.vercel.app/",
   "founder": {
     "@type": "Person",
@@ -31,10 +31,10 @@
   <meta property="og:url" content="https://morona-santiago-vias.vercel.app/" />
   <meta property="og:image" content="https://morona-santiago-vias.vercel.app/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Morona Santiago Vial" />
+  <meta name="twitter:title" content="EcuaVial" />
   <meta
     name="twitter:description"
-    content="Consulta el estado actual de las vías de Morona Santiago en un mapa interactivo."
+    content="Consulta el estado actual de las vías del Ecuador en un mapa interactivo."
   />
   <meta name="twitter:image" content="https://morona-santiago-vias.vercel.app/og-image.jpg" />
   <link rel="canonical" href="https://morona-santiago-vias.vercel.app/" />
@@ -51,22 +51,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Morona Santiago Vial | Estado de vías, incidentes y reportes ciudadanos</title>
+  <title>EcuaVial | Estado de vías, incidentes y reportes ciudadanos</title>
   <meta
     name="description"
-    content="Consulta el estado actual de las vías de Morona Santiago, revisa incidentes reportados por ECU 911 y visualiza rutas en un mapa interactivo antes de viajar."
+    content="Consulta el estado actual de las vías del Ecuador, revisa incidentes reportados por ECU 911 y visualiza rutas en un mapa interactivo antes de viajar."
   />
   <meta
     name="keywords"
-    content="Morona Santiago, estado vial, vías Morona Santiago, ECU 911, tránsito, carreteras, mapa vial, rutas Ecuador"
+    content="EcuaVial, estado vial Ecuador, vías Ecuador, ECU 911, tránsito, carreteras, mapa vial, rutas Ecuador"
   />
   <meta name="author" content="Edison Flores" />
   <meta name="robots" content="index,follow" />
 
-  <meta property="og:title" content="Morona Santiago Vial" />
+  <meta property="og:title" content="EcuaVial" />
   <meta
     property="og:description"
-    content="Visualiza el estado de las vías de Morona Santiago, consulta incidentes y dibuja rutas en el mapa."
+    content="Visualiza el estado de las vías del Ecuador, consulta incidentes y dibuja rutas en el mapa."
   />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_EC" />
@@ -87,7 +87,7 @@
 <meta name="theme-color" content="#06111f">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="MS Vial">
+<meta name="apple-mobile-web-app-title" content="EcuaVial">
 <link rel="apple-touch-icon" href="/assests/icons/icon-192.png">
 <link rel="icon" href="/assests/icons/favicon.svg" type="image/svg+xml">
 </head>
@@ -101,8 +101,8 @@
             <i class="bi bi-signpost-2-fill"></i>
           </div>
           <div>
-            <span id="appTitle" class="brand-title" data-i18n="appTitle">Morona Santiago Vial</span>
-            <div class="brand-subtitle">Monitoreo vial inteligente de Morona Santiago</div>
+            <span id="appTitle" class="brand-title" data-i18n="appTitle">EcuaVial</span>
+            <div class="brand-subtitle" data-i18n="appSubtitle">Monitoreo vial inteligente del Ecuador</div>
           </div>
         </div>
 
@@ -185,7 +185,7 @@
     <aside id="mobileSidebar" class="sidebar" aria-label="Panel lateral">
       <div class="sidebar-mobile-brand" aria-hidden="true">
         <i class="bi bi-signpost-2-fill"></i>
-        <span data-i18n="appTitle">Morona Santiago Vial</span>
+        <span data-i18n="appTitle">EcuaVial</span>
       </div>
 
       <div class="sidebar-scroll">
@@ -196,7 +196,7 @@
           </div>
           <h1 class="hero-title" data-i18n="heroTitle">Consulta incidencias, rutas y condiciones de las vías</h1>
           <p class="hero-text" data-i18n="heroText">
-            Explora la red vial de Morona Santiago en un mapa interactivo con información organizada y visual.
+            Explora la red vial del Ecuador en un mapa interactivo con información organizada y visual.
           </p>
         </section>
 
@@ -213,6 +213,13 @@
               <option value="Habilitada" data-i18n="optionOpen">Habilitada</option>
               <option value="Parcialmente habilitada" data-i18n="optionPartial">Parcialmente habilitada</option>
               <option value="Cerrada" data-i18n="optionClosed">Cerrada</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="filterProvince" data-i18n="provinceLabel">Provincia</label>
+            <select id="filterProvince" class="form-select custom-select">
+              <option value="" data-i18n="optionAllProvinces">Todas las provincias</option>
             </select>
           </div>
         </section>
@@ -317,10 +324,10 @@
       </button>
 
       <div class="info-copy">
-        <span class="section-pill" data-i18n="seoEyebrow">Guía vial de Morona Santiago</span>
-        <h2 id="infoModalTitle" data-i18n="seoTitle">Consulta el estado vial de Morona Santiago antes de viajar</h2>
+        <span class="section-pill" data-i18n="seoEyebrow">Guía vial del Ecuador</span>
+        <h2 id="infoModalTitle" data-i18n="seoTitle">Consulta el estado vial del Ecuador antes de viajar</h2>
         <p data-i18n="seoText">
-          Morona Santiago Vial permite revisar incidentes oficiales de ECU 911, reportes ciudadanos,
+          EcuaVial permite revisar incidentes oficiales de ECU 911, reportes ciudadanos,
           rutas y condiciones de vías en un mapa interactivo pensado para conductores y viajeros.
         </p>
       </div>
@@ -496,10 +503,10 @@
         <div class="tm-footer-left">
           <div class="tm-footer-brand">
             <i class="bi bi-signpost-2-fill"></i>
-            <span data-i18n="appTitle">Morona Santiago Vial</span>
+            <span data-i18n="appTitle">EcuaVial</span>
           </div>
 
-          <p data-i18n="footerDescription">Plataforma de monitoreo vial de Morona Santiago</p>
+          <p data-i18n="footerDescription">Plataforma de monitoreo vial del Ecuador</p>
 
           <p>
             <span data-i18n="officialSource">Fuente oficial:</span>
@@ -511,6 +518,38 @@
               ECU 911
             </a>
           </p>
+
+          <p>
+            <span data-i18n="roadDataSources">Datos viales:</span>
+            <a
+              href="https://www.ecu911.gob.ec/consulta-de-vias/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              consulta
+            </a>
+            ·
+            <a
+              href="https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              vías
+            </a>
+            ·
+            <a
+              href="https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&and:%3C%3E:EstadoActual-id=593&order=Provincia-descripcion&limit=200&start=0"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              novedades
+            </a>
+          </p>
+
+          <p data-i18n="routeTraceWarning">
+            El trazado de las vías puede contener errores o aproximaciones.
+          </p>
+
         </div>
 
         <div class="tm-footer-right" aria-label="Redes y contacto">
@@ -608,6 +647,18 @@
               <i class="bi bi-whatsapp"></i>
               <span>WhatsApp</span>
             </a>
+
+            <a
+              class="social-link"
+              href="https://forms.gle/9Xzq7RhFFTCwWRVW9"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Bugs y sugerencias"
+              aria-label="Bugs y sugerencias"
+            >
+              <i class="bi bi-bug-fill"></i>
+              <span data-i18n="bugsSuggestions">Bugs y sugerencias</span>
+            </a>
           </div>
         </div>
       </div>
@@ -615,7 +666,7 @@
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module" src="/js/app.js?v=20260703-weather-5"></script>
+  <script type="module" src="/js/app.js?v=20260706-ecuavial-5"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

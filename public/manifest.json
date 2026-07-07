@@ -1,7 +1,7 @@
 {
-  "name": "Morona Santiago Vial",
-  "short_name": "MS Vial",
-  "description": "Consulta el estado de las vías de Morona Santiago, incidentes y rutas en un mapa interactivo.",
+  "name": "EcuaVial",
+  "short_name": "EcuaVial",
+  "description": "Consulta el estado de las vías del Ecuador, incidentes y rutas en un mapa interactivo.",
   "id": "/",
   "start_url": "/",
   "scope": "/",

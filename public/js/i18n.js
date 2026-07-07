@@ -2,8 +2,8 @@
 export const translations = {
   es: {
     // APP / HEADER
-    appTitle: "Morona Santiago Vial",
-    appSubtitle: "Monitoreo vial inteligente de Morona Santiago",
+    appTitle: "EcuaVial",
+    appSubtitle: "Monitoreo vial inteligente del Ecuador",
     openMenu: "Abrir menú",
     climate: "Clima",
     languageToggle: "Idioma / Language",
@@ -21,12 +21,13 @@ export const translations = {
     // HERO
     heroBadge: "Estado vial en tiempo real",
     heroTitle: "Consulta incidencias, rutas y condiciones de las vías",
-    heroText: "Explora la red vial de Morona Santiago en un mapa interactivo con información organizada y visual.",
+    heroText: "Explora la red vial del Ecuador en un mapa interactivo con información organizada y visual.",
 
     // PANELS / FILTERS
     filtersTitle: "Filtros",
     control: "Control",
     stateLabel: "Estado",
+    provinceLabel: "Provincia",
     statsTitle: "Estadísticas",
     summary: "Resumen",
     roadsTitle: "Red vial",
@@ -35,6 +36,7 @@ export const translations = {
 
     // FILTER OPTIONS
     optionAll: "Todos",
+    optionAllProvinces: "Todas las provincias",
     optionOpen: "Habilitada",
     optionPartial: "Parcialmente habilitada",
     optionClosed: "Cerrada",
@@ -151,6 +153,8 @@ export const translations = {
     tutorialIntroText: "Este panel resume el monitoreo vial y te da acceso rápido a filtros, estadísticas e incidentes.",
     tutorialFilterTitle: "Filtra por estado",
     tutorialFilterText: "Usa este selector para ver todas las vías, solo las habilitadas, parciales o cerradas.",
+    tutorialProvinceTitle: "Filtra por provincia",
+    tutorialProvinceText: "Usa este selector para revisar reportes oficiales por provincia y moverte por la red vial nacional.",
     tutorialStatsTitle: "Revisa el resumen",
     tutorialStatsText: "Aquí puedes ver cuántos reportes hay por estado según la información cargada.",
     tutorialRoadsTitle: "Consulta incidentes",
@@ -170,11 +174,11 @@ export const translations = {
     tutorialToolsTitle: "Herramientas rápidas",
     tutorialToolsText: "Desde la barra superior puedes consultar el clima, cambiar idioma y alternar el tema.",
     tutorialDownloadTitle: "Descarga la app",
-    tutorialDownloadText: "En el footer puedes descargar la APK para instalar la versión Android de Morona Santiago Vial.",
+    tutorialDownloadText: "En el footer puedes descargar la APK para instalar la versión Android de EcuaVial.",
     tutorialVoiceTitle: "Activa el asistente de voz",
     tutorialVoiceText: "Este botón activa una guía por voz: en computadora lee al pasar el mouse o enfocar controles, y en teléfono lee al tocar elementos.",
     voiceUnsupported: "Tu navegador no soporta lectura por voz.",
-    voiceIntro: "Bienvenido a Morona Santiago Vial. Este es un resumen accesible del estado vial de Morona Santiago.",
+    voiceIntro: "Bienvenido a EcuaVial. Este es un resumen accesible del estado vial del Ecuador.",
     voiceStats: "Resumen de reportes",
     voiceNoRoads: "No hay incidentes para leer con el filtro actual.",
     shuarWarningTitle: "Traducción Shuar en revisión",
@@ -182,11 +186,14 @@ export const translations = {
     shuarWarningAccept: "Entendido",
 
     // FOOTER
-    footerDescription: "Plataforma de monitoreo vial de Morona Santiago",
+    footerDescription: "Plataforma de monitoreo vial del Ecuador",
     officialSource: "Fuente oficial:",
-    seoEyebrow: "Guía vial de Morona Santiago",
-    seoTitle: "Consulta el estado vial de Morona Santiago antes de viajar",
-    seoText: "Morona Santiago Vial permite revisar incidentes oficiales de ECU 911, reportes ciudadanos, rutas y condiciones de vías en un mapa interactivo pensado para conductores y viajeros.",
+    roadDataSources: "Datos viales:",
+    routeTraceWarning: "El trazado de las vías puede contener errores o aproximaciones.",
+    bugsSuggestions: "Bugs y sugerencias",
+    seoEyebrow: "Guía vial del Ecuador",
+    seoTitle: "Consulta el estado vial del Ecuador antes de viajar",
+    seoText: "EcuaVial permite revisar incidentes oficiales de ECU 911, reportes ciudadanos, rutas y condiciones de vías en un mapa interactivo pensado para conductores y viajeros.",
     seoFeatureMap: "Mapa interactivo",
     seoFeatureMapText: "Ubica tramos, marcadores e incidencias viales.",
     seoFeatureReports: "Reportes ciudadanos",
@@ -202,8 +209,8 @@ export const translations = {
 
   en: {
     // APP / HEADER
-    appTitle: "Morona Santiago Vial",
-    appSubtitle: "Smart road monitoring for Morona Santiago",
+    appTitle: "EcuaVial",
+    appSubtitle: "Smart road monitoring for Ecuador",
     openMenu: "Open menu",
     climate: "Weather",
     languageToggle: "Language / Idioma",
@@ -221,12 +228,13 @@ export const translations = {
     // HERO
     heroBadge: "Real-time road status",
     heroTitle: "Check incidents, routes, and road conditions",
-    heroText: "Explore the road network of Morona Santiago on an interactive map with organized visual information.",
+    heroText: "Explore Ecuador's road network on an interactive map with organized visual information.",
 
     // PANELS / FILTERS
     filtersTitle: "Filters",
     control: "Control",
     stateLabel: "Status",
+    provinceLabel: "Province",
     statsTitle: "Statistics",
     summary: "Summary",
     roadsTitle: "Road network",
@@ -235,6 +243,7 @@ export const translations = {
 
     // FILTER OPTIONS
     optionAll: "All",
+    optionAllProvinces: "All provinces",
     optionOpen: "Open",
     optionPartial: "Partially open",
     optionClosed: "Closed",
@@ -351,6 +360,8 @@ export const translations = {
     tutorialIntroText: "This panel summarizes road monitoring and gives you quick access to filters, statistics, and incidents.",
     tutorialFilterTitle: "Filter by status",
     tutorialFilterText: "Use this selector to view all roads, only open roads, partial roads, or closed roads.",
+    tutorialProvinceTitle: "Filter by province",
+    tutorialProvinceText: "Use this selector to review official reports by province and move through the national road network.",
     tutorialStatsTitle: "Check the summary",
     tutorialStatsText: "Here you can see how many reports exist by status according to the loaded information.",
     tutorialRoadsTitle: "Review incidents",
@@ -370,11 +381,11 @@ export const translations = {
     tutorialToolsTitle: "Quick tools",
     tutorialToolsText: "From the top bar you can check weather, switch language, and toggle theme.",
     tutorialDownloadTitle: "Download the app",
-    tutorialDownloadText: "In the footer you can download the APK to install the Android version of Morona Santiago Vial.",
+    tutorialDownloadText: "In the footer you can download the APK to install the Android version of EcuaVial.",
     tutorialVoiceTitle: "Enable the voice assistant",
     tutorialVoiceText: "This button enables a voice guide: on desktop it reads hovered or focused controls, and on mobile it reads tapped elements.",
     voiceUnsupported: "Your browser does not support voice reading.",
-    voiceIntro: "Welcome to Morona Santiago Vial. This is an accessible summary of Morona Santiago road status.",
+    voiceIntro: "Welcome to EcuaVial. This is an accessible summary of Ecuador road status.",
     voiceStats: "Report summary",
     voiceNoRoads: "There are no incidents to read with the current filter.",
     shuarWarningTitle: "Shuar translation under review",
@@ -382,11 +393,14 @@ export const translations = {
     shuarWarningAccept: "Understood",
 
     // FOOTER
-    footerDescription: "Road monitoring platform for Morona Santiago",
+    footerDescription: "Road monitoring platform for Ecuador",
     officialSource: "Official source:",
-    seoEyebrow: "Morona Santiago road guide",
-    seoTitle: "Check Morona Santiago road status before traveling",
-    seoText: "Morona Santiago Vial lets drivers and travelers review official ECU 911 incidents, citizen reports, routes, and road conditions on an interactive map.",
+    roadDataSources: "Road data:",
+    routeTraceWarning: "Road tracing may contain errors or approximations.",
+    bugsSuggestions: "Bugs and suggestions",
+    seoEyebrow: "Ecuador road guide",
+    seoTitle: "Check Ecuador road status before traveling",
+    seoText: "EcuaVial lets drivers and travelers review official ECU 911 incidents, citizen reports, routes, and road conditions on an interactive map.",
     seoFeatureMap: "Interactive map",
     seoFeatureMapText: "Find road segments, markers, and incidents.",
     seoFeatureReports: "Citizen reports",
@@ -403,8 +417,8 @@ export const translations = {
 
 translations.sh = {
   ...translations.es,
-  appTitle: "Morona Santiago Vial",
-  appSubtitle: "Morona Santiago jintia nekamuri",
+  appTitle: "EcuaVial",
+  appSubtitle: "Ecuador jintia nekamuri",
   openMenu: "Menu urakma",
   climate: "Nayaimpin",
   languageToggle: "Idioma / Language / Shuar",
@@ -420,11 +434,12 @@ translations.sh = {
 
   heroBadge: "Jintia nekamuri yamaram",
   heroTitle: "Jintia awajun, jintia najankamu nekata",
-  heroText: "Morona Santiago jintia unuimiata mapa najanamunam.",
+  heroText: "Ecuador jintia unuimiata mapa najanamunam.",
 
   filtersTitle: "Akanmamu",
   control: "Iniamu",
   stateLabel: "Nekamu",
+  provinceLabel: "Provincia",
   statsTitle: "Nekapmamu",
   summary: "Yamai etserma",
   roadsTitle: "Jintia",
@@ -432,6 +447,7 @@ translations.sh = {
   resetMap: "Mapa iwiakmamu",
 
   optionAll: "Mash",
+  optionAllProvinces: "Provincia mash",
   optionOpen: "Urakmamu",
   optionPartial: "Aintsak urakmamu",
   optionClosed: "Epentmamu",
@@ -542,6 +558,8 @@ translations.sh = {
   tutorialIntroText: "Ju panel jintia nekamuri, akanmamu, nekapmamu nuya awajun iistiniawai.",
   tutorialFilterTitle: "Nekamujai akanma",
   tutorialFilterText: "Ju selectorjai jintia mash, urakmamu, aintsak urakmamu nuya epentmamu iista.",
+  tutorialProvinceTitle: "Provinciajai akanma",
+  tutorialProvinceText: "Ju selectorjai provincia etserma oficial iista nuya Ecuador jintia nekata.",
   tutorialStatsTitle: "Nekapmamu iista",
   tutorialStatsText: "Juinkia nekamuri estadojai mash nekapmamu iistin atsumamu.",
   tutorialRoadsTitle: "Awajun iista",
@@ -561,11 +579,11 @@ translations.sh = {
   tutorialToolsTitle: "Yaimkiamu",
   tutorialToolsText: "Yakata barra nayaimpin, idioma nuya tema yapajiata.",
   tutorialDownloadTitle: "App jukimprata",
-  tutorialDownloadText: "Footernum APK jukimpratin Androidnum Morona Santiago Vial apujtustinian.",
+  tutorialDownloadText: "Footernum APK jukimpratin Androidnum EcuaVial apujtustinian.",
   tutorialVoiceTitle: "Chicham yaimkiamu urakma",
   tutorialVoiceText: "Ju botón chicham yaimkiamu urakui. Computadornum mouse pasamunam aujmatsui, telefononam elemento achikmatai aujmatsui.",
   voiceUnsupported: "Ame navegador chicham aujmatsamu takakchayi.",
-  voiceIntro: "Morona Santiago Vialnum penker tarimiat. Ju Morona Santiago jintia nekamuri resumen.",
+  voiceIntro: "EcuaVialnum penker tarimiat. Ju Ecuador jintia nekamuri resumen.",
   voiceStats: "Etserma nekapmamu",
   voiceNoRoads: "Filtro yamainkia awajun aujmatsatin atsawai.",
 
@@ -573,8 +591,11 @@ translations.sh = {
   shuarWarningText: "La traducción Shuar no es cien por ciento fiable y puede contener errores. Se recomienda validarla con hablantes o traductores de la comunidad.",
   shuarWarningAccept: "Entendido",
 
-  footerDescription: "Morona Santiago jintia nekamuri plataforma",
+  footerDescription: "Ecuador jintia nekamuri plataforma",
   officialSource: "Fuente oficial:",
+  roadDataSources: "Jintia datos:",
+  routeTraceWarning: "Jintia trazado takasbauka juka yupichu pujushti.",
+  bugsSuggestions: "Bugs nuya titaim",
   footerLinksLabel: "Redes nuya contacto",
   touristms: "MoronaBus",
   instagram: "Instagram",

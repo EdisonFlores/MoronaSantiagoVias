@@ -116,6 +116,20 @@ function getSafeCoord(point) {
   return null;
 }
 
+// Devuelve la geometria aproximada del tramo usando points o, como respaldo, start/end.
+function getSegmentCoords(segment) {
+  const points = Array.isArray(segment?.points)
+    ? segment.points.map(getSafeCoord).filter(Boolean)
+    : [];
+
+  if (points.length >= 2) return points;
+
+  const start = getSafeCoord(segment?.start);
+  const end = getSafeCoord(segment?.end);
+
+  return start && end ? [start, end] : [];
+}
+
 // Popup reutilizable para incidentes y marcadores enfocados.
 function buildIncidentPopup(incident) {
   const lang = getCurrentLanguage();
@@ -378,12 +392,11 @@ export function drawRouteGeometry(routeCoords, road) {
 }
 // Fallback visual cuando OSRM falla: conecta origen/destino con linea punteada.
 export function drawFallbackPolyline(segment, road) {
-  if (!map || !segment?.start || !segment?.end) return;
+  if (!map) return;
 
-  const start = getSafeCoord(segment.start);
-  const end = getSafeCoord(segment.end);
+  const routeCoords = getSegmentCoords(segment);
 
-  if (!start || !end) return;
+  if (routeCoords.length < 2) return;
 
   clearRoadGeometry();
 
@@ -391,7 +404,8 @@ export function drawFallbackPolyline(segment, road) {
   const lang = getCurrentLanguage();
   const t = translations[lang] || translations.es;
 
-  const routeCoords = [start, end];
+  const start = routeCoords[0];
+  const end = routeCoords[routeCoords.length - 1];
 
   roadLine = L.polyline(routeCoords, {
     weight: 5,
@@ -420,7 +434,7 @@ export function drawFallbackPolyline(segment, road) {
 export function addIncidentMarker(incident, handlers = {}) {
   if (!map || !ecu911MarkersLayer) return;
 
-  const start = getSafeCoord(incident?.matchedRoadSegment?.start);
+  const start = getSegmentCoords(incident?.matchedRoadSegment)[0];
   if (!start) return;
 
   const marker = L.marker(start);
@@ -560,7 +574,7 @@ export function cancelReportLocationPicker() {
 export function focusIncidentOnMap(segment, incident = null) {
   if (!map) return;
 
-  const start = getSafeCoord(segment?.start);
+  const start = getSegmentCoords(segment)[0];
   if (!start) return;
 
   clearIncidentFocus();

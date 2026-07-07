@@ -56,6 +56,39 @@ function buildStats(roads) {
   };
 }
 
+// Obtiene provincias unicas para construir el filtro nacional.
+function getAvailableProvinces(roads = []) {
+  return [...new Set(
+    roads
+      .map((road) => String(road.provincia || "").trim())
+      .filter(Boolean)
+      .filter((province) => province.toLowerCase() !== "ecuador")
+  )].sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
+}
+
+// Llena el selector de provincias con los datos reales cargados desde el backend.
+function populateProvinceFilter(roads = []) {
+  const select = document.getElementById("filterProvince");
+  const lang = getCurrentLanguage();
+  const t = translations[lang] || translations.es;
+
+  if (!select) return;
+
+  const currentValue = select.value;
+  const provinces = getAvailableProvinces(roads);
+
+  select.innerHTML = `
+    <option value="">${t.optionAllProvinces}</option>
+    ${provinces
+      .map((province) => `<option value="${province}">${province}</option>`)
+      .join("")}
+  `;
+
+  if (provinces.includes(currentValue)) {
+    select.value = currentValue;
+  }
+}
+
 // Detecta el punto de corte donde la interfaz cambia a drawer y mapa apilado.
 function isMobileLayout() {
   return window.innerWidth <= 992;
@@ -150,6 +183,20 @@ function getSafeCoord(point) {
   return null;
 }
 
+// Obtiene la geometria del tramo para calculos de cercania en modo recorrido.
+function getSegmentPoints(segment) {
+  const points = Array.isArray(segment?.points)
+    ? segment.points.map(getSafeCoord).filter(Boolean)
+    : [];
+
+  if (points.length >= 2) return points;
+
+  const start = getSafeCoord(segment?.start);
+  const end = getSafeCoord(segment?.end);
+
+  return start && end ? [start, end] : [];
+}
+
 // Convierte lat/lng a metros aproximados usando una latitud de referencia.
 function projectToMeters(point, referenceLat) {
   const metersPerDegreeLat = 111320;
@@ -195,12 +242,16 @@ function findNearestRoadFromLocation(location) {
 
   const nearest = allRoads.reduce((best, road) => {
     const segment = road?.matchedRoadSegment;
-    const start = getSafeCoord(segment?.start);
-    const end = getSafeCoord(segment?.end);
+    const points = getSegmentPoints(segment);
 
-    if (!start || !end) return best;
+    if (points.length < 2) return best;
 
-    const distanceMeters = getPointSegmentDistanceMeters(point, start, end);
+    const distanceMeters = points.slice(0, -1).reduce((minDistance, currentPoint, index) => {
+      const nextPoint = points[index + 1];
+      const distance = getPointSegmentDistanceMeters(point, currentPoint, nextPoint);
+
+      return Math.min(minDistance, distance);
+    }, Infinity);
 
     if (!best || distanceMeters < best.distanceMeters) {
       return { road, distanceMeters };
@@ -503,6 +554,7 @@ function getVoiceHintForElement(element) {
   if (target.matches("#btnDownloadAndroid")) return t.downloadAndroid;
   if (target.matches("[data-tutorial-open]")) return t.tutorialButton;
   if (target.matches("#filterState")) return `${t.stateLabel}. ${target.options[target.selectedIndex]?.text || ""}`;
+  if (target.matches("#filterProvince")) return `${t.provinceLabel}. ${target.options[target.selectedIndex]?.text || ""}`;
   if (target.matches("#btnStartTrip")) return target.textContent.trim();
   if (target.matches("#btnReportIncident")) return t.reportIncident;
   if (target.matches("#btnUseCurrentReportLocation")) return t.reportUseCurrentLocation;
@@ -941,6 +993,14 @@ const tutorialSteps = [
     highlightSelector: "#filterState",
     title: "tutorialFilterTitle",
     text: "tutorialFilterText",
+    mobilePanel: true
+  },
+  {
+    selector: "#filterProvince",
+    focusSelector: "#filterProvince",
+    highlightSelector: "#filterProvince",
+    title: "tutorialProvinceTitle",
+    text: "tutorialProvinceText",
     mobilePanel: true
   },
   {
@@ -1461,6 +1521,7 @@ function showLoadError() {
 // Recalcula lista, estadisticas y marcadores cada vez que cambia el filtro/idioma.
 function applyFilters() {
   const state = document.getElementById("filterState").value;
+  const province = document.getElementById("filterProvince")?.value || "";
   const lang = getCurrentLanguage();
   const activeUserReports = getActiveUserReports();
 
@@ -1505,6 +1566,10 @@ function applyFilters() {
     filtered = filtered.filter((item) => item.estado === state);
   }
 
+  if (province) {
+    filtered = filtered.filter((item) => item.provincia === province);
+  }
+
   visibleRoads = filtered;
   renderStats(buildStats(filtered), lang);
   if (isTripTracking) {
@@ -1514,7 +1579,7 @@ function applyFilters() {
   } else {
     clearUserReportMarkers();
   }
-  renderIncidentMarkers(filtered, {
+  renderIncidentMarkers(filtered.filter((item) => item.hasOfficialIncident), {
     onSelect: focusRoadOnMap
   });
 
@@ -1599,6 +1664,7 @@ async function initApp() {
 
   initLanguage(() => {
     stopVoiceAssistant();
+    populateProvinceFilter(allRoads);
     applyFilters();
     updateReportLocationStatus();
     updateTripButton();
@@ -1620,6 +1686,7 @@ async function initApp() {
   bindWeatherToMap(map, getCurrentLanguage);
 
   document.getElementById("filterState")?.addEventListener("change", applyFilters);
+  document.getElementById("filterProvince")?.addEventListener("change", applyFilters);
   document.getElementById("btnResetMap")?.addEventListener("click", () => {
     stopTripTracking({ clearMap: false });
     resetMapView();
@@ -1630,6 +1697,7 @@ async function initApp() {
   try {
     const data = await fetchIncidents();
     allRoads = data.incidents || [];
+    populateProvinceFilter(allRoads);
     applyFilters();
     loadUserReports();
   } catch (error) {

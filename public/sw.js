@@ -1,4 +1,4 @@
-const CACHE_VERSION = "morona-santiago-vial-online-v1";
+const CACHE_VERSION = "ecuavial-online-v1";
 
 self.addEventListener("install", event => {
   self.skipWaiting();
@@ -60,7 +60,7 @@ self.addEventListener("fetch", event => {
             <main>
               <h1>Sin conexión a internet</h1>
               <p>
-                Morona Santiago Vial necesita internet para consultar incidentes,
+                EcuaVial necesita internet para consultar incidentes,
                 rutas, clima y mapas actualizados.
               </p>
             </main>

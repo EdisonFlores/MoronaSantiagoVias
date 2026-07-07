@@ -2,7 +2,7 @@
 import { readFile } from "node:fs/promises";
 import { viasTramos } from "../lib/viasTramosData.js";
 import { matchRoadSegment } from "../lib/roadMatcher.js";
-import { scrapeEcu911MoronaSantiago } from "../lib/scrapeEcu911.js";
+import { scrapeEcu911Ecuador } from "../lib/scrapeEcu911.js";
 
 const ecu911CacheUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
 const apifyRecordKey = process.env.APIFY_CACHE_KEY || "latest";
@@ -49,7 +49,7 @@ async function loadApifyEcu911Items() {
 // Prioridad de datos: ECU 911 en vivo, cache Apify, cache del repositorio.
 async function getEcu911Items() {
   try {
-    const items = await scrapeEcu911MoronaSantiago();
+    const items = await scrapeEcu911Ecuador();
 
     if (items.length) {
       return { items, sourceWarning: null };
@@ -98,8 +98,6 @@ async function getEcu911Items() {
 async function buildNetworkStatus() {
   const { items: ecu911Items, sourceWarning } = await getEcu911Items();
 
-  console.log("Datos ECU 911:", ecu911Items);
-
   const matchedItems = ecu911Items
     .map((item) => {
       const tramo = matchRoadSegment(item);
@@ -113,10 +111,16 @@ async function buildNetworkStatus() {
 
   const roads = viasTramos.map((tramo) => {
     const match = matchedMap.get(tramo.id);
+    const hasOfficialIncident = Boolean(
+      match &&
+        (match.hasEcu911News ||
+          match.estado === "Parcialmente habilitada" ||
+          match.estado === "Cerrada")
+    );
 
     return {
       id: tramo.id,
-      provincia: "Morona Santiago",
+      provincia: match?.provincia || tramo.provincia || (tramo.source === "ECU 911" ? "Ecuador" : "Morona Santiago"),
       via: tramo.via,
       ref: tramo.ref || "",
       estado: match ? match.estado : "Habilitada",
@@ -125,7 +129,8 @@ async function buildNetworkStatus() {
         : "Sin novedades reportadas.",
       viaAlterna: match?.viaAlterna || "N/A",
       updatedAt: match?.modified || null,
-      source: match ? "ECU 911" : "Red vial base",
+      source: match ? "ECU 911" : tramo.source || "Red vial base",
+      hasOfficialIncident,
       hasRoadMatch: true,
       matchedRoadSegment: {
         id: tramo.id,
@@ -133,6 +138,7 @@ async function buildNetworkStatus() {
         ref: tramo.ref || "",
         origen: tramo.origen,
         destino: tramo.destino,
+        points: tramo.points || null,
         start: tramo.start,
         end: tramo.end
       }

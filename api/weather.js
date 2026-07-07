@@ -118,7 +118,7 @@ async function fetchJsonWithTimeout(url, provider, headers = {}) {
       cache: "no-store",
       headers: {
         "Accept": "application/json",
-        "User-Agent": "MoronaSantiagoVial/1.0 https://morona-santiago-vias.vercel.app",
+        "User-Agent": "EcuaVial/1.0 https://morona-santiago-vias.vercel.app",
         ...headers
       },
       signal: controller.signal

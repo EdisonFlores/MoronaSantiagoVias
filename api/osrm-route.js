@@ -5,39 +5,42 @@ export default async function handler(req, res) {
     if (req.method !== "GET") {
       return res.status(405).json({
         ok: false,
-        message: "Método no permitido"
+        message: "Metodo no permitido"
       });
     }
 
-    const { start, end, profile = "driving" } = req.query;
+    const { start, end, points, profile = "driving" } = req.query;
 
-    if (!start || !end) {
+    if ((!start || !end) && !points) {
       return res.status(400).json({
         ok: false,
-        message: "Faltan parámetros start o end"
+        message: "Faltan parametros start/end o points"
       });
     }
 
-    const startParts = String(start).split(",").map(Number);
-    const endParts = String(end).split(",").map(Number);
+    const parsedPoints = points
+      ? String(points)
+          .split(";")
+          .map((point) => point.split(",").map(Number))
+      : [
+          String(start).split(",").map(Number),
+          String(end).split(",").map(Number)
+        ];
 
     if (
-      startParts.length !== 2 ||
-      endParts.length !== 2 ||
-      startParts.some(Number.isNaN) ||
-      endParts.some(Number.isNaN)
+      parsedPoints.length < 2 ||
+      parsedPoints.some((point) => point.length !== 2 || point.some(Number.isNaN))
     ) {
       return res.status(400).json({
         ok: false,
-        message: "Formato inválido en start o end. Use lat,lng"
+        message: "Formato invalido. Use lat,lng separados por punto y coma"
       });
     }
 
-    const [startLat, startLng] = startParts;
-    const [endLat, endLng] = endParts;
-
     // OSRM espera longitud,latitud aunque la app trabaja internamente con lat,lng.
-    const coords = `${startLng},${startLat};${endLng},${endLat}`;
+    const coords = parsedPoints
+      .map(([lat, lng]) => `${lng},${lat}`)
+      .join(";");
 
     const url =
       `https://router.project-osrm.org/route/v1/${profile}/${coords}` +
@@ -47,7 +50,7 @@ export default async function handler(req, res) {
       method: "GET",
       headers: {
         "Accept": "application/json",
-        "User-Agent": "moronasantiagovias/1.0"
+        "User-Agent": "ecuavial/1.0"
       }
     });
 
@@ -56,7 +59,7 @@ export default async function handler(req, res) {
     if (!response.ok || data.code !== "Ok" || !data.routes?.length) {
       return res.status(502).json({
         ok: false,
-        message: "OSRM no encontró ruta",
+        message: "OSRM no encontro ruta",
         osrm: data
       });
     }

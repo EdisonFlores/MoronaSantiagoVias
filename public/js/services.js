@@ -79,12 +79,15 @@ export async function fetchOsrmRoute(segment, options = {}) {
   }, timeoutMs);
 
   try {
-    const start = `${segment.start[0]},${segment.start[1]}`;
-    const end = `${segment.end[0]},${segment.end[1]}`;
+    const routePoints = Array.isArray(segment.points) && segment.points.length >= 2
+      ? segment.points
+      : [segment.start, segment.end];
+    const points = routePoints
+      .map((point) => `${point[0]},${point[1]}`)
+      .join(";");
 
     const url =
-      `/api/osrm-route?start=${encodeURIComponent(start)}` +
-      `&end=${encodeURIComponent(end)}` +
+      `/api/osrm-route?points=${encodeURIComponent(points)}` +
       `&profile=driving`;
 
     const response = await fetch(url, {
