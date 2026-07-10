@@ -21,6 +21,7 @@ let roadAdministrativeHighlightLayer = null;
 let roadAdministrativeHighlightVersion = 0;
 let roadAdministrativeLegend = null;
 const administrativeGeoJsonCache = {};
+const administrativeFeatureBoundsCache = new WeakMap();
 
 const ADMINISTRATIVE_GEOJSON_URLS = {
   ecuador: "https://raw.githubusercontent.com/pabl-o-ce/Ecuador-geoJSON/master/geojson/ecuador.geojson",
@@ -120,17 +121,21 @@ function getGeoJsonCantonName(feature) {
 // Descarga y cachea GeoJSON administrativos para no repetir lecturas remotas.
 async function fetchAdministrativeGeoJson(type) {
   if (administrativeGeoJsonCache[type]) {
-    return administrativeGeoJsonCache[type];
+    return await administrativeGeoJsonCache[type];
   }
 
-  const response = await fetch(ADMINISTRATIVE_GEOJSON_URLS[type]);
-  if (!response.ok) {
-    throw new Error(`No se pudo cargar ${type}.geojson`);
-  }
+  const request = fetch(ADMINISTRATIVE_GEOJSON_URLS[type]).then(async (response) => {
+    if (!response.ok) throw new Error(`No se pudo cargar ${type}.geojson`);
+    return await response.json();
+  });
+  administrativeGeoJsonCache[type] = request;
 
-  const data = await response.json();
-  administrativeGeoJsonCache[type] = data;
-  return data;
+  try {
+    return await request;
+  } catch (error) {
+    delete administrativeGeoJsonCache[type];
+    throw error;
+  }
 }
 
 // Convierte la geometria vial [lat, lng] al orden GeoJSON [lng, lat].
@@ -204,9 +209,44 @@ function lineCrossesPolygon(points, polygon) {
   });
 }
 
-function roadCrossesFeature(points, feature) {
+function getPointsBounds(points = []) {
+  return points.reduce((bounds, point) => ({
+    minX: Math.min(bounds.minX, point[0]),
+    minY: Math.min(bounds.minY, point[1]),
+    maxX: Math.max(bounds.maxX, point[0]),
+    maxY: Math.max(bounds.maxY, point[1])
+  }), { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity });
+}
+
+function getFeatureBounds(feature) {
+  if (administrativeFeatureBoundsCache.has(feature)) {
+    return administrativeFeatureBoundsCache.get(feature);
+  }
+
+  const points = [];
+  const collectCoordinates = (coordinates) => {
+    if (!Array.isArray(coordinates)) return;
+    if (coordinates.length >= 2 && Number.isFinite(Number(coordinates[0])) && Number.isFinite(Number(coordinates[1]))) {
+      points.push([Number(coordinates[0]), Number(coordinates[1])]);
+      return;
+    }
+    coordinates.forEach(collectCoordinates);
+  };
+  collectCoordinates(feature?.geometry?.coordinates);
+  const bounds = getPointsBounds(points);
+  administrativeFeatureBoundsCache.set(feature, bounds);
+  return bounds;
+}
+
+function boundsOverlap(first, second) {
+  return first.minX <= second.maxX && first.maxX >= second.minX &&
+    first.minY <= second.maxY && first.maxY >= second.minY;
+}
+
+function roadCrossesFeature(points, feature, roadBounds = getPointsBounds(points)) {
   const geometry = feature?.geometry;
   if (!geometry || points.length < 2) return false;
+  if (!boundsOverlap(roadBounds, getFeatureBounds(feature))) return false;
 
   const polygons = geometry.type === "Polygon"
     ? [geometry.coordinates]
@@ -231,29 +271,45 @@ export async function enrichRoadsWithAdministrativeAreas(roads = []) {
     fetchAdministrativeGeoJson("cantons")
   ]);
 
-  return roads.map((road) => {
+  const enrichedRoads = [];
+
+  for (let index = 0; index < roads.length; index += 1) {
+    const road = roads[index];
     const points = getRoadGeoJsonPoints(road);
+    const roadBounds = getPointsBounds(points);
     const provincias = uniqueAdministrativeNames(
       (provincesGeoJson.features || [])
-        .filter((feature) => roadCrossesFeature(points, feature))
+        .filter((feature) => roadCrossesFeature(points, feature, roadBounds))
         .map(getGeoJsonProvinceName)
     );
     const cantones = uniqueAdministrativeNames(
       (cantonsGeoJson.features || [])
-        .filter((feature) => roadCrossesFeature(points, feature))
+        .filter((feature) => roadCrossesFeature(points, feature, roadBounds))
         .map(getGeoJsonCantonName)
     );
 
     const fallbackProvince = String(road.provincia || "").trim();
     const finalProvinces = provincias.length ? provincias : (fallbackProvince ? [fallbackProvince] : []);
 
-    return {
+    enrichedRoads.push({
       ...road,
       provincia: finalProvinces[0] || fallbackProvince,
       provincias: finalProvinces,
       cantones
-    };
-  });
+    });
+
+    if (index > 0 && index % 12 === 0) {
+      await new Promise((resolve) => {
+        if (typeof requestIdleCallback === "function") {
+          requestIdleCallback(resolve, { timeout: 80 });
+        } else {
+          setTimeout(resolve, 0);
+        }
+      });
+    }
+  }
+
+  return enrichedRoads;
 }
 
 // Resalta las divisiones administrativas atravesadas por la via seleccionada.
@@ -557,7 +613,7 @@ export async function renderAdministrativeBoundaries(provinceName = "", options 
     const [countryGeoJson, provincesGeoJson, cantonsGeoJson] = await Promise.all([
       fetchAdministrativeGeoJson("ecuador"),
       fetchAdministrativeGeoJson("provinces"),
-      fetchAdministrativeGeoJson("cantons")
+      selectedProvince ? fetchAdministrativeGeoJson("cantons") : Promise.resolve(null)
     ]);
 
     const layers = [];
