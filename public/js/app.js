@@ -21,7 +21,7 @@ import {
   clearUserReportMarkers,
   clearTravelTracking,
   updateTravelPosition
-} from "./map.js";
+} from "./map.js?v=20260710-route-popup-1";
 import { renderIncidents, renderUserIncidents, showToast, showRouteNotice, renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
 import { initLanguage, getCurrentLanguage } from "./translate.js";

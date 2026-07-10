@@ -805,6 +805,10 @@ export function drawRouteGeometry(routeCoords, road) {
     opacity: 0.95
   }).addTo(map);
   roadLine.bringToFront();
+  roadLine.bindPopup(buildIncidentPopup(road), {
+    closeButton: true,
+    autoPan: true
+  });
 
   const first = routeCoords[0];
   const last = routeCoords[routeCoords.length - 1];
@@ -852,11 +856,10 @@ export function drawFallbackPolyline(segment, road) {
     .addTo(map)
     .bindPopup(`<b>${t.mapEnd}:</b> ${segment?.destino || t.mapEnd}`);
 
-  roadLine.bindPopup(
-    lang === "en"
-      ? "Approximate route. OSRM was unavailable or took too long."
-      : "Ruta aproximada. OSRM no respondió o demoró demasiado."
-  );
+  roadLine.bindPopup(buildIncidentPopup(road), {
+    closeButton: true,
+    autoPan: true
+  });
 
   map.fitBounds(L.latLngBounds(routeCoords), { padding: [32, 32] });
 }
