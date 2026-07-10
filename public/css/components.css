@@ -1854,4 +1854,34 @@ textarea.custom-input {
     max-width: 190px;
     padding: 9px 11px;
   }
+
+  /* Popups compactos para no cubrir casi todo el mapa en telefonos. */
+  .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+  }
+
+  .leaflet-popup-content {
+    width: min(205px, calc(100vw - 92px)) !important;
+    margin: 9px 11px 10px !important;
+    font-size: 0.7rem;
+    line-height: 1.28 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .leaflet-popup-content > div {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    line-height: inherit !important;
+  }
+
+  .leaflet-popup-content div {
+    margin-bottom: 2px !important;
+  }
+
+  .leaflet-popup-close-button {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 17px !important;
+    line-height: 22px !important;
+  }
 }
