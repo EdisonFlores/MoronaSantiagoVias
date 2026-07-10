@@ -1,0 +1,3491 @@
+{
+  "generatedAt": "2026-07-10T03:01:25.508Z",
+  "roads": {
+    "bella-union-limon": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "LIMON INDANZA",
+        "SANTIAGO"
+      ]
+    },
+    "bella-union-mendez": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "SANTIAGO"
+      ]
+    },
+    "gualaquiza-chiguinda-sigsig-cuenca": {
+      "provincias": [
+        "Azuay",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "GUALAQUIZA",
+        "SIGSIG"
+      ]
+    },
+    "gualaquiza-chuchumbletza": {
+      "provincias": [
+        "Morona Santiago",
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "EL PANGUI",
+        "GUALAQUIZA"
+      ]
+    },
+    "gualaquiza-el-porton-rio-negro-e594": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "GUALAQUIZA"
+      ]
+    },
+    "limon-gualaceo": {
+      "provincias": [
+        "Azuay",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "EL PAN",
+        "GUALACEO",
+        "LIMON INDANZA"
+      ]
+    },
+    "limon-san-juan-bosco": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "LIMON INDANZA",
+        "SAN JUAN BOSCO"
+      ]
+    },
+    "logrono-bella-union": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "LOGROÐO",
+        "SANTIAGO"
+      ]
+    },
+    "macas-puyo": {
+      "provincias": [
+        "Morona Santiago",
+        "Pastaza"
+      ],
+      "cantones": [
+        "HUAMBOYA",
+        "MERA",
+        "MORONA",
+        "PABLO SEXTO",
+        "PALORA",
+        "Pastaza"
+      ]
+    },
+    "macas-riobamba": {
+      "provincias": [
+        "Chimborazo",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "CHAMBO",
+        "MORONA",
+        "PABLO SEXTO",
+        "RIOBAMBA"
+      ]
+    },
+    "macas-sevilla-seipa-sucua": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "MORONA",
+        "SUCUA"
+      ]
+    },
+    "macas-sucua": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "MORONA",
+        "SUCUA"
+      ]
+    },
+    "macas-taisha": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "MORONA",
+        "TAISHA"
+      ]
+    },
+    "mendez-guarumales-cuenca": {
+      "provincias": [
+        "Azuay",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "EL PAN",
+        "GUACHAPALA",
+        "PAUTE",
+        "SANTIAGO",
+        "SEVILLA DE ORO"
+      ]
+    },
+    "san-juan-bosco-gualaquiza": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "GUALAQUIZA",
+        "SAN JUAN BOSCO"
+      ]
+    },
+    "sucua-logrono": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "LOGROÐO",
+        "SUCUA"
+      ]
+    },
+    "tiwintza-san-jose-de-morona": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "TIWINTZA"
+      ]
+    },
+    "y-de-patuca-tiwintza": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "LOGROÐO",
+        "SANTIAGO",
+        "TIWINTZA"
+      ]
+    },
+    "palmas-amaluza": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "SEVILLA DE ORO"
+      ]
+    },
+    "cuenca-giron-pasaje-machala": {
+      "provincias": [
+        "Azuay",
+        "El Oro"
+      ],
+      "cantones": [
+        "Cuenca",
+        "EL GUABO",
+        "Giron",
+        "MACHALA",
+        "PASAJE",
+        "PUCARA",
+        "SAN FERNANDO",
+        "SANTA ISABEL"
+      ]
+    },
+    "amaluza-limite-provincial-azuay-morona-santiago": {
+      "provincias": [
+        "Azuay",
+        "Chimborazo",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "SANTIAGO",
+        "SEVILLA DE ORO"
+      ]
+    },
+    "entronque-paso-lateral-de-cuenca-cumbe": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "Cuenca"
+      ]
+    },
+    "lentag-abdon-calderon": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "Giron",
+        "SAN FERNANDO",
+        "SANTA ISABEL"
+      ]
+    },
+    "limite-provincial-guayas-azuay-camilo-ponce-limite-provincial-azuay-el-oro": {
+      "provincias": [
+        "Azuay",
+        "El Oro",
+        "Guayas"
+      ],
+      "cantones": [
+        "CAMILO PONCE ENRIQUEZ",
+        "EL GUABO",
+        "GUAYAQUIL"
+      ]
+    },
+    "santa-isabel-limite-provincial-el-oro-azuay": {
+      "provincias": [
+        "Azuay",
+        "Loja"
+      ],
+      "cantones": [
+        "SANTA ISABEL",
+        "SARAGURO"
+      ]
+    },
+    "sevilla-de-oro-palmas": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "SEVILLA DE ORO"
+      ]
+    },
+    "cuenca-canar-alausi": {
+      "provincias": [
+        "Azuay",
+        "Cañar",
+        "Chimborazo"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "BIBLIAN",
+        "Cañar",
+        "CHUNCHI",
+        "Cuenca",
+        "DELEG",
+        "EL TAMBO"
+      ]
+    },
+    "abdon-calderon-santa-isabel": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "SANTA ISABEL"
+      ]
+    },
+    "cuenca-gualaceo-limon-macas": {
+      "provincias": [
+        "Azuay",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "CHORDELEG",
+        "Cuenca",
+        "GUALACEO",
+        "LIMON INDANZA",
+        "LOGROÐO",
+        "MORONA",
+        "SANTIAGO",
+        "SUCUA"
+      ]
+    },
+    "cuenca-chordeleg-sigsig-gualaquiza": {
+      "provincias": [
+        "Azuay",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "Cuenca",
+        "GUALAQUIZA",
+        "SIGSIG"
+      ]
+    },
+    "cuenca-molleturo-naranjal": {
+      "provincias": [
+        "Azuay",
+        "Guayas"
+      ],
+      "cantones": [
+        "Cuenca",
+        "NARANJAL"
+      ]
+    },
+    "giron-lentag": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "Giron",
+        "SAN FERNANDO"
+      ]
+    },
+    "cuenca-guarumales-mendez-macas": {
+      "provincias": [
+        "Azuay",
+        "Cañar",
+        "Chimborazo",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "AZOGUES",
+        "Cuenca",
+        "MORONA",
+        "PAUTE",
+        "SANTIAGO",
+        "SEVILLA DE ORO",
+        "SUCUA"
+      ]
+    },
+    "biblian-zhud-la-troncal": {
+      "provincias": [
+        "Cañar",
+        "ZONA NO DELIMITADA"
+      ],
+      "cantones": [
+        "BIBLIAN",
+        "Cañar",
+        "EL PIEDRERO",
+        "LA TRONCAL",
+        "SUSCAL"
+      ]
+    },
+    "el-triunfo-la-troncal-cochancay": {
+      "provincias": [
+        "Cañar",
+        "ZONA NO DELIMITADA"
+      ],
+      "cantones": [
+        "EL PIEDRERO",
+        "LA TRONCAL"
+      ]
+    },
+    "canar-biblian": {
+      "provincias": [
+        "Cañar"
+      ],
+      "cantones": [
+        "BIBLIAN"
+      ]
+    },
+    "biblian-azogues-limite-provincial-canar-azuay": {
+      "provincias": [
+        "Cañar"
+      ],
+      "cantones": [
+        "BIBLIAN",
+        "DELEG"
+      ]
+    },
+    "tulcan-rumichaca": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "TULCAN"
+      ]
+    },
+    "tulcan-julio-andrade": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "TULCAN"
+      ]
+    },
+    "carmelo-julio-andrade-tulcan": {
+      "provincias": [
+        "Carchi",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "Sucumbíos",
+        "TULCAN"
+      ]
+    },
+    "chical-maldonado-tufino": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "TULCAN"
+      ]
+    },
+    "latacunga-zumbahua": {
+      "provincias": [
+        "Cotopaxi"
+      ],
+      "cantones": [
+        "LATACUNGA",
+        "PUJILI"
+      ]
+    },
+    "pujili-la-mana": {
+      "provincias": [
+        "Cotopaxi"
+      ],
+      "cantones": [
+        "LA MANA",
+        "PUJILI"
+      ]
+    },
+    "ibarra-otavalo": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "ANTONIO ANTE",
+        "IBARRA",
+        "OTAVALO"
+      ]
+    },
+    "ibarra-urcuqui": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "ANTONIO ANTE",
+        "IBARRA",
+        "SAN MIGUEL DE URCUQUI"
+      ]
+    },
+    "otavalo-cotacachi": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "COTACACHI",
+        "OTAVALO"
+      ]
+    },
+    "salinas-la-carolina-lita": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "IBARRA"
+      ]
+    },
+    "zumbahua-latacunga": {
+      "provincias": [
+        "Cotopaxi"
+      ],
+      "cantones": [
+        "LATACUNGA",
+        "PUJILI"
+      ]
+    },
+    "balsas-rio-pindo": {
+      "provincias": [
+        "El Oro",
+        "Loja"
+      ],
+      "cantones": [
+        "BALSAS",
+        "CHAGUARPAMBA",
+        "PALTAS",
+        "PIÑAS"
+      ]
+    },
+    "portovelo-salati-ambocas-el-cisne": {
+      "provincias": [
+        "El Oro",
+        "Loja"
+      ],
+      "cantones": [
+        "Loja",
+        "PORTOVELO"
+      ]
+    },
+    "huaquillas-arenillas": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "ARENILLAS",
+        "HUAQUILLAS"
+      ]
+    },
+    "santa-rosa-machala": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "MACHALA",
+        "SANTA ROSA"
+      ]
+    },
+    "pasaje-santa-rosa": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "MACHALA",
+        "PASAJE",
+        "SANTA ROSA"
+      ]
+    },
+    "arenillas-santa-rosa": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "ARENILLAS",
+        "SANTA ROSA"
+      ]
+    },
+    "loja-saraguro": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "Loja",
+        "SARAGURO"
+      ]
+    },
+    "loja-catamayo": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CATAMAYO",
+        "Loja"
+      ]
+    },
+    "loja-malacatos": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CATAMAYO",
+        "Loja"
+      ]
+    },
+    "loja-zamora": {
+      "provincias": [
+        "Loja",
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "Loja",
+        "Zamora"
+      ]
+    },
+    "via-alamor-arenillas": {
+      "provincias": [
+        "El Oro",
+        "Loja"
+      ],
+      "cantones": [
+        "ARENILLAS",
+        "LAS LAJAS",
+        "PUYANGO"
+      ]
+    },
+    "via-cariamanga-espindola": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CALVAS",
+        "ESPINDOLA"
+      ]
+    },
+    "via-cariamanga-sozoranga": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CALVAS",
+        "SOZORANGA"
+      ]
+    },
+    "via-catacocha-el-empalme-lucarqui-macara": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "MACARA",
+        "PALTAS",
+        "SOZORANGA"
+      ]
+    },
+    "via-el-empalme-celica-alamor": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CELICA",
+        "PALTAS",
+        "PUYANGO"
+      ]
+    },
+    "via-olmedo-chaguarpamba": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CHAGUARPAMBA",
+        "OLMEDO"
+      ]
+    },
+    "via-yangana-valladolid-zumba": {
+      "provincias": [
+        "Loja",
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "CHINCHIPE",
+        "Loja",
+        "PALANDA"
+      ]
+    },
+    "san-pedro-las-chinchas-via-a-la-costa": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CATAMAYO",
+        "GONZANAMA"
+      ]
+    },
+    "via-sozoranga-macara-penjamo": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "MACARA",
+        "SOZORANGA"
+      ]
+    },
+    "via-velacruz-catacocha": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CATAMAYO",
+        "OLMEDO",
+        "PALTAS"
+      ]
+    },
+    "esmeraldas-quininde": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "Esmeraldas",
+        "QUININDE"
+      ]
+    },
+    "esmeraldas-rioverde": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "Esmeraldas",
+        "RIOVERDE"
+      ]
+    },
+    "esmeraldas-san-lorenzo": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "ELOY ALFARO",
+        "Esmeraldas",
+        "RIOVERDE",
+        "SAN LORENZO"
+      ]
+    },
+    "san-lorenzo-san-jose": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "SAN LORENZO"
+      ]
+    },
+    "y-del-salto-chamanga": {
+      "provincias": [
+        "Esmeraldas",
+        "Manabí"
+      ],
+      "cantones": [
+        "ATACAMES",
+        "MUISNE",
+        "PEDERNALES"
+      ]
+    },
+    "y-san-mateo-viche": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "Esmeraldas",
+        "QUININDE"
+      ]
+    },
+    "manta-portoviejo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JARAMIJO",
+        "MANTA",
+        "MONTECRISTI",
+        "PORTOVIEJO"
+      ]
+    },
+    "manta-san-mateo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "MANTA"
+      ]
+    },
+    "montecristi-jipijapa": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JIPIJAPA",
+        "MONTECRISTI"
+      ]
+    },
+    "portoviejo-santa-ana": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PORTOVIEJO",
+        "SANTA ANA"
+      ]
+    },
+    "pedernales-coaque": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PEDERNALES"
+      ]
+    },
+    "pedernales-cojimies": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PEDERNALES"
+      ]
+    },
+    "pedernales-jama": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JAMA",
+        "PEDERNALES"
+      ]
+    },
+    "jama-canoa": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JAMA",
+        "SAN VICENTE"
+      ]
+    },
+    "canoa-san-vicente": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "SAN VICENTE"
+      ]
+    },
+    "bahia-san-clemente-rocafuerte": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "ROCAFUERTE",
+        "SUCRE"
+      ]
+    },
+    "canuto-calceta": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "Bolívar",
+        "CHONE"
+      ]
+    },
+    "rocafuerte-tosagua": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "ROCAFUERTE",
+        "TOSAGUA"
+      ]
+    },
+    "tosagua-bahia": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "SAN VICENTE",
+        "SUCRE",
+        "TOSAGUA"
+      ]
+    },
+    "jipijapa-la-cadena": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JIPIJAPA",
+        "PAJAN"
+      ]
+    },
+    "via-quininde-el-mirador-esmeraldas": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "Esmeraldas",
+        "QUININDE"
+      ]
+    },
+    "san-jose-de-chamanga-pedernales": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PEDERNALES"
+      ]
+    },
+    "jipijapa-limite-provincial-manabi-guayas-la-cadena": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JIPIJAPA",
+        "PAJAN"
+      ]
+    },
+    "guayaquil-el-triunfo": {
+      "provincias": [
+        "Cañar",
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "LA TRONCAL",
+        "NARANJAL",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "guayaquil-bucay": {
+      "provincias": [
+        "Chimborazo",
+        "Guayas"
+      ],
+      "cantones": [
+        "CUMANDA",
+        "DURAN",
+        "GNRAL. ANTONIO ELIZALDE",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "NARANJITO",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "guayaquil-naranjal": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "NARANJAL"
+      ]
+    },
+    "guayaquil-progreso-playas": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "GUAYAQUIL"
+      ]
+    },
+    "guayaquil-progreso-salinas": {
+      "provincias": [
+        "Guayas",
+        "Santa Elena"
+      ],
+      "cantones": [
+        "GUAYAQUIL",
+        "LA LIBERTAD",
+        "SALINAS",
+        "Santa Elena"
+      ]
+    },
+    "guayaquil-daule": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DAULE",
+        "GUAYAQUIL"
+      ]
+    },
+    "guayaquil-balzar": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "BALZAR",
+        "COLIMES",
+        "DAULE",
+        "GUAYAQUIL",
+        "PALESTINA",
+        "SANTA LUCIA"
+      ]
+    },
+    "guayaquil-milagro": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "guayaquil-jujan": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "guayaquil-yaguachi": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "guayaquil-samborondon": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "SAMBORONDON",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "coca-lago-agrio": {
+      "provincias": [
+        "Orellana",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "LA JOYA DE LOS SACHAS",
+        "LAGO AGRIO",
+        "Orellana",
+        "SHUSHUFINDI"
+      ]
+    },
+    "coca-loreto": {
+      "provincias": [
+        "Orellana"
+      ],
+      "cantones": [
+        "LORETO",
+        "Orellana"
+      ]
+    },
+    "coca-tena-y-de-narupa": {
+      "provincias": [
+        "Napo",
+        "Orellana"
+      ],
+      "cantones": [
+        "ARCHIDONA",
+        "LORETO",
+        "Orellana"
+      ]
+    },
+    "coca-dayuma": {
+      "provincias": [
+        "Orellana"
+      ],
+      "cantones": [
+        "Orellana"
+      ]
+    },
+    "coca-joya-de-los-sachas": {
+      "provincias": [
+        "Orellana"
+      ],
+      "cantones": [
+        "LA JOYA DE LOS SACHAS",
+        "Orellana"
+      ]
+    },
+    "tena-baeza": {
+      "provincias": [
+        "Napo"
+      ],
+      "cantones": [
+        "ARCHIDONA",
+        "QUIJOS",
+        "TENA"
+      ]
+    },
+    "tena-puyo": {
+      "provincias": [
+        "Napo",
+        "Pastaza"
+      ],
+      "cantones": [
+        "CARLOS JULIO AROSEMENA TOLA",
+        "Pastaza",
+        "SANTA CLARA",
+        "TENA"
+      ]
+    },
+    "tena-loreto": {
+      "provincias": [
+        "Napo",
+        "Orellana"
+      ],
+      "cantones": [
+        "ARCHIDONA",
+        "LORETO",
+        "TENA"
+      ]
+    },
+    "y-de-baeza-lago-agrio": {
+      "provincias": [
+        "Napo",
+        "Orellana",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "CASCALES",
+        "EL CHACO",
+        "LAGO AGRIO",
+        "Orellana",
+        "QUIJOS"
+      ]
+    },
+    "y-de-baeza-papallacta": {
+      "provincias": [
+        "Napo"
+      ],
+      "cantones": [
+        "QUIJOS"
+      ]
+    },
+    "banos-puyo": {
+      "provincias": [
+        "Pastaza",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "BAÑOS DE AGUA SANTA",
+        "MERA",
+        "Pastaza"
+      ]
+    },
+    "ambato-banos": {
+      "provincias": [
+        "Tungurahua"
+      ],
+      "cantones": [
+        "AMBATO",
+        "BAÑOS DE AGUA SANTA",
+        "PATATE",
+        "SAN PEDRO DE PELILEO"
+      ]
+    },
+    "ambato-guaranda": {
+      "provincias": [
+        "Bolívar",
+        "Chimborazo",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "AMBATO",
+        "GUARANDA",
+        "RIOBAMBA"
+      ]
+    },
+    "ambato-salcedo": {
+      "provincias": [
+        "Cotopaxi",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "AMBATO",
+        "SALCEDO"
+      ]
+    },
+    "ambato-pillaro": {
+      "provincias": [
+        "Tungurahua"
+      ],
+      "cantones": [
+        "AMBATO",
+        "SANTIAGO DE PILLARO"
+      ]
+    },
+    "ambato-pelileo": {
+      "provincias": [
+        "Tungurahua"
+      ],
+      "cantones": [
+        "AMBATO",
+        "SAN PEDRO DE PELILEO"
+      ]
+    },
+    "riobamba-guaranda": {
+      "provincias": [
+        "Bolívar",
+        "Chimborazo"
+      ],
+      "cantones": [
+        "GUARANDA",
+        "RIOBAMBA"
+      ]
+    },
+    "riobamba-cuenca": {
+      "provincias": [
+        "Azuay",
+        "Cañar",
+        "Chimborazo"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "BIBLIAN",
+        "Cañar",
+        "CHUNCHI",
+        "COLTA",
+        "Cuenca",
+        "DELEG",
+        "EL TAMBO",
+        "GUAMOTE",
+        "RIOBAMBA"
+      ]
+    },
+    "riobamba-guayaquil": {
+      "provincias": [
+        "Bolívar",
+        "Chimborazo",
+        "Guayas",
+        "Los Ríos"
+      ],
+      "cantones": [
+        "BABAHOYO",
+        "CHILLANES",
+        "COLTA",
+        "DURAN",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "RIOBAMBA",
+        "SAN JACINTO DE YAGUACHI",
+        "SAN MIGUEL",
+        "SIMON Bolívar"
+      ]
+    },
+    "riobamba-penipe-banos": {
+      "provincias": [
+        "Chimborazo",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "BAÑOS DE AGUA SANTA",
+        "GUANO",
+        "PENIPE",
+        "RIOBAMBA",
+        "SAN PEDRO DE PELILEO"
+      ]
+    },
+    "colta-pallatanga": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "COLTA",
+        "PALLATANGA"
+      ]
+    },
+    "guamote-alausi": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "GUAMOTE"
+      ]
+    },
+    "santo-domingo-el-carmen": {
+      "provincias": [
+        "Manabí",
+        "Santo Domingo",
+        "Santo Domingo DE LOS TSACHILAS"
+      ],
+      "cantones": [
+        "EL CARMEN",
+        "Santo Domingo"
+      ]
+    },
+    "santo-domingo-patricia-pilar": {
+      "provincias": [
+        "Los Ríos",
+        "Santo Domingo",
+        "Santo Domingo DE LOS TSACHILAS"
+      ],
+      "cantones": [
+        "BUENA FE",
+        "Santo Domingo"
+      ]
+    },
+    "santo-domingo-la-concordia-la-independencia": {
+      "provincias": [
+        "Esmeraldas",
+        "Santo Domingo",
+        "Santo Domingo DE LOS TSACHILAS"
+      ],
+      "cantones": [
+        "LA CONCORDIA",
+        "Santo Domingo"
+      ]
+    },
+    "santo-domingo-las-mercedes-los-bancos": {
+      "provincias": [
+        "Pichincha",
+        "Santo Domingo",
+        "Santo Domingo DE LOS TSACHILAS"
+      ],
+      "cantones": [
+        "SAN MIGUEL DE LOS BANCOS",
+        "Santo Domingo"
+      ]
+    },
+    "lago-agrio-el-reventador": {
+      "provincias": [
+        "Napo",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "CASCALES",
+        "EL CHACO",
+        "GONZALO PIZARRO",
+        "LAGO AGRIO"
+      ]
+    },
+    "lago-agrio-shushufindi": {
+      "provincias": [
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "LAGO AGRIO",
+        "SHUSHUFINDI"
+      ]
+    },
+    "lago-agrio-cuyabeno-puerto-el-carmen": {
+      "provincias": [
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "LAGO AGRIO",
+        "PUTUMAYO"
+      ]
+    },
+    "via-interoceanica-la-bonita-el-playon": {
+      "provincias": [
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "Sucumbíos"
+      ]
+    },
+    "via-santa-elena-ruta-del-spondylus": {
+      "provincias": [
+        "Manabí",
+        "Santa Elena"
+      ],
+      "cantones": [
+        "PUERTO LOPEZ",
+        "Santa Elena"
+      ]
+    },
+    "via-zamora-yantzaza": {
+      "provincias": [
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "CENTINELA DEL CONDOR",
+        "YANTZAZA",
+        "Zamora"
+      ]
+    },
+    "via-yantzaza-zumbi": {
+      "provincias": [
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "CENTINELA DEL CONDOR",
+        "YANTZAZA"
+      ]
+    },
+    "zumbi-paquisha": {
+      "provincias": [
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "CENTINELA DEL CONDOR",
+        "PAQUISHA"
+      ]
+    },
+    "el-pangui-tundayme": {
+      "provincias": [
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "EL PANGUI"
+      ]
+    },
+    "via-valladolid-palanda-zumba": {
+      "provincias": [
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "CHINCHIPE",
+        "PALANDA"
+      ]
+    },
+    "zumba-la-balsa": {
+      "provincias": [
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "CHINCHIPE"
+      ]
+    },
+    "zamora-yacuambi": {
+      "provincias": [
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "YACUAMBI",
+        "Zamora"
+      ]
+    },
+    "san-juan-sigsig": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "CHORDELEG",
+        "GUALACEO",
+        "SIGSIG"
+      ]
+    },
+    "victoria-del-portete-giron": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "Cuenca",
+        "Giron"
+      ]
+    },
+    "cumbe-la-jarata": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "Cuenca",
+        "Giron",
+        "NABON"
+      ]
+    },
+    "molleturo-sayausi": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "Cuenca"
+      ]
+    },
+    "echeandia-via-guaranda": {
+      "provincias": [
+        "Bolívar"
+      ],
+      "cantones": [
+        "ECHEANDIA",
+        "GUARANDA"
+      ]
+    },
+    "magdalena-via-cochabamba": {
+      "provincias": [
+        "Bolívar"
+      ],
+      "cantones": [
+        "CHIMBO",
+        "SAN MIGUEL"
+      ]
+    },
+    "balzapamba-chaupiacu": {
+      "provincias": [
+        "Bolívar"
+      ],
+      "cantones": [
+        "SAN MIGUEL"
+      ]
+    },
+    "guanujo-via-ambato": {
+      "provincias": [
+        "Bolívar",
+        "Chimborazo",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "AMBATO",
+        "GUARANDA",
+        "RIOBAMBA"
+      ]
+    },
+    "echeandia-via-caluma": {
+      "provincias": [
+        "Bolívar",
+        "Los Ríos"
+      ],
+      "cantones": [
+        "CALUMA",
+        "ECHEANDIA",
+        "URDANETA"
+      ]
+    },
+    "guaranda-via-caluma": {
+      "provincias": [
+        "Bolívar"
+      ],
+      "cantones": [
+        "CALUMA",
+        "GUARANDA"
+      ]
+    },
+    "guaranda-via-san-simon": {
+      "provincias": [
+        "Bolívar"
+      ],
+      "cantones": [
+        "GUARANDA"
+      ]
+    },
+    "las-naves-via-ventanas": {
+      "provincias": [
+        "Bolívar",
+        "Los Ríos"
+      ],
+      "cantones": [
+        "LAS NAVES",
+        "VENTANAS"
+      ]
+    },
+    "magdalena-cochabamba-telimbela": {
+      "provincias": [
+        "Bolívar"
+      ],
+      "cantones": [
+        "CHIMBO",
+        "SAN MIGUEL"
+      ]
+    },
+    "cuenca-zhud-cochancay": {
+      "provincias": [
+        "Azuay",
+        "Cañar",
+        "ZONA NO DELIMITADA"
+      ],
+      "cantones": [
+        "BIBLIAN",
+        "Cañar",
+        "Cuenca",
+        "EL PIEDRERO",
+        "EL TAMBO",
+        "SUSCAL"
+      ]
+    },
+    "ducur-cochancay": {
+      "provincias": [
+        "Cañar",
+        "ZONA NO DELIMITADA"
+      ],
+      "cantones": [
+        "Cañar",
+        "EL PIEDRERO"
+      ]
+    },
+    "zhud-canar": {
+      "provincias": [
+        "Cañar"
+      ],
+      "cantones": [
+        "BIBLIAN",
+        "Cañar",
+        "EL TAMBO"
+      ]
+    },
+    "cochancay-ducur": {
+      "provincias": [
+        "Cañar",
+        "ZONA NO DELIMITADA"
+      ],
+      "cantones": [
+        "Cañar",
+        "EL PIEDRERO"
+      ]
+    },
+    "el-angel-bolivar": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "Bolívar",
+        "ESPEJO"
+      ]
+    },
+    "julio-andrade-el-carmelo": {
+      "provincias": [
+        "Carchi",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "Sucumbíos",
+        "TULCAN"
+      ]
+    },
+    "tulcan-tufino": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "TULCAN"
+      ]
+    },
+    "e187-el-angel-mira-mascarilla": {
+      "provincias": [
+        "Carchi",
+        "Imbabura"
+      ],
+      "cantones": [
+        "Bolívar",
+        "ESPEJO",
+        "IBARRA",
+        "MIRA"
+      ]
+    },
+    "chical-gualchan": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "ESPEJO",
+        "TULCAN"
+      ]
+    },
+    "chical-quinshul-penas-blancas-el-pailon": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "TULCAN"
+      ]
+    },
+    "cuesaca-bolivar": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "Bolívar",
+        "MONTUFAR"
+      ]
+    },
+    "bolivar-piquiucho": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "Bolívar"
+      ]
+    },
+    "jijon-y-caamano-la-carolina": {
+      "provincias": [
+        "Carchi",
+        "Imbabura"
+      ],
+      "cantones": [
+        "ESPEJO",
+        "MIRA"
+      ]
+    },
+    "el-angel-mira": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "ESPEJO",
+        "MIRA"
+      ]
+    },
+    "san-gabriel-la-paz": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "Bolívar",
+        "MONTUFAR"
+      ]
+    },
+    "san-francisco-troje-el-playon": {
+      "provincias": [
+        "Carchi",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "Sucumbíos",
+        "TULCAN"
+      ]
+    },
+    "julio-andrade-huaca": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "SAN PEDRO DE HUACA",
+        "TULCAN"
+      ]
+    },
+    "la-paz-bolivar": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "Bolívar"
+      ]
+    },
+    "penas-blancas-maldonado": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "TULCAN"
+      ]
+    },
+    "sigchos-latacunga": {
+      "provincias": [
+        "Cotopaxi"
+      ],
+      "cantones": [
+        "LATACUNGA",
+        "SAQUISILI",
+        "SIGCHOS"
+      ]
+    },
+    "salcedo-latacunga": {
+      "provincias": [
+        "Cotopaxi"
+      ],
+      "cantones": [
+        "LATACUNGA",
+        "SALCEDO"
+      ]
+    },
+    "pilalo-zumbahua": {
+      "provincias": [
+        "Cotopaxi"
+      ],
+      "cantones": [
+        "PUJILI"
+      ]
+    },
+    "latacunga-pujili": {
+      "provincias": [
+        "Cotopaxi"
+      ],
+      "cantones": [
+        "LATACUNGA",
+        "PUJILI"
+      ]
+    },
+    "alausi-huigra-el-piedrero-el-triunfo": {
+      "provincias": [
+        "Cañar",
+        "Chimborazo",
+        "ZONA NO DELIMITADA"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "Cañar",
+        "CUMANDA",
+        "EL PIEDRERO",
+        "LA TRONCAL"
+      ]
+    },
+    "alausi-chunchi-armenia-huigra": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "CHUNCHI"
+      ]
+    },
+    "guamote-socavon-macas": {
+      "provincias": [
+        "Chimborazo",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "GUAMOTE",
+        "MORONA"
+      ]
+    },
+    "riobamba-cebadas-macas": {
+      "provincias": [
+        "Chimborazo",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "GUAMOTE",
+        "MORONA",
+        "RIOBAMBA"
+      ]
+    },
+    "riobamba-penipe-cotalo-banos": {
+      "provincias": [
+        "Chimborazo",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "BAÑOS DE AGUA SANTA",
+        "GUANO",
+        "QUERO",
+        "RIOBAMBA",
+        "SAN PEDRO DE PELILEO"
+      ]
+    },
+    "riobamba-colta": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "COLTA",
+        "RIOBAMBA"
+      ]
+    },
+    "alausi-chunchi-canar": {
+      "provincias": [
+        "Cañar",
+        "Chimborazo"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "BIBLIAN",
+        "Cañar",
+        "CHUNCHI",
+        "EL TAMBO"
+      ]
+    },
+    "pallatanga-cumanda": {
+      "provincias": [
+        "Bolívar",
+        "Chimborazo"
+      ],
+      "cantones": [
+        "CHILLANES",
+        "CUMANDA",
+        "PALLATANGA"
+      ]
+    },
+    "riobamba-san-juan-guaranda": {
+      "provincias": [
+        "Bolívar",
+        "Chimborazo"
+      ],
+      "cantones": [
+        "GUARANDA",
+        "RIOBAMBA"
+      ]
+    },
+    "chunchi-huigra-alausi": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "CHUNCHI"
+      ]
+    },
+    "riobamba-penipe-bilbao-banos": {
+      "provincias": [
+        "Chimborazo",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "BAÑOS DE AGUA SANTA",
+        "GUANO",
+        "PENIPE",
+        "RIOBAMBA",
+        "SAN PEDRO DE PELILEO"
+      ]
+    },
+    "chunchi-huigra-chunchi": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "CHUNCHI"
+      ]
+    },
+    "riobamba-ambato": {
+      "provincias": [
+        "Chimborazo",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "AMBATO",
+        "CEVALLOS",
+        "GUANO",
+        "MOCHA",
+        "QUERO",
+        "RIOBAMBA"
+      ]
+    },
+    "guamote-cebadas-macas": {
+      "provincias": [
+        "Chimborazo",
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "GUAMOTE",
+        "MORONA"
+      ]
+    },
+    "penipe-riobamba": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "GUANO",
+        "PENIPE",
+        "RIOBAMBA"
+      ]
+    },
+    "colta-guamote": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "COLTA",
+        "GUAMOTE"
+      ]
+    },
+    "via-portovelo-zaruma": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "PORTOVELO",
+        "ZARUMA"
+      ]
+    },
+    "via-la-avanzada-saracay": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "PIÑAS",
+        "SANTA ROSA"
+      ]
+    },
+    "via-pinas-portovelo": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "PIÑAS",
+        "PORTOVELO"
+      ]
+    },
+    "via-portovelo-pindo-trapiche": {
+      "provincias": [
+        "El Oro",
+        "Loja"
+      ],
+      "cantones": [
+        "CHAGUARPAMBA",
+        "PIÑAS",
+        "PORTOVELO"
+      ]
+    },
+    "via-paccha-ayapamba": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "ATAHUALPA"
+      ]
+    },
+    "saracay-pinas": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "PIÑAS"
+      ]
+    },
+    "el-guabo-cana-quemada-pasaje": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "EL GUABO",
+        "PASAJE"
+      ]
+    },
+    "pasaje-quera": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "PASAJE"
+      ]
+    },
+    "via-cerro-azul-paccha": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "ATAHUALPA",
+        "CHILLA",
+        "PASAJE"
+      ]
+    },
+    "via-balsas-marcabeli": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "BALSAS",
+        "MARCABELI"
+      ]
+    },
+    "zaruma-atahualpa": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "ATAHUALPA",
+        "ZARUMA"
+      ]
+    },
+    "el-guabo-ponce-enriquez": {
+      "provincias": [
+        "Azuay",
+        "El Oro"
+      ],
+      "cantones": [
+        "CAMILO PONCE ENRIQUEZ",
+        "EL GUABO"
+      ]
+    },
+    "chilla-quera": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "CHILLA",
+        "PASAJE"
+      ]
+    },
+    "via-las-lajas-puyango": {
+      "provincias": [
+        "El Oro",
+        "Loja"
+      ],
+      "cantones": [
+        "LAS LAJAS",
+        "PUYANGO"
+      ]
+    },
+    "via-arenillas-las-lajas": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "ARENILLAS",
+        "LAS LAJAS"
+      ]
+    },
+    "saracay-balsas": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "BALSAS",
+        "PIÑAS"
+      ]
+    },
+    "tonchigue-y-del-salto-muisne": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "MUISNE"
+      ]
+    },
+    "esmeraldas-san-mateo-chaflu": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "Esmeraldas"
+      ]
+    },
+    "same-sua-tonchigue": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "ATACAMES",
+        "MUISNE"
+      ]
+    },
+    "palestina-rioverde": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "RIOVERDE"
+      ]
+    },
+    "esmeraldas-camarones-colope": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "Esmeraldas"
+      ]
+    },
+    "esmeraldas-el-eden-rioverde": {
+      "provincias": [
+        "Esmeraldas"
+      ],
+      "cantones": [
+        "Esmeraldas",
+        "RIOVERDE"
+      ]
+    },
+    "baltra-bellavista": {
+      "provincias": [
+        "Galápagos"
+      ],
+      "cantones": [
+        "SANTA CRUZ"
+      ]
+    },
+    "via-guayaquil-isidro-ayora": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "GUAYAQUIL",
+        "ISIDRO AYORA",
+        "NOBOL"
+      ]
+    },
+    "via-guayaquil-progreso-playas": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "GUAYAQUIL"
+      ]
+    },
+    "via-guayaquil-lomas-de-sargentillo": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DAULE",
+        "GUAYAQUIL",
+        "LOMAS DE SARGENTILLO",
+        "NOBOL"
+      ]
+    },
+    "via-guayaquil-santa-lucia": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DAULE",
+        "GUAYAQUIL",
+        "SANTA LUCIA"
+      ]
+    },
+    "via-guayaquil-salitre": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DAULE",
+        "GUAYAQUIL",
+        "SALITRE",
+        "SAMBORONDON"
+      ]
+    },
+    "via-guayaquil-jujan": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-guayaquil-el-triunfo": {
+      "provincias": [
+        "Cañar",
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "EL TRIUNFO",
+        "GUAYAQUIL",
+        "LA TRONCAL",
+        "NARANJAL",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-guayaquil-milagro": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-naranjal-molleturo-cuenca": {
+      "provincias": [
+        "Azuay",
+        "Guayas"
+      ],
+      "cantones": [
+        "Cuenca",
+        "NARANJAL"
+      ]
+    },
+    "via-guayaquil-colimes": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "COLIMES",
+        "DAULE",
+        "GUAYAQUIL",
+        "PALESTINA",
+        "SANTA LUCIA"
+      ]
+    },
+    "via-guayaquil-el-empalme": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "BALZAR",
+        "COLIMES",
+        "DAULE",
+        "EMPALME",
+        "GUAYAQUIL",
+        "PALESTINA",
+        "SALITRE",
+        "SANTA LUCIA"
+      ]
+    },
+    "via-guayaquil-marcelino-mariduena": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "CRNEL. MARCELINO MARIDUEÑA",
+        "DURAN",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "NARANJITO",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-guayaquil-samborondon": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "SAMBORONDON",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-guayaquil-yaguachi": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-guayaquil-simon-bolivar": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-guayaquil-balzar": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "BALZAR",
+        "COLIMES",
+        "DAULE",
+        "GUAYAQUIL",
+        "PALESTINA",
+        "SANTA LUCIA"
+      ]
+    },
+    "via-guayaquil-balao": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "BALAO",
+        "DURAN",
+        "GUAYAQUIL",
+        "NARANJAL"
+      ]
+    },
+    "via-guayaquil-nobol": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DAULE",
+        "GUAYAQUIL"
+      ]
+    },
+    "via-guayaquil-progreso-salinas": {
+      "provincias": [
+        "Guayas",
+        "Santa Elena"
+      ],
+      "cantones": [
+        "GUAYAQUIL",
+        "LA LIBERTAD",
+        "SALINAS",
+        "Santa Elena"
+      ]
+    },
+    "via-guayaquil-naranjal": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "NARANJAL"
+      ]
+    },
+    "via-guayaquil-pedro-carbo": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "GUAYAQUIL",
+        "ISIDRO AYORA",
+        "NOBOL",
+        "PEDRO CARBO"
+      ]
+    },
+    "via-guayaquil-naranjito": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DURAN",
+        "GUAYAQUIL",
+        "MILAGRO",
+        "NARANJITO",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-guayaquil-bucay": {
+      "provincias": [
+        "Cañar",
+        "Chimborazo",
+        "Guayas",
+        "ZONA NO DELIMITADA"
+      ],
+      "cantones": [
+        "CUMANDA",
+        "DURAN",
+        "EL PIEDRERO",
+        "EL TRIUNFO",
+        "GNRAL. ANTONIO ELIZALDE",
+        "GUAYAQUIL",
+        "LA TRONCAL",
+        "NARANJAL",
+        "SAN JACINTO DE YAGUACHI"
+      ]
+    },
+    "via-guayaquil-palestina": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DAULE",
+        "GUAYAQUIL",
+        "PALESTINA",
+        "SANTA LUCIA"
+      ]
+    },
+    "via-guayaquil-daule": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "DAULE",
+        "GUAYAQUIL"
+      ]
+    },
+    "salinas-la-carolina-lita-e10": {
+      "provincias": [
+        "Carchi",
+        "Imbabura"
+      ],
+      "cantones": [
+        "IBARRA",
+        "MIRA"
+      ]
+    },
+    "ibarra-imbaya-urcuqui": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "ANTONIO ANTE",
+        "IBARRA",
+        "SAN MIGUEL DE URCUQUI"
+      ]
+    },
+    "otavalo-tangali-selva-alegre": {
+      "provincias": [
+        "Imbabura",
+        "Pichincha"
+      ],
+      "cantones": [
+        "OTAVALO",
+        "Quito"
+      ]
+    },
+    "lita-la-carolina": {
+      "provincias": [
+        "Carchi",
+        "Imbabura"
+      ],
+      "cantones": [
+        "IBARRA",
+        "MIRA"
+      ]
+    },
+    "e35-ibarra-e35-ambuqui-e35-juncal": {
+      "provincias": [
+        "Carchi",
+        "Imbabura"
+      ],
+      "cantones": [
+        "Bolívar",
+        "IBARRA"
+      ]
+    },
+    "quiroga-otavalo": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "OTAVALO"
+      ]
+    },
+    "e35-ibarra-e35-antonio-ante-e35-otavalo": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "ANTONIO ANTE",
+        "IBARRA",
+        "OTAVALO"
+      ]
+    },
+    "atuntaqui-la-merced-cotacachi": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "ANTONIO ANTE",
+        "COTACACHI"
+      ]
+    },
+    "atuntaqui-imantag-cotacachi": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "ANTONIO ANTE",
+        "COTACACHI"
+      ]
+    },
+    "e35-otavalo-pinsaqui-cotacachi": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "COTACACHI",
+        "OTAVALO"
+      ]
+    },
+    "cotacachi-cuicocha-laguna-de-cuicocha": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "COTACACHI"
+      ]
+    },
+    "e35-cajas-gonzalez-suarez-san-rafael-otavalo": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "OTAVALO"
+      ]
+    },
+    "ibarra-la-esperanza-rumipamba-zuleta": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "IBARRA"
+      ]
+    },
+    "cotacachi-apuela-garcia-moreno": {
+      "provincias": [
+        "Imbabura"
+      ],
+      "cantones": [
+        "COTACACHI"
+      ]
+    },
+    "chaguarpamba-via-a-la-costa": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CHAGUARPAMBA",
+        "PALTAS",
+        "PUYANGO"
+      ]
+    },
+    "via-sabiango-macara": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "MACARA"
+      ]
+    },
+    "via-gonzanama-catamayo": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CATAMAYO",
+        "GONZANAMA"
+      ]
+    },
+    "via-loja-catamayo": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CATAMAYO",
+        "Loja"
+      ]
+    },
+    "via-loja-malacatos": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CATAMAYO",
+        "Loja"
+      ]
+    },
+    "via-gonzanama-quilanga": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "GONZANAMA",
+        "QUILANGA"
+      ]
+    },
+    "via-salati-ambocas": {
+      "provincias": [
+        "El Oro",
+        "Loja"
+      ],
+      "cantones": [
+        "Loja",
+        "PORTOVELO"
+      ]
+    },
+    "via-utuana-sozoranga": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CALVAS",
+        "SOZORANGA"
+      ]
+    },
+    "via-celica-el-empalme": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CELICA",
+        "PALTAS"
+      ]
+    },
+    "via-celica-alamor": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CELICA",
+        "PUYANGO"
+      ]
+    },
+    "via-pindal-alamor": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "PINDAL",
+        "PUYANGO"
+      ]
+    },
+    "via-loja-zamora": {
+      "provincias": [
+        "Loja",
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "Loja",
+        "Zamora"
+      ]
+    },
+    "vinces-san-juan": {
+      "provincias": [
+        "Los Ríos"
+      ],
+      "cantones": [
+        "BABA",
+        "PUEBLOVIEJO",
+        "VINCES"
+      ]
+    },
+    "baba-guare-el-guayabo": {
+      "provincias": [
+        "Los Ríos"
+      ],
+      "cantones": [
+        "BABA",
+        "BABAHOYO"
+      ]
+    },
+    "via-salitre-samborondon": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "SALITRE",
+        "SAMBORONDON"
+      ]
+    },
+    "empalme-e25-baba": {
+      "provincias": [
+        "Los Ríos"
+      ],
+      "cantones": [
+        "BABAHOYO",
+        "PUEBLOVIEJO",
+        "URDANETA"
+      ]
+    },
+    "pichincha-el-empalme": {
+      "provincias": [
+        "Guayas"
+      ],
+      "cantones": [
+        "EMPALME"
+      ]
+    },
+    "coaque-jama": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JAMA"
+      ]
+    },
+    "pedernales-el-carmen": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "CHONE",
+        "EL CARMEN",
+        "FLAVIO ALFARO",
+        "PEDERNALES"
+      ]
+    },
+    "via-el-carmen-flavio-alfaro": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "EL CARMEN",
+        "FLAVIO ALFARO"
+      ]
+    },
+    "tosagua-calceta": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "Bolívar",
+        "TOSAGUA"
+      ]
+    },
+    "t-de-buenos-aires-portoviejo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PORTOVIEJO",
+        "ROCAFUERTE"
+      ]
+    },
+    "via-portoviejo-montecristi": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "MONTECRISTI",
+        "PORTOVIEJO"
+      ]
+    },
+    "guayabal-la-pila": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "MONTECRISTI"
+      ]
+    },
+    "chone-canuto": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "CHONE"
+      ]
+    },
+    "suma-pedernales-puerto-nuevo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "CHONE",
+        "EL CARMEN",
+        "PEDERNALES"
+      ]
+    },
+    "san-jose-puerto-cayo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JIPIJAPA",
+        "MONTECRISTI"
+      ]
+    },
+    "san-mateo-san-lorenzo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "MANTA"
+      ]
+    },
+    "t-de-buenos-aires-manta": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JARAMIJO",
+        "MANTA",
+        "PORTOVIEJO",
+        "ROCAFUERTE"
+      ]
+    },
+    "via-jipijapa-puerto-cayo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JIPIJAPA"
+      ]
+    },
+    "jipijapa-pajan-la-cadena": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JIPIJAPA",
+        "PAJAN"
+      ]
+    },
+    "rocafuerte-el-rodeo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PORTOVIEJO",
+        "ROCAFUERTE"
+      ]
+    },
+    "san-placido-san-sebastian": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "Bolívar",
+        "PORTOVIEJO"
+      ]
+    },
+    "calceta-junin": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "Bolívar",
+        "JUNIN"
+      ]
+    },
+    "via-calceta-quiroga-pichincha": {
+      "provincias": [
+        "Guayas",
+        "Manabí"
+      ],
+      "cantones": [
+        "Bolívar",
+        "EMPALME",
+        "Pichincha"
+      ]
+    },
+    "puerto-cayo-machalilla": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JIPIJAPA",
+        "PUERTO LOPEZ"
+      ]
+    },
+    "via-junin-pueblo-nuevo-portoviejo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JUNIN",
+        "PORTOVIEJO"
+      ]
+    },
+    "via-puerto-lopez-salango": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PUERTO LOPEZ"
+      ]
+    },
+    "balsa-tumbada-pimpiguasi": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PORTOVIEJO"
+      ]
+    },
+    "chone-flavio-alfaro": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "CHONE",
+        "FLAVIO ALFARO"
+      ]
+    },
+    "rocafuerte-t-de-buenos-aires": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "ROCAFUERTE"
+      ]
+    },
+    "el-carmen-la-bramadora": {
+      "provincias": [
+        "Manabí",
+        "Santo Domingo",
+        "Santo Domingo DE LOS TSACHILAS"
+      ],
+      "cantones": [
+        "EL CARMEN",
+        "Santo Domingo"
+      ]
+    },
+    "santa-ana-poza-honda": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "SANTA ANA"
+      ]
+    },
+    "montecristi-jaramijo": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JARAMIJO",
+        "MONTECRISTI"
+      ]
+    },
+    "tosagua-chone": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "CHONE",
+        "TOSAGUA"
+      ]
+    },
+    "san-sebastian-pichincha": {
+      "provincias": [
+        "Guayas",
+        "Manabí"
+      ],
+      "cantones": [
+        "Bolívar",
+        "EMPALME",
+        "Pichincha",
+        "PORTOVIEJO"
+      ]
+    },
+    "via-canitas-charapoto": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "ROCAFUERTE",
+        "SUCRE"
+      ]
+    },
+    "tucumbatza-gualaquiza": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "GUALAQUIZA"
+      ]
+    },
+    "san-juan-bosco-tucumbatza": {
+      "provincias": [
+        "Morona Santiago"
+      ],
+      "cantones": [
+        "GUALAQUIZA",
+        "SAN JUAN BOSCO"
+      ]
+    },
+    "chontapunta-coca": {
+      "provincias": [
+        "Napo",
+        "Orellana",
+        "Pastaza"
+      ],
+      "cantones": [
+        "ARAJUNO",
+        "Orellana",
+        "TENA"
+      ]
+    },
+    "ahuano-chontapunta": {
+      "provincias": [
+        "Napo",
+        "Pastaza"
+      ],
+      "cantones": [
+        "ARAJUNO",
+        "TENA"
+      ]
+    },
+    "via-tena-archidona": {
+      "provincias": [
+        "Napo"
+      ],
+      "cantones": [
+        "ARCHIDONA",
+        "TENA"
+      ]
+    },
+    "cuyuja-baeza": {
+      "provincias": [
+        "Napo"
+      ],
+      "cantones": [
+        "QUIJOS"
+      ]
+    },
+    "el-chaco-lago-agrio": {
+      "provincias": [
+        "Napo",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "CASCALES",
+        "EL CHACO",
+        "GONZALO PIZARRO",
+        "LAGO AGRIO"
+      ]
+    },
+    "puerto-napo-ahuano": {
+      "provincias": [
+        "Napo"
+      ],
+      "cantones": [
+        "TENA"
+      ]
+    },
+    "sachas-lago-agrio": {
+      "provincias": [
+        "Orellana",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "LA JOYA DE LOS SACHAS",
+        "LAGO AGRIO",
+        "SHUSHUFINDI"
+      ]
+    },
+    "coca-ines-arango": {
+      "provincias": [
+        "Orellana"
+      ],
+      "cantones": [
+        "Orellana"
+      ]
+    },
+    "puyo-macas": {
+      "provincias": [
+        "Morona Santiago",
+        "Pastaza"
+      ],
+      "cantones": [
+        "HUAMBOYA",
+        "MERA",
+        "MORONA",
+        "PABLO SEXTO",
+        "PALORA",
+        "Pastaza"
+      ]
+    },
+    "puyo-santa-clara-tena": {
+      "provincias": [
+        "Napo",
+        "Pastaza"
+      ],
+      "cantones": [
+        "CARLOS JULIO AROSEMENA TOLA",
+        "Pastaza",
+        "SANTA CLARA",
+        "TENA"
+      ]
+    },
+    "puyo-shell": {
+      "provincias": [
+        "Pastaza"
+      ],
+      "cantones": [
+        "MERA",
+        "Pastaza"
+      ]
+    },
+    "cusubamba-guayllabamba": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "CAYAMBE",
+        "Quito"
+      ]
+    },
+    "e35-cayambe-cajas": {
+      "provincias": [
+        "Imbabura",
+        "Pichincha"
+      ],
+      "cantones": [
+        "CAYAMBE",
+        "OTAVALO",
+        "PEDRO MONCAYO"
+      ]
+    },
+    "calacali-quito": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "Quito"
+      ]
+    },
+    "san-miguel-de-los-bancos-pedro-vicente-maldonado": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "PEDRO VICENTE MALDONADO",
+        "SAN MIGUEL DE LOS BANCOS"
+      ]
+    },
+    "aloag-santo-domingo": {
+      "provincias": [
+        "Cotopaxi",
+        "Pichincha",
+        "Santo Domingo",
+        "Santo Domingo DE LOS TSACHILAS"
+      ],
+      "cantones": [
+        "MEJIA",
+        "Santo Domingo",
+        "SIGCHOS"
+      ]
+    },
+    "via-puerto-quito-rio-blanco": {
+      "provincias": [
+        "Esmeraldas",
+        "Pichincha"
+      ],
+      "cantones": [
+        "PUERTO Quito"
+      ]
+    },
+    "quito-guayllabamba": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "Quito"
+      ]
+    },
+    "guayllabamba-tabacundo": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "CAYAMBE",
+        "PEDRO MONCAYO",
+        "Quito"
+      ]
+    },
+    "via-pifo-papallacta": {
+      "provincias": [
+        "Napo",
+        "Pichincha"
+      ],
+      "cantones": [
+        "QUIJOS",
+        "Quito"
+      ]
+    },
+    "nanegalito-calacali": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "Quito"
+      ]
+    },
+    "nanegalito-san-miguel-de-los-bancos": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "Quito",
+        "SAN MIGUEL DE LOS BANCOS"
+      ]
+    },
+    "e35-checa-iguinaro": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "Quito"
+      ]
+    },
+    "pedro-vicente-maldonado-puerto-quito": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "PEDRO VICENTE MALDONADO",
+        "PUERTO Quito"
+      ]
+    },
+    "latacunga-quito": {
+      "provincias": [
+        "Cotopaxi",
+        "Pichincha"
+      ],
+      "cantones": [
+        "LATACUNGA",
+        "MEJIA",
+        "Quito"
+      ]
+    },
+    "guayllabamba-calderon": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "Quito"
+      ]
+    },
+    "quito-cayambe": {
+      "provincias": [
+        "Pichincha"
+      ],
+      "cantones": [
+        "CAYAMBE",
+        "Quito"
+      ]
+    },
+    "via-santo-domingo-las-mercedes-los-bancos": {
+      "provincias": [
+        "Pichincha",
+        "Santo Domingo",
+        "Santo Domingo DE LOS TSACHILAS"
+      ],
+      "cantones": [
+        "SAN MIGUEL DE LOS BANCOS",
+        "Santo Domingo"
+      ]
+    },
+    "via-valle-hermoso-cristobal-colon-los-bancos": {
+      "provincias": [
+        "Pichincha",
+        "Santo Domingo",
+        "Santo Domingo DE LOS TSACHILAS"
+      ],
+      "cantones": [
+        "SAN MIGUEL DE LOS BANCOS",
+        "Santo Domingo"
+      ]
+    },
+    "shushufindi-limoncocha-pto-itaya": {
+      "provincias": [
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "SHUSHUFINDI"
+      ]
+    },
+    "lago-agrio-jivino-verde-shushufindi": {
+      "provincias": [
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "LAGO AGRIO",
+        "SHUSHUFINDI"
+      ]
+    },
+    "pelileo-banos-pelileo": {
+      "provincias": [
+        "Tungurahua"
+      ],
+      "cantones": [
+        "BAÑOS DE AGUA SANTA",
+        "PATATE",
+        "SAN PEDRO DE PELILEO"
+      ]
+    },
+    "cotalo-pillate-cahuaji": {
+      "provincias": [
+        "Chimborazo",
+        "Tungurahua"
+      ],
+      "cantones": [
+        "GUANO",
+        "SAN PEDRO DE PELILEO"
+      ]
+    },
+    "via-antigua-zamora-loja": {
+      "provincias": [
+        "Loja",
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "Loja",
+        "Zamora"
+      ]
+    },
+    "via-paquisha-el-dorado-guayzimi": {
+      "provincias": [
+        "Zamora Chinchipe"
+      ],
+      "cantones": [
+        "CENTINELA DEL CONDOR",
+        "PAQUISHA"
+      ]
+    },
+    "guangarcucho-gualaceo-sigsig": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "CHORDELEG",
+        "Cuenca",
+        "GUALACEO",
+        "SIGSIG"
+      ]
+    },
+    "puente-loma-reten-policial-santa-isabel": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "SANTA ISABEL"
+      ]
+    },
+    "chicti-sevilla-de-oro": {
+      "provincias": [
+        "Azuay"
+      ],
+      "cantones": [
+        "EL PAN",
+        "GUACHAPALA",
+        "PAUTE",
+        "SEVILLA DE ORO"
+      ]
+    },
+    "via-san-lucas-saraguro": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "Loja",
+        "SARAGURO"
+      ]
+    },
+    "via-catacocha-el-empalme-lucarqui": {
+      "provincias": [
+        "Loja"
+      ],
+      "cantones": [
+        "CELICA",
+        "MACARA",
+        "PALTAS"
+      ]
+    },
+    "panamericana-norte-sector-y-del-barrial": {
+      "provincias": [
+        "Carchi"
+      ],
+      "cantones": [
+        "TULCAN"
+      ]
+    },
+    "piquiucho-tumbatu": {
+      "provincias": [
+        "Carchi",
+        "Imbabura",
+        "Napo",
+        "Pichincha",
+        "Sucumbíos"
+      ],
+      "cantones": [
+        "Bolívar",
+        "CAYAMBE",
+        "EL CHACO",
+        "GONZALO PIZARRO",
+        "PIMAMPIRO",
+        "QUIJOS"
+      ]
+    },
+    "chunchi-armenia-huataxi-capzol": {
+      "provincias": [
+        "Chimborazo"
+      ],
+      "cantones": [
+        "ALAUSI",
+        "CHUNCHI"
+      ]
+    },
+    "via-juncal-pimampiro-chalguayaco": {
+      "provincias": [
+        "Carchi",
+        "Imbabura"
+      ],
+      "cantones": [
+        "Bolívar",
+        "PIMAMPIRO"
+      ]
+    },
+    "bella-india-tillales": {
+      "provincias": [
+        "El Oro"
+      ],
+      "cantones": [
+        "EL GUABO",
+        "MACHALA"
+      ]
+    },
+    "puerto-villamil-tomas-de-berlanga": {
+      "provincias": [
+        "Galápagos"
+      ],
+      "cantones": [
+        "ISABELA"
+      ]
+    },
+    "puerto-baquerizo-moreno-el-progreso": {
+      "provincias": [
+        "Galápagos"
+      ],
+      "cantones": [
+        "SAN CRISTOBAL"
+      ]
+    },
+    "rio-panchalica-pelileo": {
+      "provincias": [
+        "Tungurahua"
+      ],
+      "cantones": [
+        "SAN PEDRO DE PELILEO"
+      ]
+    },
+    "via-a-palenque-recinto-banepo-las-animas": {
+      "provincias": [
+        "Los Ríos"
+      ],
+      "cantones": [
+        "PALENQUE",
+        "VINCES"
+      ]
+    },
+    "via-el-vergel-la-esperanza": {
+      "provincias": [
+        "Los Ríos"
+      ],
+      "cantones": [
+        "QUEVEDO",
+        "VALENCIA"
+      ]
+    },
+    "junin-balzar-tumbada": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "JUNIN",
+        "PORTOVIEJO"
+      ]
+    },
+    "portoviejo-san-placido-cerro-mancha-grande": {
+      "provincias": [
+        "Manabí"
+      ],
+      "cantones": [
+        "PORTOVIEJO"
+      ]
+    }
+  }
+}

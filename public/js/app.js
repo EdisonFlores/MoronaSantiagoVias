@@ -20,8 +20,7 @@ import {
   cancelReportLocationPicker,
   clearUserReportMarkers,
   clearTravelTracking,
-  updateTravelPosition,
-  enrichRoadsWithAdministrativeAreas
+  updateTravelPosition
 } from "./map.js";
 import { renderIncidents, renderUserIncidents, showToast, showRouteNotice, renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
@@ -1740,25 +1739,6 @@ async function initApp() {
     populateProvinceFilter(allRoads);
     applyFilters();
     loadUserReports();
-
-    // Espera a que el navegador pinte la lista antes de descargar y procesar cantones.
-    const enrichAdministrativeAreas = () => {
-      enrichRoadsWithAdministrativeAreas(loadedRoads)
-        .then((enrichedRoads) => {
-          allRoads = enrichedRoads;
-          populateProvinceFilter(allRoads);
-          applyFilters();
-        })
-        .catch((administrativeError) => {
-          console.warn("No se pudieron calcular provincias y cantones de las vias:", administrativeError);
-        });
-    };
-
-    if (typeof window.requestIdleCallback === "function") {
-      window.requestIdleCallback(enrichAdministrativeAreas, { timeout: 1200 });
-    } else {
-      window.setTimeout(enrichAdministrativeAreas, 250);
-    }
   } catch (error) {
     console.error(error);
     showLoadError();
