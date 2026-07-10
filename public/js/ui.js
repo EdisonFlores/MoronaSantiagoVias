@@ -80,13 +80,18 @@ export function renderIncidents(roads, handlers, lang = "es") {
       const updatedLine = updatedAt
         ? `<p class="small-text"><strong>${t.lastUpdated}:</strong> ${updatedAt}</p>`
         : "";
+      const provinces = Array.isArray(item.provincias) && item.provincias.length
+        ? item.provincias.join(", ")
+        : item.provincia || "";
+      const cantons = Array.isArray(item.cantones) ? item.cantones.join(", ") : "";
 
       return `
         <article class="incident-card" data-voice-label="${escapeAttribute(voiceLabel)}">
           <div class="incident-top">
             <div>
               <h3>${item.via}</h3>
-              <div class="small-text">${t.province}: ${item.provincia}</div>
+              <div class="small-text">${t.provinces || t.province}: ${provinces}</div>
+              <div class="small-text">${t.cantons || "Cantones"}: ${cantons || "N/A"}</div>
             </div>
             <span class="badge-state ${getStateClass(item.estado)}">${stateText}</span>
           </div>

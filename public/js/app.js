@@ -7,6 +7,10 @@ import {
   drawRouteGeometry,
   drawFallbackPolyline,
   focusIncidentOnMap,
+  clearIncidentFocus,
+  clearRoadGeometry,
+  clearRoadAdministrativeHighlights,
+  renderAdministrativeBoundaries,
   resetMapView,
   renderIncidentMarkers,
   renderUserReportMarkers,
@@ -16,7 +20,8 @@ import {
   cancelReportLocationPicker,
   clearUserReportMarkers,
   clearTravelTracking,
-  updateTravelPosition
+  updateTravelPosition,
+  enrichRoadsWithAdministrativeAreas
 } from "./map.js";
 import { renderIncidents, renderUserIncidents, showToast, showRouteNotice, renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
@@ -41,6 +46,8 @@ let lastTripErrorAt = 0;
 let isVoiceHintsEnabled = false;
 let voiceHintTimer = null;
 let lastVoiceHint = "";
+let mapFilterVersion = 0;
+let lastAppliedProvince = "";
 
 const USER_REPORTS_PAGE_LIMIT = 50;
 const USER_REPORTS_CACHE_MS = 60 * 1000;
@@ -60,7 +67,10 @@ function buildStats(roads) {
 function getAvailableProvinces(roads = []) {
   return [...new Set(
     roads
-      .map((road) => String(road.provincia || "").trim())
+      .flatMap((road) => Array.isArray(road.provincias) && road.provincias.length
+        ? road.provincias
+        : [road.provincia])
+      .map((province) => String(province || "").trim())
       .filter(Boolean)
       .filter((province) => province.toLowerCase() !== "ecuador")
   )].sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
@@ -1379,6 +1389,7 @@ function initTutorial() {
 // Intenta dibujar la ruta real con OSRM; si falla, usa una linea aproximada.
 async function focusRoadOnMap(road) {
   const lang = getCurrentLanguage();
+  const routeFilterVersion = mapFilterVersion;
 
   try {
     const segment = road.matchedRoadSegment;
@@ -1410,10 +1421,12 @@ async function focusRoadOnMap(road) {
         timeoutMs: 12000
       });
 
+      if (routeFilterVersion !== mapFilterVersion) return;
       drawRouteGeometry(routeResult.coordinates, road);
     } catch (routeError) {
       console.warn("OSRM falló. Se usará polilínea aproximada:", routeError);
 
+      if (routeFilterVersion !== mapFilterVersion) return;
       drawFallbackPolyline(segment, road);
 
       showToast(
@@ -1520,6 +1533,11 @@ function showLoadError() {
 
 // Recalcula lista, estadisticas y marcadores cada vez que cambia el filtro/idioma.
 function applyFilters() {
+  mapFilterVersion += 1;
+  clearIncidentFocus();
+  clearRoadGeometry();
+  clearRoadAdministrativeHighlights();
+
   const state = document.getElementById("filterState").value;
   const province = document.getElementById("filterProvince")?.value || "";
   const lang = getCurrentLanguage();
@@ -1567,10 +1585,26 @@ function applyFilters() {
   }
 
   if (province) {
-    filtered = filtered.filter((item) => item.provincia === province);
+    filtered = filtered.filter((item) => {
+      const provinces = Array.isArray(item.provincias) && item.provincias.length
+        ? item.provincias
+        : [item.provincia];
+      return provinces.includes(province);
+    });
   }
 
   visibleRoads = filtered;
+
+  if (province !== lastAppliedProvince) {
+    renderAdministrativeBoundaries(province, { fitToProvince: Boolean(province) });
+
+    if (!province) {
+      resetMapView();
+    }
+
+    lastAppliedProvince = province;
+  }
+
   renderStats(buildStats(filtered), lang);
   if (isTripTracking) {
     renderUserReportMarkers(activeUserReports, {
@@ -1585,6 +1619,8 @@ function applyFilters() {
 
   renderIncidents(filtered, {
     onFocus: async (road) => {
+      const routeFilterVersion = mapFilterVersion;
+
       try {
         const segment = road.matchedRoadSegment;
 
@@ -1615,10 +1651,12 @@ showRouteNotice(
     timeoutMs: 12000
   });
 
+  if (routeFilterVersion !== mapFilterVersion) return;
   drawRouteGeometry(routeResult.coordinates, road);
 } catch (routeError) {
   console.warn("OSRM falló. Se usará polilínea aproximada:", routeError);
 
+  if (routeFilterVersion !== mapFilterVersion) return;
   drawFallbackPolyline(segment, road);
 
   showToast(
@@ -1684,6 +1722,7 @@ async function initApp() {
   initWeather();
   const map = initMap();
   bindWeatherToMap(map, getCurrentLanguage);
+  renderAdministrativeBoundaries();
 
   document.getElementById("filterState")?.addEventListener("change", applyFilters);
   document.getElementById("filterProvince")?.addEventListener("change", applyFilters);
@@ -1696,7 +1735,13 @@ async function initApp() {
 
   try {
     const data = await fetchIncidents();
-    allRoads = data.incidents || [];
+    const loadedRoads = data.incidents || [];
+    try {
+      allRoads = await enrichRoadsWithAdministrativeAreas(loadedRoads);
+    } catch (administrativeError) {
+      console.warn("No se pudieron calcular provincias y cantones de las vias:", administrativeError);
+      allRoads = loadedRoads;
+    }
     populateProvinceFilter(allRoads);
     applyFilters();
     loadUserReports();

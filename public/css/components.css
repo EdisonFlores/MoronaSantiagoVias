@@ -1782,3 +1782,76 @@ textarea.custom-input {
     opacity: 1;
   }
 }
+
+/* Resaltado territorial de la via seleccionada sobre el mapa Leaflet. */
+.road-province-highlight {
+  filter: drop-shadow(0 0 3px rgba(139, 92, 246, 0.34));
+  transition: fill-opacity 0.2s ease, stroke-width 0.2s ease;
+}
+
+.road-canton-highlight {
+  filter: drop-shadow(0 0 2px rgba(8, 145, 178, 0.3));
+  transition: fill-opacity 0.2s ease, stroke-width 0.2s ease;
+}
+
+.road-province-highlight:hover,
+.road-canton-highlight:hover {
+  fill-opacity: 0.18;
+  stroke-width: 3.5;
+}
+
+.road-administrative-legend {
+  display: grid;
+  gap: 7px;
+  min-width: 180px;
+  max-width: 250px;
+  padding: 12px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.28);
+  backdrop-filter: blur(10px);
+}
+
+.road-administrative-legend strong {
+  overflow: hidden;
+  color: #fff;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.road-administrative-legend span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.road-admin-swatch {
+  width: 24px;
+  height: 12px;
+  flex: 0 0 auto;
+  border-radius: 4px;
+}
+
+.road-admin-swatch.province {
+  border: 2px solid #8b5cf6;
+  background: rgba(196, 181, 253, 0.3);
+}
+
+.road-admin-swatch.canton {
+  border: 2px dashed #0891b2;
+  background: rgba(103, 232, 249, 0.28);
+}
+
+@media (max-width: 576px) {
+  .road-administrative-legend {
+    min-width: 145px;
+    max-width: 190px;
+    padding: 9px 11px;
+  }
+}

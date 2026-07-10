@@ -49,6 +49,8 @@ export const translations = {
 
     // INCIDENTS / UI
     province: "Provincia",
+    provinces: "Provincias",
+    cantons: "Cantones",
     observation: "Observación",
     alternateRoute: "Vía alterna",
     source: "Fuente",
@@ -256,6 +258,8 @@ export const translations = {
 
     // INCIDENTS / UI
     province: "Province",
+    provinces: "Provinces",
+    cantons: "Cantons",
     observation: "Observation",
     alternateRoute: "Alternate route",
     source: "Source",
@@ -458,6 +462,8 @@ translations.sh = {
   closed: "Epentmamu",
 
   province: "Provincia",
+  provinces: "Provincias",
+  cantons: "Cantones",
   observation: "Iismamu",
   alternateRoute: "Jintia chikich",
   source: "Nuyá jukimpramu",
