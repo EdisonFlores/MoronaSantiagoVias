@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { viasTramos } from "../lib/viasTramosData.js";
 import { matchRoadSegment } from "../lib/roadMatcher.js";
 import { scrapeEcu911Ecuador } from "../lib/scrapeEcu911.js";
+import roadAdministrativeAreas from "../data/road-administrative-areas.json" with { type: "json" };
 
 const ecu911CacheUrl = new URL("../data/ecu911-morona-santiago.json", import.meta.url);
 const apifyRecordKey = process.env.APIFY_CACHE_KEY || "latest";
@@ -111,6 +112,15 @@ async function buildNetworkStatus() {
 
   const roads = viasTramos.map((tramo) => {
     const match = matchedMap.get(tramo.id);
+    const administrativeAreas = roadAdministrativeAreas.roads?.[tramo.id] || {};
+    const fallbackProvince = match?.provincia || tramo.provincia ||
+      (tramo.source === "ECU 911" ? "Ecuador" : "Morona Santiago");
+    const provincias = Array.isArray(administrativeAreas.provincias) && administrativeAreas.provincias.length
+      ? administrativeAreas.provincias
+      : [fallbackProvince].filter(Boolean);
+    const cantones = Array.isArray(administrativeAreas.cantones)
+      ? administrativeAreas.cantones
+      : [];
     const hasOfficialIncident = Boolean(
       match &&
         (match.hasEcu911News ||
@@ -120,7 +130,9 @@ async function buildNetworkStatus() {
 
     return {
       id: tramo.id,
-      provincia: match?.provincia || tramo.provincia || (tramo.source === "ECU 911" ? "Ecuador" : "Morona Santiago"),
+      provincia: provincias[0] || fallbackProvince,
+      provincias,
+      cantones,
       via: tramo.via,
       ref: tramo.ref || "",
       estado: match ? match.estado : "Habilitada",

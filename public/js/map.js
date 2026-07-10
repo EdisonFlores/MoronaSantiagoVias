@@ -24,9 +24,9 @@ const administrativeGeoJsonCache = {};
 const administrativeFeatureBoundsCache = new WeakMap();
 
 const ADMINISTRATIVE_GEOJSON_URLS = {
-  ecuador: "https://raw.githubusercontent.com/pabl-o-ce/Ecuador-geoJSON/master/geojson/ecuador.geojson",
-  provinces: "https://raw.githubusercontent.com/pabl-o-ce/Ecuador-geoJSON/master/geojson/provinces.geojson",
-  cantons: "https://raw.githubusercontent.com/pabl-o-ce/Ecuador-geoJSON/master/geojson/cantons.geojson"
+  ecuador: "/data/administrative/ecuador.geojson?v=20260710-1",
+  provinces: "/data/administrative/provinces.geojson?v=20260710-1",
+  cantons: "/data/administrative/cantons.geojson?v=20260710-1"
 };
 
 // Usa el estado vial para mantener colores consistentes entre mapa y tarjetas.
@@ -253,63 +253,6 @@ function roadCrossesFeature(points, feature, roadBounds = getPointsBounds(points
     : geometry.type === "MultiPolygon" ? geometry.coordinates : [];
 
   return polygons.some((polygon) => lineCrossesPolygon(points, polygon));
-}
-
-function uniqueAdministrativeNames(names) {
-  const unique = new Map();
-  names.filter(Boolean).forEach((name) => {
-    const label = String(name).trim();
-    unique.set(normalizeAdministrativeName(label), label);
-  });
-  return [...unique.values()].sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
-}
-
-// Enriquece cada via con todos los territorios que cruza, no solo con su punto inicial.
-export async function enrichRoadsWithAdministrativeAreas(roads = []) {
-  const [provincesGeoJson, cantonsGeoJson] = await Promise.all([
-    fetchAdministrativeGeoJson("provinces"),
-    fetchAdministrativeGeoJson("cantons")
-  ]);
-
-  const enrichedRoads = [];
-
-  for (let index = 0; index < roads.length; index += 1) {
-    const road = roads[index];
-    const points = getRoadGeoJsonPoints(road);
-    const roadBounds = getPointsBounds(points);
-    const provincias = uniqueAdministrativeNames(
-      (provincesGeoJson.features || [])
-        .filter((feature) => roadCrossesFeature(points, feature, roadBounds))
-        .map(getGeoJsonProvinceName)
-    );
-    const cantones = uniqueAdministrativeNames(
-      (cantonsGeoJson.features || [])
-        .filter((feature) => roadCrossesFeature(points, feature, roadBounds))
-        .map(getGeoJsonCantonName)
-    );
-
-    const fallbackProvince = String(road.provincia || "").trim();
-    const finalProvinces = provincias.length ? provincias : (fallbackProvince ? [fallbackProvince] : []);
-
-    enrichedRoads.push({
-      ...road,
-      provincia: finalProvinces[0] || fallbackProvince,
-      provincias: finalProvinces,
-      cantones
-    });
-
-    if (index > 0 && index % 12 === 0) {
-      await new Promise((resolve) => {
-        if (typeof requestIdleCallback === "function") {
-          requestIdleCallback(resolve, { timeout: 80 });
-        } else {
-          setTimeout(resolve, 0);
-        }
-      });
-    }
-  }
-
-  return enrichedRoads;
 }
 
 // Resalta las divisiones administrativas atravesadas por la via seleccionada.
