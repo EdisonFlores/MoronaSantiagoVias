@@ -79,7 +79,7 @@ function getWeatherProxyUrls(lat, lon) {
   const urls = [`/api/weather?${params.toString()}`];
 
   if (localHosts.includes(window.location.hostname)) {
-    urls.push(`https://morona-santiago-vias.vercel.app/api/weather?${params.toString()}`);
+    urls.push(`https://ecuavial.vercel.app/api/weather?${params.toString()}`);
   }
 
   return urls;

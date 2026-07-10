@@ -25,7 +25,7 @@ import {
 import { renderIncidents, renderUserIncidents, showToast, showRouteNotice, renderStats } from "./ui.js";
 import { initTheme } from "./theme.js";
 import { initLanguage, getCurrentLanguage } from "./translate.js";
-import { initWeather, bindWeatherToMap, updateWeatherFromMapCenter } from "./weather.js?v=20260703-weather-5";
+import { initWeather, bindWeatherToMap, updateWeatherFromMapCenter } from "./weather.js?v=20260710-weather-6";
 import { translations, translateState } from "./i18n.js";
 
 let allRoads = [];
