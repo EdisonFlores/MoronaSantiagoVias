@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://morona-santiago-vias.vercel.app/sitemap.xml
+Sitemap: https://ecuavial.vercel.app/sitemap.xml
