@@ -20,8 +20,8 @@ export const translations = {
 
     // HERO
     heroBadge: "Estado vial en tiempo real",
-    heroTitle: "Consulta incidencias, rutas y condiciones de las vías",
-    heroText: "Explora la red vial del Ecuador en un mapa interactivo con información organizada y visual.",
+    heroTitle: "Estado vial del Ecuador hoy: vías, cierres e incidentes",
+    heroText: "Consulta cómo están las vías del Ecuador, revisa carreteras cerradas o habilitadas y explora la red vial en el mapa.",
 
     // PANELS / FILTERS
     filtersTitle: "Filtros",
@@ -229,8 +229,8 @@ export const translations = {
 
     // HERO
     heroBadge: "Real-time road status",
-    heroTitle: "Check incidents, routes, and road conditions",
-    heroText: "Explore Ecuador's road network on an interactive map with organized visual information.",
+    heroTitle: "Ecuador road conditions today: roads, closures, and incidents",
+    heroText: "Check Ecuador's roads, review closed or open highways, and explore the road network on the map.",
 
     // PANELS / FILTERS
     filtersTitle: "Filters",
