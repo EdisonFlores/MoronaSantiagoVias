@@ -101,7 +101,7 @@
   <link rel="stylesheet" href="/css/themes.css" />
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/layout.css?v=20260703-design-1" />
-  <link rel="stylesheet" href="/css/components.css?v=20260710-seo-content-1" />
+  <link rel="stylesheet" href="/css/components.css?v=20260712-info-modal-1" />
   <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#06111f">
 <meta name="mobile-web-app-capable" content="yes">
@@ -335,11 +335,17 @@
     </section>
   </main>
 
-  <!-- Contenido editorial visible para viajeros y buscadores; una sola pagina, sin landings duplicadas. -->
-  <section class="seo-landing" aria-labelledby="ecuadorRoadStatusTitle" lang="es-EC">
+  <!-- Informacion completa de viaje: se abre desde el icono Informacion. -->
+  <div id="infoModal" class="info-modal" aria-hidden="true">
+    <div class="info-card info-card-travel" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+      <button id="infoModalClose" class="info-close" type="button" aria-label="Cerrar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+  <section class="seo-modal-content" aria-labelledby="infoModalTitle" lang="es-EC">
     <header class="seo-landing-head">
       <span class="section-pill">Información para viajar</span>
-      <h2 id="ecuadorRoadStatusTitle">Estado de las vías y carreteras del Ecuador hoy</h2>
+      <h2 id="infoModalTitle">Estado de las vías y carreteras del Ecuador hoy</h2>
       <p>
         EcuaVial reúne información vial del Ecuador para consultar cómo están las vías antes de viajar.
         Revisa cierres viales, carreteras habilitadas, incidentes, derrumbes y deslizamientos en la última
@@ -409,37 +415,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Informacion de la plataforma: se abre desde el footer para no cargar la pantalla principal. -->
-  <div id="infoModal" class="info-modal" aria-hidden="true">
-    <div class="info-card" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
-      <button id="infoModalClose" class="info-close" type="button" aria-label="Cerrar">
-        <i class="bi bi-x-lg"></i>
-      </button>
-
-      <div class="info-copy">
-        <span class="section-pill" data-i18n="seoEyebrow">Guía vial del Ecuador</span>
-        <h2 id="infoModalTitle" data-i18n="seoTitle">Consulta el estado vial del Ecuador antes de viajar</h2>
-        <p data-i18n="seoText">
-          EcuaVial permite revisar incidentes oficiales de ECU 911, reportes ciudadanos,
-          rutas y condiciones de vías en un mapa interactivo pensado para conductores y viajeros.
-        </p>
-      </div>
-
-      <div class="info-list" aria-label="Funciones principales">
-        <div>
-          <strong data-i18n="seoFeatureMap">Mapa interactivo</strong>
-          <span data-i18n="seoFeatureMapText">Ubica tramos, marcadores e incidencias viales.</span>
-        </div>
-        <div>
-          <strong data-i18n="seoFeatureReports">Reportes ciudadanos</strong>
-          <span data-i18n="seoFeatureReportsText">Visualiza avisos recientes enviados por usuarios.</span>
-        </div>
-        <div>
-          <strong data-i18n="seoFeatureTrip">Recorrido GPS</strong>
-          <span data-i18n="seoFeatureTripText">Sigue tu avance y detecta el tramo vial cercano.</span>
-        </div>
-      </div>
     </div>
   </div>
 
