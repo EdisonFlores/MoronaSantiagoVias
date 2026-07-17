@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-17T12:44:42.135Z",
+  "updatedAt": "2026-07-17T14:50:37.292Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -185,19 +185,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "1843c7a7-f5c9-4c23-b6d3-5f88fe73e9d9",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "LIMON INDANZA",
-      "via": "LIMON - GUALACEO",
-      "ref": "",
-      "estado": "Parcialmente habilitada",
-      "observaciones": "PRECAUCIÓN, DESLIZAMIENTO DE TIERRA E INESTABILIDAD DE TALUD EN EL SECTOR CHACRAS",
-      "viaAlterna": "N/A",
-      "modified": "2026-07-07 18:48:50",
-      "hasEcu911News": true,
-      "source": "ECU 911"
-    },
-    {
       "id": "2f548f2a-6d38-491c-81f7-2a699e70a2b9",
       "provincia": "MORONA SANTIAGO",
       "canton": "SUCUA",
@@ -234,6 +221,19 @@
       "viaAlterna": "N/A",
       "modified": "2020-05-24 11:42:48",
       "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
+      "id": "1843c7a7-f5c9-4c23-b6d3-5f88fe73e9d9",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "LIMON INDANZA",
+      "via": "LIMON - GUALACEO",
+      "ref": "",
+      "estado": "Cerrada",
+      "observaciones": "DESLIZAMIENTO DE TIERRA POR EL SECTOR CERRO BOSCO A LA ALTURA DEL MIRADOR.",
+      "viaAlterna": "N/A",
+      "modified": "2026-07-17 06:58:05",
+      "hasEcu911News": true,
       "source": "ECU 911"
     },
     {
