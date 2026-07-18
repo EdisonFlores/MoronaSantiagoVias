@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-17T14:50:37.292Z",
+  "updatedAt": "2026-07-18T04:09:26.415Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -229,10 +229,10 @@
       "canton": "LIMON INDANZA",
       "via": "LIMON - GUALACEO",
       "ref": "",
-      "estado": "Cerrada",
+      "estado": "Parcialmente habilitada",
       "observaciones": "DESLIZAMIENTO DE TIERRA POR EL SECTOR CERRO BOSCO A LA ALTURA DEL MIRADOR.",
       "viaAlterna": "N/A",
-      "modified": "2026-07-17 06:58:05",
+      "modified": "2026-07-17 19:00:30",
       "hasEcu911News": true,
       "source": "ECU 911"
     },
