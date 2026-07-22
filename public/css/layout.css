@@ -316,3 +316,61 @@
     min-height: 390px;
   }
 }
+
+@media (min-width: 993px) {
+  .app-shell {
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 12px;
+    padding: 10px;
+    height: calc(140vh - 171px);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .sidebar,
+  .map-area,
+  .map-card {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .sidebar {
+    align-self: stretch;
+  }
+
+  .sidebar-scroll {
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-bottom: 18px;
+  }
+
+  .map-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #map {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 993px) {
+  .map-card {
+    padding: 8px;
+  }
+
+  .map-card-head {
+    padding: 2px 4px 8px;
+  }
+
+  .map-title {
+    font-size: 1.05rem;
+  }
+
+  .map-subtitle {
+    font-size: 0.84rem;
+  }
+}

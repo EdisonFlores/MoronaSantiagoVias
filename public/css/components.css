@@ -2007,3 +2007,60 @@ textarea.custom-input {
     line-height: 22px !important;
   }
 }
+
+/* Ajuste desktop: evita huecos grandes en el panel lateral y deja visible la red vial antes. */
+@media (min-width: 993px) {
+  .sidebar-scroll {
+    gap: 12px;
+    padding-bottom: 18px;
+  }
+
+  .sidebar-scroll > .panel {
+    padding: 14px 16px;
+  }
+
+  #statsPanel {
+    padding: 14px 16px;
+  }
+
+  #statsPanel .section-title-wrap {
+    margin-bottom: 8px;
+  }
+
+  #statsBox.stats-grid {
+    gap: 8px;
+  }
+
+  #statsBox .stat-card {
+    min-height: 72px;
+    max-height: 82px;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #statsBox .stat-card strong {
+    font-size: 1.18rem;
+    margin-bottom: 2px;
+    line-height: 1.05;
+  }
+
+  #statsBox .stat-card span {
+    font-size: 0.86rem;
+    line-height: 1.15;
+  }
+
+  .panel-roads {
+    flex: 0 0 auto;
+    min-height: 240px;
+    overflow: visible;
+    padding-bottom: 16px;
+  }
+
+  #incidentsList.incidents-list {
+    overflow: visible;
+    padding-bottom: 0;
+  }
+}
