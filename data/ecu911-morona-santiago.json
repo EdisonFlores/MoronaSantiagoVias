@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-08-08T11:37:14.618Z",
+  "updatedAt": "2026-08-08T12:00:11.352Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
-      "id": "263d339c-8e65-4a9f-9af8-3ed8833b1532",
+      "id": "7a23da27-1df4-40c6-b3d9-e07e8ac87a90",
       "provincia": "MORONA SANTIAGO",
-      "canton": "MORONA",
-      "via": "MACAS - SUCUA",
+      "canton": "GUALAQUIZA",
+      "via": "SAN JUAN BOSCO - TUCUMBATZA",
       "ref": "",
       "estado": "Habilitada",
-      "observaciones": "*",
+      "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
-      "modified": "2022-06-30 22:15:10",
+      "modified": "2020-05-24 11:42:48",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -94,6 +94,19 @@
       "source": "ECU 911"
     },
     {
+      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "TAISHA",
+      "via": "MACAS - TAISHA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "HABILITADA",
+      "viaAlterna": "N/A",
+      "modified": "2026-05-23 05:37:35",
+      "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
       "id": "1843c7a7-f5c9-4c23-b6d3-5f88fe73e9d9",
       "provincia": "MORONA SANTIAGO",
       "canton": "LIMON INDANZA",
@@ -107,15 +120,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
+      "id": "f04eb4a2-4457-40a3-9d2e-834a3413ebc6",
       "provincia": "MORONA SANTIAGO",
-      "canton": "TAISHA",
-      "via": "MACAS - TAISHA",
+      "canton": "LOGROÑO",
+      "via": "LOGROÑO - BELLA UNION",
       "ref": "",
       "estado": "Habilitada",
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
-      "modified": "2026-05-23 05:37:35",
+      "modified": "2021-10-02 19:18:19",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -146,19 +159,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "f04eb4a2-4457-40a3-9d2e-834a3413ebc6",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "LOGROÑO",
-      "via": "LOGROÑO - BELLA UNION",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2021-10-02 19:18:19",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
       "id": "fbe21b4c-bd5d-4eab-9f43-c364b093b1a4",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
@@ -185,15 +185,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "7a23da27-1df4-40c6-b3d9-e07e8ac87a90",
+      "id": "263d339c-8e65-4a9f-9af8-3ed8833b1532",
       "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "SAN JUAN BOSCO - TUCUMBATZA",
+      "canton": "MORONA",
+      "via": "MACAS - SUCUA",
       "ref": "",
       "estado": "Habilitada",
-      "observaciones": "HABILITADA",
+      "observaciones": "*",
       "viaAlterna": "N/A",
-      "modified": "2020-05-24 11:42:48",
+      "modified": "2022-06-30 22:15:10",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
