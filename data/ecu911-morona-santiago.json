@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-11T19:40:08.207Z",
+  "updatedAt": "2026-08-13T19:39:09.351Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -25,19 +25,6 @@
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
       "modified": "2021-10-02 19:18:19",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
-      "id": "725982f5-a045-44da-8bcb-b587c3b09d27",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "SANTIAGO",
-      "via": "BELLA UNION - MENDEZ",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "DESLIZAMIENTO TRAMO BELLA UNION - MENDEZ",
-      "viaAlterna": "N/A",
-      "modified": "2021-07-23 20:50:17",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -159,6 +146,19 @@
       "source": "ECU 911"
     },
     {
+      "id": "725982f5-a045-44da-8bcb-b587c3b09d27",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "SANTIAGO",
+      "via": "BELLA UNION - MENDEZ",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "DESLIZAMIENTO TRAMO BELLA UNION - MENDEZ",
+      "viaAlterna": "N/A",
+      "modified": "2021-07-23 20:50:17",
+      "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
       "id": "7a23da27-1df4-40c6-b3d9-e07e8ac87a90",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
@@ -172,16 +172,16 @@
       "source": "ECU 911"
     },
     {
-      "id": "9076be3f-1a07-44f0-9aa6-1c5dd7e72b1a",
+      "id": "163bda38-281e-410b-9799-5fb4b8b888c4",
       "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "TUCUMBATZA - GUALAQUIZA",
+      "canton": "SANTIAGO",
+      "via": "TIWINTZA - SAN JOSÉ DE MORONA",
       "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
+      "estado": "Parcialmente habilitada",
+      "observaciones": "DESLIZAMIENTO SECTOR SHAIME",
       "viaAlterna": "N/A",
-      "modified": "2020-05-24 11:43:02",
-      "hasEcu911News": false,
+      "modified": "2025-11-07 09:32:25",
+      "hasEcu911News": true,
       "source": "ECU 911"
     },
     {
@@ -211,29 +211,16 @@
       "source": "ECU 911"
     },
     {
-      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
+      "id": "9076be3f-1a07-44f0-9aa6-1c5dd7e72b1a",
       "provincia": "MORONA SANTIAGO",
-      "canton": "TAISHA",
-      "via": "MACAS - TAISHA",
+      "canton": "GUALAQUIZA",
+      "via": "TUCUMBATZA - GUALAQUIZA",
       "ref": "",
       "estado": "Habilitada",
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
-      "modified": "2026-05-23 05:37:35",
+      "modified": "2020-05-24 11:43:02",
       "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
-      "id": "163bda38-281e-410b-9799-5fb4b8b888c4",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "SANTIAGO",
-      "via": "TIWINTZA - SAN JOSÉ DE MORONA",
-      "ref": "",
-      "estado": "Parcialmente habilitada",
-      "observaciones": "DESLIZAMIENTO SECTOR SHAIME",
-      "viaAlterna": "N/A",
-      "modified": "2025-11-07 09:32:25",
-      "hasEcu911News": true,
       "source": "ECU 911"
     },
     {
@@ -247,6 +234,19 @@
       "viaAlterna": "N/A",
       "modified": "2026-07-25 03:22:12",
       "hasEcu911News": true,
+      "source": "ECU 911"
+    },
+    {
+      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "TAISHA",
+      "via": "MACAS - TAISHA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "HABILITADA",
+      "viaAlterna": "N/A",
+      "modified": "2026-05-23 05:37:35",
+      "hasEcu911News": false,
       "source": "ECU 911"
     },
     {
