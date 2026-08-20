@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T09:45:50.598Z",
+  "updatedAt": "2026-08-20T10:40:34.325Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -29,15 +29,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "fbe21b4c-bd5d-4eab-9f43-c364b093b1a4",
+      "id": "931ee900-cce6-4960-a579-9fc4473fae4d",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
-      "via": "GUALAQUIZA-EL PORTON-RIO NEGRO-VIA ESTATAL E-594",
-      "ref": "E-594",
+      "via": "GUALAQUIZA - CHUCHUMBLETZA (LIMITE PROVINCIAL ZAMORA)",
+      "ref": "",
       "estado": "Habilitada",
-      "observaciones": "SIN NOVEDAD",
+      "observaciones": "*",
       "viaAlterna": "N/A",
-      "modified": "2021-05-17 14:45:56",
+      "modified": "2022-07-01 16:47:38",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -81,15 +81,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "931ee900-cce6-4960-a579-9fc4473fae4d",
+      "id": "ac921c19-2066-42af-85c5-3120b56fa5e6",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
-      "via": "GUALAQUIZA - CHUCHUMBLETZA (LIMITE PROVINCIAL ZAMORA)",
+      "via": "MATANGA (LIMITE MORONA / AZUAY) - CHIGUINDA",
       "ref": "",
       "estado": "Habilitada",
-      "observaciones": "*",
+      "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
-      "modified": "2022-07-01 16:47:38",
+      "modified": "2020-07-26 08:17:26",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -103,19 +103,6 @@
       "observaciones": "VIA ALTERNA AL PUYO",
       "viaAlterna": "N/A",
       "modified": "2022-05-18 04:14:12",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
-      "id": "ac921c19-2066-42af-85c5-3120b56fa5e6",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "MATANGA (LIMITE MORONA / AZUAY) - CHIGUINDA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2020-07-26 08:17:26",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -159,6 +146,19 @@
       "source": "ECU 911"
     },
     {
+      "id": "fbe21b4c-bd5d-4eab-9f43-c364b093b1a4",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "GUALAQUIZA",
+      "via": "GUALAQUIZA-EL PORTON-RIO NEGRO-VIA ESTATAL E-594",
+      "ref": "E-594",
+      "estado": "Habilitada",
+      "observaciones": "SIN NOVEDAD",
+      "viaAlterna": "N/A",
+      "modified": "2021-05-17 14:45:56",
+      "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
       "id": "7a23da27-1df4-40c6-b3d9-e07e8ac87a90",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
@@ -168,6 +168,19 @@
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
       "modified": "2020-05-24 11:42:48",
+      "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
+      "id": "9076be3f-1a07-44f0-9aa6-1c5dd7e72b1a",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "GUALAQUIZA",
+      "via": "TUCUMBATZA - GUALAQUIZA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "HABILITADA",
+      "viaAlterna": "N/A",
+      "modified": "2020-05-24 11:43:02",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -211,15 +224,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "9076be3f-1a07-44f0-9aa6-1c5dd7e72b1a",
+      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
       "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "TUCUMBATZA - GUALAQUIZA",
+      "canton": "TAISHA",
+      "via": "MACAS - TAISHA",
       "ref": "",
       "estado": "Habilitada",
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
-      "modified": "2020-05-24 11:43:02",
+      "modified": "2026-05-23 05:37:35",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -237,19 +250,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "TAISHA",
-      "via": "MACAS - TAISHA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2026-05-23 05:37:35",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
       "id": "5da9d61d-a4de-441b-bd10-ed52fbb0062d",
       "provincia": "MORONA SANTIAGO",
       "canton": "LIMON INDANZA",
@@ -259,19 +259,6 @@
       "observaciones": "PRECAUCIÓN, DESLIZAMIENTO DE TIERRA A LA ALTURA DE LA GASOLINERA SALIDA A LIMÓN, SECTOR EL PAXI.",
       "viaAlterna": "N/A",
       "modified": "2026-07-17 04:50:20",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
-      "id": "263d339c-8e65-4a9f-9af8-3ed8833b1532",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "MORONA",
-      "via": "MACAS - SUCUA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "*",
-      "viaAlterna": "N/A",
-      "modified": "2022-06-30 22:15:10",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -286,6 +273,19 @@
       "viaAlterna": "N/A",
       "modified": "2026-06-13 08:43:10",
       "hasEcu911News": true,
+      "source": "ECU 911"
+    },
+    {
+      "id": "263d339c-8e65-4a9f-9af8-3ed8833b1532",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "MORONA",
+      "via": "MACAS - SUCUA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "*",
+      "viaAlterna": "N/A",
+      "modified": "2022-06-30 22:15:10",
+      "hasEcu911News": false,
       "source": "ECU 911"
     }
   ]
