@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-18T01:45:59.663Z",
+  "updatedAt": "2026-08-20T09:45:50.598Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -25,6 +25,19 @@
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
       "modified": "2021-10-02 19:18:19",
+      "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
+      "id": "fbe21b4c-bd5d-4eab-9f43-c364b093b1a4",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "GUALAQUIZA",
+      "via": "GUALAQUIZA-EL PORTON-RIO NEGRO-VIA ESTATAL E-594",
+      "ref": "E-594",
+      "estado": "Habilitada",
+      "observaciones": "SIN NOVEDAD",
+      "viaAlterna": "N/A",
+      "modified": "2021-05-17 14:45:56",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -103,19 +116,6 @@
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
       "modified": "2020-07-26 08:17:26",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
-      "id": "fbe21b4c-bd5d-4eab-9f43-c364b093b1a4",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "GUALAQUIZA-EL PORTON-RIO NEGRO-VIA ESTATAL E-594",
-      "ref": "E-594",
-      "estado": "Habilitada",
-      "observaciones": "SIN NOVEDAD",
-      "viaAlterna": "N/A",
-      "modified": "2021-05-17 14:45:56",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
