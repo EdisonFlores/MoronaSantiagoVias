@@ -1923,11 +1923,12 @@ textarea.custom-input {
 }
 
 .road-administrative-legend {
+  position: relative;
   display: grid;
   gap: 7px;
   min-width: 180px;
   max-width: 250px;
-  padding: 12px 14px;
+  padding: 14px 42px 14px 14px;
   border: 1px solid rgba(148, 163, 184, 0.55);
   border-radius: 14px;
   background: rgba(15, 23, 42, 0.92);
@@ -1945,6 +1946,30 @@ textarea.custom-input {
   white-space: nowrap;
 }
 
+
+.road-administrative-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.72);
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.road-administrative-close:hover,
+.road-administrative-close:focus-visible {
+  background: rgba(37, 99, 235, 0.86);
+  color: #ffffff;
+  outline: none;
+  transform: scale(1.04);
+}
 .road-administrative-legend span {
   display: flex;
   align-items: center;

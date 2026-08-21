@@ -330,11 +330,25 @@ export async function renderRoadAdministrativeHighlights(road) {
     roadAdministrativeLegend.onAdd = () => {
       const legend = L.DomUtil.create("div", "road-administrative-legend");
       legend.innerHTML = `
+        <button class="road-administrative-close" type="button" aria-label="Cerrar leyenda de provincias y cantones">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
         <strong>${escapeHtml(road?.via || t.road)}</strong>
         <span><i class="road-admin-swatch province"></i>${escapeHtml(t.provinces || t.province)}</span>
         <span><i class="road-admin-swatch canton"></i>${escapeHtml(t.cantons || "Cantones")}</span>
       `;
+      const closeBtn = legend.querySelector(".road-administrative-close");
       L.DomEvent.disableClickPropagation(legend);
+      L.DomEvent.disableScrollPropagation(legend);
+      if (closeBtn) {
+        L.DomEvent.on(closeBtn, "click", (event) => {
+          L.DomEvent.stop(event);
+          if (roadAdministrativeLegend) {
+            map.removeControl(roadAdministrativeLegend);
+            roadAdministrativeLegend = null;
+          }
+        });
+      }
       return legend;
     };
     roadAdministrativeLegend.addTo(map);
