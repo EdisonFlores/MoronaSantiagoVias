@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-08-22T10:34:51.192Z",
+  "updatedAt": "2026-08-22T14:32:02.852Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
-      "id": "6a4af35c-38a4-4f9b-9260-15af71fac2a0",
+      "id": "3c77edd7-e40b-4718-b18e-7f1c48405246",
       "provincia": "MORONA SANTIAGO",
-      "canton": "MORONA",
-      "via": "MACAS - SEVILLA - SEIPA - SUCUA",
+      "canton": "LIMON INDANZA",
+      "via": "BELLA UNION - LIMON",
       "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
+      "estado": "Parcialmente habilitada",
+      "observaciones": "DESLIZAMIENTO DE TIERRA SECTOR EL ROSARIO",
       "viaAlterna": "N/A",
-      "modified": "2019-01-31 23:07:56",
-      "hasEcu911News": false,
+      "modified": "2026-07-25 03:22:12",
+      "hasEcu911News": true,
       "source": "ECU 911"
     },
     {
@@ -94,6 +94,19 @@
       "source": "ECU 911"
     },
     {
+      "id": "6a4af35c-38a4-4f9b-9260-15af71fac2a0",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "MORONA",
+      "via": "MACAS - SEVILLA - SEIPA - SUCUA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "HABILITADA",
+      "viaAlterna": "N/A",
+      "modified": "2019-01-31 23:07:56",
+      "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
       "id": "56428642-d2e3-47a6-9237-3fef51f3ffdc",
       "provincia": "MORONA SANTIAGO",
       "canton": "MORONA",
@@ -133,6 +146,19 @@
       "source": "ECU 911"
     },
     {
+      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "TAISHA",
+      "via": "MACAS - TAISHA",
+      "ref": "",
+      "estado": "Cerrada",
+      "observaciones": "TRABAJOS DE DE EXCAVACION Y MOVIMIENTO DE TIERRAS EN EL SECTOR DE LA MINA DE YUNKUAPAIS 08H00 A 12H00 - 13H00 A 17H00",
+      "viaAlterna": "N/A",
+      "modified": "2026-08-22 06:54:58",
+      "hasEcu911News": true,
+      "source": "ECU 911"
+    },
+    {
       "id": "cabef7e8-4475-4877-b93b-f6740c4e477c",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
@@ -159,19 +185,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "9076be3f-1a07-44f0-9aa6-1c5dd7e72b1a",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "TUCUMBATZA - GUALAQUIZA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2020-05-24 11:43:02",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
       "id": "7a23da27-1df4-40c6-b3d9-e07e8ac87a90",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
@@ -181,6 +194,19 @@
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
       "modified": "2020-05-24 11:42:48",
+      "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
+      "id": "9076be3f-1a07-44f0-9aa6-1c5dd7e72b1a",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "GUALAQUIZA",
+      "via": "TUCUMBATZA - GUALAQUIZA",
+      "ref": "",
+      "estado": "Habilitada",
+      "observaciones": "HABILITADA",
+      "viaAlterna": "N/A",
+      "modified": "2020-05-24 11:43:02",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -220,32 +246,6 @@
       "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
       "modified": "2026-02-25 21:38:45",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
-      "id": "3c77edd7-e40b-4718-b18e-7f1c48405246",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "LIMON INDANZA",
-      "via": "BELLA UNION - LIMON",
-      "ref": "",
-      "estado": "Parcialmente habilitada",
-      "observaciones": "DESLIZAMIENTO DE TIERRA SECTOR EL ROSARIO",
-      "viaAlterna": "N/A",
-      "modified": "2026-07-25 03:22:12",
-      "hasEcu911News": true,
-      "source": "ECU 911"
-    },
-    {
-      "id": "e1afec70-9da8-4edd-9ad8-1cea6bff9f0d",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "TAISHA",
-      "via": "MACAS - TAISHA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2026-05-23 05:37:35",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
