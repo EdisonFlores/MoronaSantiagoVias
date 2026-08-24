@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-23T12:57:26.392Z",
+  "updatedAt": "2026-08-24T03:12:37.179Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -42,16 +42,16 @@
       "source": "ECU 911"
     },
     {
-      "id": "1843c7a7-f5c9-4c23-b6d3-5f88fe73e9d9",
+      "id": "931ee900-cce6-4960-a579-9fc4473fae4d",
       "provincia": "MORONA SANTIAGO",
-      "canton": "LIMON INDANZA",
-      "via": "LIMON - GUALACEO",
+      "canton": "GUALAQUIZA",
+      "via": "GUALAQUIZA - CHUCHUMBLETZA (LIMITE PROVINCIAL ZAMORA)",
       "ref": "",
-      "estado": "Parcialmente habilitada",
-      "observaciones": "CON PRECAUCIÓN POR DESLIZAMIENTOS DE TIERRA SECTORES CERRO BOSCO, SAN VICENTE Y CHACRAS.",
+      "estado": "Habilitada",
+      "observaciones": "*",
       "viaAlterna": "N/A",
-      "modified": "2026-07-18 04:38:33",
-      "hasEcu911News": true,
+      "modified": "2022-07-01 16:47:38",
+      "hasEcu911News": false,
       "source": "ECU 911"
     },
     {
@@ -81,15 +81,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "931ee900-cce6-4960-a579-9fc4473fae4d",
+      "id": "ac921c19-2066-42af-85c5-3120b56fa5e6",
       "provincia": "MORONA SANTIAGO",
       "canton": "GUALAQUIZA",
-      "via": "GUALAQUIZA - CHUCHUMBLETZA (LIMITE PROVINCIAL ZAMORA)",
+      "via": "MATANGA (LIMITE MORONA / AZUAY) - CHIGUINDA",
       "ref": "",
       "estado": "Habilitada",
-      "observaciones": "*",
+      "observaciones": "HABILITADA",
       "viaAlterna": "N/A",
-      "modified": "2022-07-01 16:47:38",
+      "modified": "2020-07-26 08:17:26",
       "hasEcu911News": false,
       "source": "ECU 911"
     },
@@ -107,19 +107,6 @@
       "source": "ECU 911"
     },
     {
-      "id": "ac921c19-2066-42af-85c5-3120b56fa5e6",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "GUALAQUIZA",
-      "via": "MATANGA (LIMITE MORONA / AZUAY) - CHIGUINDA",
-      "ref": "",
-      "estado": "Habilitada",
-      "observaciones": "HABILITADA",
-      "viaAlterna": "N/A",
-      "modified": "2020-07-26 08:17:26",
-      "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
       "id": "2f548f2a-6d38-491c-81f7-2a699e70a2b9",
       "provincia": "MORONA SANTIAGO",
       "canton": "SUCUA",
@@ -130,6 +117,19 @@
       "viaAlterna": "N/A",
       "modified": "2022-07-01 16:46:33",
       "hasEcu911News": false,
+      "source": "ECU 911"
+    },
+    {
+      "id": "1843c7a7-f5c9-4c23-b6d3-5f88fe73e9d9",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "LIMON INDANZA",
+      "via": "LIMON - GUALACEO",
+      "ref": "",
+      "estado": "Parcialmente habilitada",
+      "observaciones": "CON PRECAUCIÓN POR DESLIZAMIENTOS DE TIERRA SECTORES CERRO BOSCO, SAN VICENTE Y CHACRAS.",
+      "viaAlterna": "N/A",
+      "modified": "2026-07-18 04:38:33",
+      "hasEcu911News": true,
       "source": "ECU 911"
     },
     {
