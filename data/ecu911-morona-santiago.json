@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-26T14:21:45.154Z",
+  "updatedAt": "2026-08-28T21:29:57.411Z",
   "sourceUrl": "https://ecu911.gob.ec/Services/WSVias/ViasWeb.php?estado=A&order=Provincia-descripcion&limit=500&start=0",
   "items": [
     {
@@ -198,15 +198,15 @@
       "source": "ECU 911"
     },
     {
-      "id": "3371c7c7-5183-439c-a4fe-27d2cbfc91e3",
+      "id": "3c77edd7-e40b-4718-b18e-7f1c48405246",
       "provincia": "MORONA SANTIAGO",
-      "canton": "MORONA",
-      "via": "MACAS - RIOBAMBA",
+      "canton": "LIMON INDANZA",
+      "via": "BELLA UNION - LIMON",
       "ref": "",
       "estado": "Parcialmente habilitada",
-      "observaciones": "DESLIZAMIENTO SECTOR CASCADA MACABEA //DESLIZAMIENTO DE TIERRA KM 95 SECTOR 9 DE OCTUBRE // PRECAUCION DESLIZAMIENTO DE ROCAS KM 47 SECTOR LAGUNAS DE ATILLO",
+      "observaciones": "DESLIZAMIENTO DE TIERRA SECTOR EL ROSARIO",
       "viaAlterna": "N/A",
-      "modified": "2026-04-18 11:06:39",
+      "modified": "2026-07-25 03:22:12",
       "hasEcu911News": true,
       "source": "ECU 911"
     },
@@ -237,6 +237,19 @@
       "source": "ECU 911"
     },
     {
+      "id": "3371c7c7-5183-439c-a4fe-27d2cbfc91e3",
+      "provincia": "MORONA SANTIAGO",
+      "canton": "MORONA",
+      "via": "MACAS - RIOBAMBA",
+      "ref": "",
+      "estado": "Parcialmente habilitada",
+      "observaciones": "DESLIZAMIENTO SECTOR CASCADA MACABEA //DESLIZAMIENTO DE TIERRA KM 95 SECTOR 9 DE OCTUBRE // PRECAUCION DESLIZAMIENTO DE ROCAS KM 47 SECTOR LAGUNAS DE ATILLO",
+      "viaAlterna": "N/A",
+      "modified": "2026-04-18 11:06:39",
+      "hasEcu911News": true,
+      "source": "ECU 911"
+    },
+    {
       "id": "725982f5-a045-44da-8bcb-b587c3b09d27",
       "provincia": "MORONA SANTIAGO",
       "canton": "SANTIAGO",
@@ -247,19 +260,6 @@
       "viaAlterna": "N/A",
       "modified": "2021-07-23 20:50:17",
       "hasEcu911News": false,
-      "source": "ECU 911"
-    },
-    {
-      "id": "3c77edd7-e40b-4718-b18e-7f1c48405246",
-      "provincia": "MORONA SANTIAGO",
-      "canton": "LIMON INDANZA",
-      "via": "BELLA UNION - LIMON",
-      "ref": "",
-      "estado": "Parcialmente habilitada",
-      "observaciones": "DESLIZAMIENTO DE TIERRA SECTOR EL ROSARIO",
-      "viaAlterna": "N/A",
-      "modified": "2026-07-25 03:22:12",
-      "hasEcu911News": true,
       "source": "ECU 911"
     },
     {
