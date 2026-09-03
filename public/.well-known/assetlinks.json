@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.edisonflores.ecuavial",
+        "sha256_cert_fingerprints": ["EF:30:3B:B2:8F:53:C7:EF:8B:2E:DA:A2:14:AD:4E:1C:2C:5E:A9:01:F1:22:E0:2B:E3:D8:23:01:B9:1E:7F:C2"]
+      }
+    }]
