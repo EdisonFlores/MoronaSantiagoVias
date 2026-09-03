@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de privacidad | EcuaVial</title>
+  <meta
+    name="description"
+    content="Política de privacidad de EcuaVial: uso de ubicación, reportes ciudadanos, servicios externos y protección de datos."
+  />
+  <meta name="author" content="Edison Flores" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://ecuavial.vercel.app/privacidad.html" />
+  <meta name="theme-color" content="#06111f" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/assests/icons/favicon.svg" type="image/svg+xml" sizes="any" />
+  <link rel="apple-touch-icon" href="/assests/icons/icon-192-v2.png" />
+
+  <meta property="og:title" content="Política de privacidad | EcuaVial" />
+  <meta
+    property="og:description"
+    content="Conoce cómo EcuaVial utiliza la ubicación, los reportes ciudadanos y los servicios externos."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ecuavial.vercel.app/privacidad.html" />
+  <meta property="og:site_name" content="EcuaVial" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/css/themes.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+
+  <style>
+    body {
+      min-height: 100vh;
+    }
+
+    .privacy-page {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+    }
+
+    .privacy-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0 26px;
+    }
+
+    .privacy-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      font-weight: 900;
+      font-size: 1.15rem;
+    }
+
+    .privacy-brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .privacy-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 800;
+    }
+
+    .privacy-hero,
+    .privacy-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .privacy-hero {
+      padding: 28px;
+      margin-bottom: 18px;
+    }
+
+    .privacy-hero h1 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.02;
+      font-weight: 900;
+    }
+
+    .privacy-hero p,
+    .privacy-section p,
+    .privacy-section li {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .privacy-section {
+      padding: 22px;
+      margin-top: 16px;
+    }
+
+    .privacy-section h2 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .privacy-section ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .privacy-section li + li {
+      margin-top: 8px;
+    }
+
+    .privacy-note {
+      border-color: rgba(245, 158, 11, 0.45);
+      background: rgba(245, 158, 11, 0.10);
+    }
+
+    .privacy-updated {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+      .privacy-page {
+        width: min(100% - 24px, 980px);
+        padding-top: 18px;
+      }
+
+      .privacy-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .privacy-back {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .privacy-hero,
+      .privacy-section {
+        border-radius: 18px;
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="privacy-page">
+    <header class="privacy-header">
+      <a class="privacy-brand" href="/" aria-label="Volver a EcuaVial">
+        <span class="privacy-brand-icon">
+          <i class="bi bi-signpost-2-fill"></i>
+        </span>
+        <span>EcuaVial</span>
+      </a>
+
+      <a class="privacy-back" href="/">
+        <i class="bi bi-arrow-left"></i>
+        Volver a la aplicación
+      </a>
+    </header>
+
+    <section class="privacy-hero">
+      <span class="section-pill">Privacidad</span>
+      <h1>Política de privacidad</h1>
+      <p>
+        Esta política explica cómo EcuaVial utiliza la información necesaria para consultar el estado vial,
+        mostrar reportes ciudadanos y ofrecer funciones de ubicación dentro de la aplicación.
+      </p>
+      <span class="privacy-updated">
+        <i class="bi bi-calendar-check"></i>
+        Última actualización: 2 de septiembre de 2026
+      </span>
+    </section>
+
+    <section class="privacy-section">
+      <h2>Información que puede recopilar la aplicación</h2>
+      <ul>
+        <li>Ubicación del dispositivo, únicamente cuando el usuario activa funciones como usar su ubicación, elegir un punto en el mapa o iniciar recorrido.</li>
+        <li>Nombre del reportante cuando se envía un reporte ciudadano.</li>
+        <li>Datos del reporte ciudadano: tipo de incidente, descripción, provincia, cantón, parroquia, coordenadas, vía detectada y fecha de creación.</li>
+        <li>Información técnica básica generada por servicios de alojamiento, analítica o funcionamiento web, como solicitudes, errores o datos de rendimiento.</li>
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <h2>Uso de la información</h2>
+      <p>
+        EcuaVial utiliza la información para mostrar incidentes viales en el mapa, ayudar al usuario a
+        identificar su ubicación durante un recorrido, relacionar reportes con vías cercanas y mejorar la
+        consulta ciudadana del estado vial.
+      </p>
+      <p>
+        La información no se vende ni se comparte con fines comerciales.
+      </p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>Ubicación y GPS</h2>
+      <p>
+        La ubicación se solicita solo cuando el usuario usa una función que la necesita. EcuaVial no rastrea
+        permanentemente al usuario en segundo plano. El seguimiento de recorrido funciona mientras el usuario
+        mantiene activa esa opción y permite el acceso a la ubicación desde el dispositivo.
+      </p>
+    </section>
+
+    <section class="privacy-section privacy-note">
+      <h2>Reportes ciudadanos</h2>
+      <p>
+        Los reportes enviados por usuarios son información ciudadana no verificada oficialmente. El usuario
+        debe enviar datos responsables y verdaderos. EcuaVial puede mostrar estos reportes para apoyar la
+        consulta vial, pero no reemplaza las indicaciones de autoridades competentes.
+      </p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>Servicios externos utilizados</h2>
+      <ul>
+        <li>Firebase Firestore, para almacenar reportes ciudadanos.</li>
+        <li>Vercel, para alojar la aplicación y sus servicios backend.</li>
+        <li>OpenStreetMap y Leaflet, para la visualización del mapa.</li>
+        <li>Servicios meteorológicos externos, para consultar el clima cuando la función está disponible.</li>
+        <li>Servicios de rutas como OSRM, para estimar recorridos cuando la aplicación lo requiere.</li>
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <h2>Conservación y eliminación</h2>
+      <p>
+        Los reportes ciudadanos pueden conservarse mientras sean útiles para la consulta vial y el mantenimiento
+        del sistema. Si necesitas solicitar revisión o eliminación de información enviada, usa el formulario de
+        bugs y sugerencias disponible en la aplicación.
+      </p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>Seguridad</h2>
+      <p>
+        EcuaVial utiliza servicios backend para evitar exponer credenciales sensibles en el navegador. Aun así,
+        ningún sistema conectado a Internet puede garantizar seguridad absoluta, por lo que se aplican medidas
+        razonables para proteger la información operativa de la aplicación.
+      </p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>Contacto</h2>
+      <p>
+        Para consultas de privacidad, solicitudes, bugs o sugerencias, puedes usar el formulario oficial de
+        contacto de EcuaVial:
+        <a href="https://forms.gle/9Xzq7RhFFTCwWRVW9" target="_blank" rel="noopener noreferrer">
+          https://forms.gle/9Xzq7RhFFTCwWRVW9
+        </a>.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
