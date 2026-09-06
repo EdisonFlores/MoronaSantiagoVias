@@ -866,6 +866,13 @@ textarea.custom-input {
   font-size: 0.9rem;
 }
 
+.tm-footer-left .footer-disclaimer {
+  margin-top: 4px;
+  max-width: 560px;
+  color: var(--text);
+  font-weight: 700;
+}
+
 .tm-footer-brand {
   display: inline-flex;
   align-items: center;
